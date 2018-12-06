@@ -32,35 +32,47 @@ myGadgetFunc <- function(data = data.frame(x = runif(20), y = runif(20)),
     current_group <- reactiveVal(1)
 
     observeEvent(input$click, handlerExpr = {
+
       if (drawing()) {
-        next_group <- current_group() + 1
+
+        this_group <- current_group()
+
+        n <- length(target$x) - length(target$group)
+        print(n)
+        print(this_group)
+
+        target$group <- c(target$group, rep.int(this_group, n))
+        next_group <- this_group + 1
         current_group(next_group)
+
       }
       temp <- drawing()
       drawing(!temp)
 
-      })
+    })
 
     observeEvent(input$reset_all, handlerExpr = {
       target$x <- NULL
       target$y <- NULL
+      target$group <- NULL
       current_group(1)
     })
     observeEvent(input$reset_prev, handlerExpr = {
-      target$x <- target$x[target$group == current_group() - 1]
-      target$y <- target$y[target$group == current_group() - 1]
-      temp <- current_group()
-      # print(temp)
-      current_group(temp - 1)
+      if (length(target$x) > 0) {
+        this_group <- current_group()
+        prev_group <- this_group - 1
+        keep <- target$group != (prev_group)
+        target$x <- target$x[keep]
+        target$y <- target$y[keep]
+        target$group <- target$group[keep]
+        current_group(prev_group)
+      }
     })
 
     observeEvent(input$hover, {
       if (drawing()) {
         target$x <- c(target$x, input$hover$x)
         target$y <- c(target$y, input$hover$y)
-        gr <- current_group()
-        # print(gr)
-        target$group <- c(target$group, gr)
       }})
 
     output$plot <- renderPlot({
