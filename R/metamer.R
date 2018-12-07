@@ -43,7 +43,7 @@ metamerise <- function(data, FUN, cols, signif = 2,  N = 100, target = NULL, dis
                                                     nrow = nrows, ncol = ncols)
     new <- fun(new_data)
 
-    if (all(round(new, signif) - round(org, signif) == 0)) {
+    if (all(signif(new, signif) - signif(org, signif) == 0)) {
       if (!is.null(target)) {
         dist_new <- distance_fun(new_data[, c(cols)], target)
       }

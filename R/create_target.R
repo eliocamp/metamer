@@ -1,13 +1,12 @@
-library(shiny)
-library(miniUI)
 
-myGadgetFunc <- function(data = data.frame(x = runif(20), y = runif(20)),
+
+draw_data <- function(data = NULL,
                          target = NULL) {
-
+  library(shiny)
+  library(miniUI)
   ui <- miniPage(
     gadgetTitleBar("Draw your target figure"),
     miniContentPanel(
-      # actionButton("reset", "reset"),
       plotOutput("plot", width = "100%", height = "100%",
                  hover = hoverOpts(id = "hover", delay = 100,
                                    delayType = "throttle", clip = TRUE, nullOutside = TRUE),
@@ -16,12 +15,10 @@ myGadgetFunc <- function(data = data.frame(x = runif(20), y = runif(20)),
         actionButton("reset_prev", "Clear last group"),
         actionButton("reset_all", "Clear all")
       )
-      # Define layout, inputs, outputs
     )
   )
 
   server <- function(input, output, session) {
-    # Define reactive expressions, outputs, etc.
     if (is.null(target)) {
       target = reactiveValues(x = NULL, y = NULL, group = NULL)
     } else {
@@ -32,24 +29,23 @@ myGadgetFunc <- function(data = data.frame(x = runif(20), y = runif(20)),
     current_group <- reactiveVal(1)
 
     observeEvent(input$click, handlerExpr = {
-
       if (drawing()) {
-
         this_group <- current_group()
-
-        n <- length(target$x) - length(target$group)
-        print(n)
-        print(this_group)
-
-        target$group <- c(target$group, rep.int(this_group, n))
+        # target$group <- c(target$group, rep.int(this_group, n))
         next_group <- this_group + 1
         current_group(next_group)
-
       }
       temp <- drawing()
       drawing(!temp)
-
     })
+
+    observeEvent(input$hover, {
+      if (drawing()) {
+        target$x <- c(target$x, input$hover$x)
+        target$y <- c(target$y, input$hover$y)
+        target$group <- c(target$group, current_group())
+
+      }})
 
     observeEvent(input$reset_all, handlerExpr = {
       target$x <- NULL
@@ -57,6 +53,7 @@ myGadgetFunc <- function(data = data.frame(x = runif(20), y = runif(20)),
       target$group <- NULL
       current_group(1)
     })
+
     observeEvent(input$reset_prev, handlerExpr = {
       if (length(target$x) > 0) {
         this_group <- current_group()
@@ -69,24 +66,22 @@ myGadgetFunc <- function(data = data.frame(x = runif(20), y = runif(20)),
       }
     })
 
-    observeEvent(input$hover, {
-      if (drawing()) {
-        target$x <- c(target$x, input$hover$x)
-        target$y <- c(target$y, input$hover$y)
-      }})
-
     output$plot <- renderPlot({
-      plot(x = data$x, y = data$y, ylab="y", xlab="x")
-      points(x = target$x, y = target$y)
+      if (!is.null(data)) {
+        plot(x = data$x, y = data$y, ylab="y", xlab="x")
+      } else {
+        plot(1, type="n", xlab="", ylab="", xlim=c(0, 1), ylim=c(0, 1))
+      }
+
+      points(target$x, target$y)
     })
 
-    # When the Done button is clicked, return a value
     observeEvent(input$done, {
       returnValue <- data.frame(x = target$x,
-                                y = target$y,
-                                group = target$group)
+                                y = target$y)
       stopApp(returnValue)
     })
+
     observeEvent(input$cancel, {
       stopApp(invisible(NULL))
     })
