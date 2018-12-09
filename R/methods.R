@@ -18,3 +18,9 @@ as.data.table.metamer_list <- function(x, keep.rownames = FALSE, ...) {
   attr(df, "convergence") <- attr(x, "convergence")
   return(df)
 }
+
+
+#' @export
+print.metamer_list <- function(x, ...) {
+  cat("List of ", length(x), " metamers", sep = "")
+}

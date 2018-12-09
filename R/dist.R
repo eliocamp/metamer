@@ -23,3 +23,30 @@ mean_dist_to <- function(target) {
 }
 
 
+#' Apply expressions to data.frames
+#'
+#' Creates a function that evaluates expressions in a future data.frame.
+#'
+#' @param ... Expressions that will be evaluated.
+#'
+#' @return
+#' A function that takes a `data.frame` and returns the expressions in `...`
+#' evaluated in an enviroment constructed from it.
+#'
+#' @details
+#' Each expression in `...` must return numeric values. They can be named or
+#' return named vectors.
+#'
+#' @examples
+#' some_stats <- with_data(mean_x = mean(x), mean(y), sd(x), coef(lm(x ~ y)))
+#' data <- data.frame(x = rnorm(20) , y = rnorm(20))
+#' some_stats(data)
+#'
+#' @export
+with_data <- function(...) {
+  funs <- match.call(expand.dots = FALSE)$`...`
+  function(data) {
+    unlist(lapply(funs, function(x) eval(x, data)))
+  }
+}
+
