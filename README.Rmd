@@ -33,7 +33,7 @@ You can install the development version of metamer with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("eliocamp/metR")
+devtools::install_github("eliocamp/metamer")
 ```
 
 ## Example
