@@ -3,6 +3,9 @@
 
 # metamer
 
+[![Travis build
+status](https://travis-ci.org/eliocamp/metamer.svg?branch=master)](https://travis-ci.org/eliocamp/metamer)
+
 Implements the algorithm proposed by [Matejka & Fitzmaurice
 (2017)](https://www.autodeskresearch.com/publications/samestats) to
 create metamers (datasets with identical statistical properties but very

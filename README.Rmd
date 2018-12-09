@@ -15,6 +15,8 @@ knitr::opts_chunk$set(
 ```
 # metamer
 
+[![Travis build status](https://travis-ci.org/eliocamp/metamer.svg?branch=master)](https://travis-ci.org/eliocamp/metamer)
+
 Implements the algorithm proposed by [Matejka & Fitzmaurice (2017)](https://www.autodeskresearch.com/publications/samestats) to create metamers (datasets with identical statistical properties but very differnet graphs).
 
 In color theory, [metamers](https://en.wikipedia.org/wiki/Metamerism_(color)) are colors that have very different wavelength distribution but are percieved as equal by out visual system. This happens because out eyes essentially summarise a continuous distribution of wavelength by just 3 numbers: the ammount that each type of cone cell is exited. Color metamerism is how artists can reproduce so many colors with a few pigments, or how PC monitors use only 3 lights to show colorful pictures. 
