@@ -11,7 +11,8 @@ as.data.frame.metamer_list <- function(x, row.names = NULL, optional = FALSE, ..
   return(df)
 }
 
-#' @importFrom data.table rbindlist
+#' @importFrom data.table as.data.table
+#' @export
 as.data.table.metamer_list <- function(x, keep.rownames = FALSE, ...) {
   df <- data.table::rbindlist(x, idcol = ".metamer")
   attr(df, "convergence") <- attr(x, "convergence")

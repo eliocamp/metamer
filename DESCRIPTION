@@ -9,12 +9,16 @@ Authors@R:
 Description: Creates data with identical statistics (metamers).
 License: GPL-3
 Encoding: UTF-8
+ByteCompile: yes
 LazyData: true
-imports:
+Imports:
   FNN,
-  progress
-suggests:
-  data.table,
+  progress,
+  shiny, 
+  miniUI,
+  methods,
+  data.table
+Suggests:
   datasauRus
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1

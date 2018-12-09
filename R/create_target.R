@@ -1,9 +1,19 @@
-
-
-draw_data <- function(data = NULL,
-                         target = NULL) {
-  library(shiny)
-  library(miniUI)
+#' Freehand drawing
+#'
+#' Opens up a dialogue that lets you draw your data.
+#'
+#' @param data Optional `data.frame` with x and y values that can used as
+#' background to guide your drawing.
+#'
+#' @return
+#' A `data.frame` with the x and y values of your data.
+#'
+#' @export
+#' @importFrom shiny plotOutput hoverOpts actionButton reactiveValues reactiveVal
+#' observeEvent renderPlot stopApp runGadget dialogViewer
+#' @importFrom miniUI miniPage gadgetTitleBar miniButtonBlock miniContentPanel
+#' @importFrom graphics par points plot
+draw_data <- function(data = NULL) {
   ui <- miniPage(
     gadgetTitleBar("Draw your target figure"),
     miniContentPanel(
@@ -21,12 +31,7 @@ draw_data <- function(data = NULL,
   )
 
   server <- function(input, output, session) {
-    if (is.null(target)) {
-      target = reactiveValues(x = NULL, y = NULL, group = NULL)
-    } else {
-      target = reactiveValues(x = target$x, y = target$y, group = 1)
-    }
-
+    target = reactiveValues(x = NULL, y = NULL, group = NULL)
     drawing = reactiveVal(FALSE)
     current_group <- reactiveVal(1)
 
@@ -96,10 +101,10 @@ draw_data <- function(data = NULL,
       stopApp(returnValue)
     })
 
-    observeEvent(input$cancel, {
-      stopApp(invisible(NULL))
-    })
+    # observeEvent(input$cancel, {
+    #   stopApp(invisible(NULL))
+    # })
   }
 
-  runGadget(ui, server, stopOnCancel = FALSE, viewer = dialogViewer(""))
+  runGadget(ui, server, stopOnCancel = TRUE, viewer = dialogViewer(""))
 }

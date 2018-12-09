@@ -36,7 +36,8 @@
 #' Matejka, J., & Fitzmaurice, G. (2017). Same Stats, Different Graphs. Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems  - CHI ’17, 1290–1294. https://doi.org/10.1145/3025453.3025912
 #'
 #' @export
-#' @importFrom progress progress_bar
+#' @importFrom methods hasArg
+#' @importFrom stats rnorm runif
 metamerize <- function(data,
                        preserve,
                        minimize,
@@ -44,9 +45,7 @@ metamerize <- function(data,
                        N = 100,
                        cols = colnames(data),
                        annealing = TRUE,
-                       verbose = interactive(), ...) {
-  # on.exit(return(.metamer(metamers, history, m, call.args, org_exact)))
-
+                       verbose = interactive()) {
   if (inherits(data, "metamer_list")) {
     metamers <- data
     m <- length(metamers)
