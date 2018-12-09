@@ -47,7 +47,7 @@ start <- subset(datasauRus::datasaurus_dozen, dataset == "dino")
 start$dataset <- NULL
 
 # And we want to preserve means and correlation
-mean_cor <- inverse_with(mean(x), mean(y), cor(x, y)) 
+mean_cor <- reverse_with(mean(x), mean(y), cor(x, y)) 
 
 metamers <- metamerize(start, preserve = mean_cor, N = 10000)
 print(metamers)

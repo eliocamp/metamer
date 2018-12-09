@@ -19,9 +19,9 @@ get_preserve(object)
 \item{object}{A \code{metamer_list} object.}
 
 \item{minimize, preserve}{Minimize and preserve functions as defined in
-\code{metamerize}.}
+\code{\link[=metamerize]{metamerize()}}.}
 }
 \description{
 Set attributes of \code{metamer_list}s that will be used as function arguments in
-\code{metamerize}.
+\code{\link[=metamerize]{metamerize()}}.
 }

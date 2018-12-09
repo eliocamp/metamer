@@ -1,11 +1,11 @@
 #' Set `metamer_list` attributes
 #'
 #' Set attributes of `metamer_list`s that will be used as function arguments in
-#' `metamerize`.
+#' [metamerize()].
 #'
 #' @param object A `metamer_list` object.
 #' @param minimize,preserve Minimize and preserve functions as defined in
-#'  `metamerize`.
+#'  [metamerize()].
 #'
 #'
 #' @export

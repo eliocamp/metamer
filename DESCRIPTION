@@ -6,7 +6,8 @@ Authors@R:
            family = "Campitelli",
            role = c("aut", "cre"),
            email = "elio.campitelli@cima.fcen.uba.ar")
-Description: Creates data with identical statistics (metamers).
+Description: Creates data with identical statistics (metamers) using an iterative 
+   altorithm proposed by Matejka & Fitzmaurice (2017). 
 License: GPL-3
 Encoding: UTF-8
 ByteCompile: yes
