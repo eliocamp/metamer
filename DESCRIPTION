@@ -16,8 +16,7 @@ Language: en-US
 Imports:
   FNN,
   progress,
-  methods,
-  data.table
+  methods
 Suggests:
   datasauRus,
   shiny, 

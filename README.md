@@ -55,14 +55,14 @@ start <- subset(datasauRus::datasaurus_dozen, dataset == "dino")
 start$dataset <- NULL
 
 # And we want to preserve means and correlation
-mean_cor <- reverse_with(mean(x), mean(y), cor(x, y)) 
+mean_cor <- delayed_with(mean(x), mean(y), cor(x, y)) 
 
 metamers <- metamerize(start, preserve = mean_cor, N = 10000)
 print(metamers)
-#> List of 6203 metamers
+#> List of 6152 metamers
 ```
 
-We found 6203 metamers. Let’s see the final one, with the starting
+We found 6152 metamers. Let’s see the final one, with the starting
 dataset as background.
 
 ``` r
@@ -137,7 +137,7 @@ function.
 
 ``` r
 library(magrittr)
-target2 <-subset(datasauRus::datasaurus_dozen, dataset == "star")
+target2 <- subset(datasauRus::datasaurus_dozen, dataset == "star")
 target2$dataset <- NULL
 
 metamers <- metamerize(start,
