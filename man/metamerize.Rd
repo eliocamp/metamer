@@ -51,3 +51,8 @@ are missing, the previous functions will be carried over from the previous call.
 \references{
 Matejka, J., & Fitzmaurice, G. (2017). Same Stats, Different Graphs. Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems  - CHI ’17, 1290–1294. https://doi.org/10.1145/3025453.3025912
 }
+\seealso{
+\code{\link[=delayed_with]{delayed_with()}} for a convenient way of making functions suitable for
+\code{preserve}, \code{\link[=mean_dist_to]{mean_dist_to()}} for a convenient way of minimizing the distance
+to a known target in \code{minimize}.
+}

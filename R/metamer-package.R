@@ -1,5 +1,5 @@
 #' @section Overview:
-#' Create metamers with the [metamerize()] function. Use the [reverse_with()]
+#' Create metamers with the [metamerize()] function. Use the [delayed_with()]
 #' to define the statistical transformation you want to preserve.
 #'
 #' Inspired by Matejka & Fitzmaurice (2017) awesome paper.

@@ -11,7 +11,7 @@ Creates data with identical statistics (metamers) using an iterative
 }
 \section{Overview}{
 
-Create metamers with the \code{\link[=metamerize]{metamerize()}} function. Use the \code{\link[=reverse_with]{reverse_with()}}
+Create metamers with the \code{\link[=metamerize]{metamerize()}} function. Use the \code{\link[=delayed_with]{delayed_with()}}
 to define the statistical transformation you want to preserve.
 
 Inspired by Matejka & Fitzmaurice (2017) awesome paper.

@@ -29,6 +29,10 @@
 #' last metamer of the list. Furthermore, if `preserve` and/or `minimize`
 #' are missing, the previous functions will be carried over from the previous call.
 #'
+#' @seealso [delayed_with()] for a convenient way of making functions suitable for
+#' `preserve`, [mean_dist_to()] for a convenient way of minimizing the distance
+#' to a known target in `minimize`.
+#'
 #' @return
 #' A `metamer_list` object (a list of data.frames).
 #'
