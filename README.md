@@ -9,16 +9,16 @@ status](https://travis-ci.org/eliocamp/metamer.svg?branch=master)](https://travi
 Implements the algorithm proposed by [Matejka & Fitzmaurice
 (2017)](https://www.autodeskresearch.com/publications/samestats) to
 create metamers (datasets with identical statistical properties but very
-differnet graphs).
+different graphs).
 
-In color theory,
+In colour theory,
 [metamers](https://en.wikipedia.org/wiki/Metamerism_\(color\)) are
-colors that have very different wavelength distribution but are
-percieved as equal by out visual system. This happens because out eyes
+colours that have very different wavelength distribution but are
+perceived as equal by out visual system. This happens because out eyes
 essentially summarise a continuous distribution of wavelength by just 3
-numbers: the ammount that each type of cone cell is exited. Color
-metamerism is how artists can reproduce so many colors with a few
-pigments, or how PC monitors use only 3 lights to show colorful
+numbers: the amount that each type of cone cell is exited. Colour
+metamerism is how artists can reproduce so many colours with a few
+pigments, or how PC monitors use only 3 lights to show colourful
 pictures.
 
 ![](man/figures/lemon.jpg)
@@ -35,7 +35,7 @@ properties.
 
 ## Installation
 
-You can install the developement version of metamer with:
+You can install the development version of metamer with:
 
 ``` r
 # install.packages("devtools")
@@ -75,7 +75,7 @@ ggplot(metamers[[length(metamers)]], aes(x, y)) +
 
 <img src="man/figures/README-unnamed-chunk-1-1.png" width="100%" />
 
-We can check that the satistical properties have been preserved up to 2
+We can check that the statistical properties have been preserved up to 2
 significant figures:
 
 ``` r
@@ -150,7 +150,7 @@ metamers <- metamerize(start,
   metamerize(N = 10000)
 ```
 
-And the ful sequence
+And the full sequence
 
 ``` r
 keep(metamers, 450) %>% 
