@@ -10,7 +10,7 @@
 #' the data as argument and return a single numeric.
 #' @param cols A character vector with the names of the columns that need to be
 #' changed.
-#' @param signif The number of significan digits of `preserve` that need to be
+#' @param signif The number of significant digits of `preserve` that need to be
 #' preserved.
 #' @param N Number of iterations.
 #' @param annealing Logical indicating whether to perform annealing.
@@ -30,7 +30,7 @@
 #' are missing, the previous functions will be carried over from the previous call.
 #'
 #' @return
-#' A `metamer_list` object wich is a list of data.frames
+#' A `metamer_list` object (a list of data.frames).
 #'
 #' @references
 #' Matejka, J., & Fitzmaurice, G. (2017). Same Stats, Different Graphs. Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems  - CHI ’17, 1290–1294. https://doi.org/10.1145/3025453.3025912

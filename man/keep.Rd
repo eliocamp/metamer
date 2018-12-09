@@ -2,7 +2,7 @@
 % Please edit documentation in R/trimm.R
 \name{keep}
 \alias{keep}
-\title{Trimm a \code{metamer_list}}
+\title{Trim a \code{metamer_list}}
 \usage{
 keep(object, n = length(object))
 }
@@ -12,7 +12,7 @@ keep(object, n = length(object))
 \item{n}{The number of metamers to keep.}
 }
 \value{
-A \code{metamer_list} object with \code{n} metamers.
+A \code{metamer_list} object with \code{n} equally spaced metamers.
 }
 \description{
 When creating metamers, \code{metamerize()} can produce thousands of very similar

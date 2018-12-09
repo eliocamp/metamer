@@ -119,6 +119,8 @@ metamers <- metamerize(start,
   metamerize(N = 10000)
 ```
 
+And the ful sequence 
+
 ```{r, gganimate = list(duration = 3, fps = 30)}
 keep(metamers, 450) %>% 
   as.data.frame() %>% 

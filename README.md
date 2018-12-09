@@ -52,14 +52,14 @@ start <- subset(datasauRus::datasaurus_dozen, dataset == "dino")
 start$dataset <- NULL
 
 # And we want to preserve means and correlation
-mean_cor <- with_data(mean(x), mean(y), cor(x, y)) 
+mean_cor <- inverse_with(mean(x), mean(y), cor(x, y)) 
 
 metamers <- metamerize(start, preserve = mean_cor, N = 10000)
 print(metamers)
-#> List of 6357 metamers
+#> List of 6271 metamers
 ```
 
-We found 6357 metamers. Let’s see the final one, with the starting
+We found 6271 metamers. Let’s see the final one, with the starting
 dataset as background.
 
 ``` r
@@ -146,6 +146,8 @@ metamers <- metamerize(start,
   set_minimize(mean_dist_to(start)) %>% 
   metamerize(N = 10000)
 ```
+
+And the ful sequence
 
 ``` r
 keep(metamers, 450) %>% 

@@ -11,7 +11,7 @@ inverse_with(...)
 }
 \value{
 A function that takes a \code{data.frame} and returns the expressions in \code{...}
-evaluated in an enviroment constructed from it.
+evaluated in an environment constructed from it.
 }
 \description{
 Creates a function that evaluates expressions in a future data.frame. Is like

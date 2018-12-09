@@ -32,7 +32,7 @@ mean_dist_to <- function(target) {
 #'
 #' @return
 #' A function that takes a `data.frame` and returns the expressions in `...`
-#' evaluated in an enviroment constructed from it.
+#' evaluated in an environment constructed from it.
 #'
 #' @details
 #' Each expression in `...` must return numeric values. They can be named or

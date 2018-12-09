@@ -17,7 +17,7 @@ Must take the data as argument and return a numeric vector.}
 \item{minimize}{An optional function to minimize in the process. Must take
 the data as argument and return a single numeric.}
 
-\item{signif}{The number of significan digits of \code{preserve} that need to be
+\item{signif}{The number of significant digits of \code{preserve} that need to be
 preserved.}
 
 \item{N}{Number of iterations.}
@@ -30,7 +30,7 @@ changed.}
 \item{verbose}{Logical indicating whether to show a progress bar.}
 }
 \value{
-A \code{metamer_list} object wich is a list of data.frames
+A \code{metamer_list} object (a list of data.frames).
 }
 \description{
 Produces very dissimilar datasets with the same statistical properties.
