@@ -9,33 +9,48 @@
 #' A `data.frame` with the x and y values of your data.
 #'
 #' @export
-#' @importFrom shiny plotOutput hoverOpts actionButton reactiveValues reactiveVal
-#' observeEvent renderPlot stopApp runGadget dialogViewer
-#' @importFrom miniUI miniPage gadgetTitleBar miniButtonBlock miniContentPanel
 #' @importFrom graphics par points plot
 draw_data <- function(data = NULL) {
-  ui <- miniPage(
-    gadgetTitleBar("Draw your target figure"),
-    miniContentPanel(
-      plotOutput("plot", width = "100%", height = "90%",
-                 hover = hoverOpts(id = "hover", delay = 100,
+  shiny.available <- requireNamespace("shiny", quietly = TRUE)
+  minuUI.available <- requireNamespace("miniUI", quietly = TRUE)
+
+  if (!shiny.available & !minuUI.available) {
+    stop("draw_data needs packages 'shiny' and 'miniUI'. ",
+         "Install them with 'install.packages(c(\"shiny\", \"miniUI\"))'")
+  }
+
+  if (!shiny.available) {
+    stop("draw_data needs package'shiny'. ",
+         "Install it with 'install.packages(\"shiny\")'")
+  }
+
+  if (!minuUI.available) {
+    stop("draw_data needs package 'miniUI'. ",
+         "Install it with 'install.packages(\"miniUI\")'")
+  }
+
+  ui <- miniUI::miniPage(
+    miniUI::gadgetTitleBar("Draw your target figure"),
+    miniUI::miniContentPanel(
+      shiny::plotOutput("plot", width = "100%", height = "90%",
+                 hover = shiny::hoverOpts(id = "hover", delay = 100,
                                    delayType = "throttle", clip = TRUE, nullOutside = TRUE),
                  click = "click",
                  dblclick = "dblclick"),
-      miniButtonBlock(
-        actionButton("reset_prev", "Clear last group"),
-        actionButton("reset_all", "Clear all"),
+      miniUI::miniButtonBlock(
+        shiny::actionButton("reset_prev", "Clear last group"),
+        shiny::actionButton("reset_all", "Clear all"),
         border = "bottom"
       )
     )
   )
 
   server <- function(input, output, session) {
-    target = reactiveValues(x = NULL, y = NULL, group = NULL)
-    drawing = reactiveVal(FALSE)
-    current_group <- reactiveVal(1)
+    target = shiny::reactiveValues(x = NULL, y = NULL, group = NULL)
+    drawing = shiny::reactiveVal(FALSE)
+    current_group <- shiny::reactiveVal(1)
 
-    observeEvent(input$dblclick, handlerExpr = {
+    shiny::observeEvent(input$dblclick, handlerExpr = {
       if (drawing()) {
         this_group <- current_group()
         # target$group <- c(target$group, rep.int(this_group, n))
@@ -46,7 +61,7 @@ draw_data <- function(data = NULL) {
       drawing(!temp)
     })
 
-    observeEvent(input$click, handlerExpr = {
+    shiny::observeEvent(input$click, handlerExpr = {
       target$x <- c(target$x, input$click$x)
       target$y <- c(target$y, input$click$y)
       target$group <- c(target$group, current_group())
@@ -57,7 +72,7 @@ draw_data <- function(data = NULL) {
       current_group(next_group)
     })
 
-    observeEvent(input$hover, {
+    shiny::observeEvent(input$hover, {
       if (drawing()) {
         target$x <- c(target$x, input$hover$x)
         target$y <- c(target$y, input$hover$y)
@@ -65,14 +80,14 @@ draw_data <- function(data = NULL) {
 
       }})
 
-    observeEvent(input$reset_all, handlerExpr = {
+    shiny::observeEvent(input$reset_all, handlerExpr = {
       target$x <- NULL
       target$y <- NULL
       target$group <- NULL
       current_group(1)
     })
 
-    observeEvent(input$reset_prev, handlerExpr = {
+    shiny::observeEvent(input$reset_prev, handlerExpr = {
       if (length(target$x) > 0) {
         this_group <- current_group()
         prev_group <- this_group - 1
@@ -84,21 +99,23 @@ draw_data <- function(data = NULL) {
       }
     })
 
-    output$plot <- renderPlot({
+    output$plot <- shiny::renderPlot({
       par(mar = c(1,1,1,1))
       if (!is.null(data)) {
-        plot(x = data$x, y = data$y, ylab="", xlab="", pch = 20, cex = 0.7)
+        plot(x = data$x, y = data$y, ylab="", xlab="", pch = 20, cex = 0.7,
+             main = "Single click to add points, double click to draw lines")
       } else {
-        plot(1, type="n", xlab="", ylab="", xlim=c(0, 1), ylim=c(0, 1))
+        plot(1, type="n", xlab="", ylab="", xlim=c(0, 1), ylim=c(0, 1),
+             main = "Single click to add points, double click to draw lines")
       }
 
       points(target$x, target$y, pch = 19, col = "red")
     })
 
-    observeEvent(input$done, {
+    shiny::observeEvent(input$done, {
       returnValue <- data.frame(x = target$x,
                                 y = target$y)
-      stopApp(returnValue)
+      shiny::stopApp(returnValue)
     })
 
     # observeEvent(input$cancel, {
@@ -106,5 +123,5 @@ draw_data <- function(data = NULL) {
     # })
   }
 
-  runGadget(ui, server, stopOnCancel = TRUE, viewer = dialogViewer(""))
+  shiny::runGadget(ui, server, stopOnCancel = TRUE, viewer = shiny::dialogViewer(""))
 }

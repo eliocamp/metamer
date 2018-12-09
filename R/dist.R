@@ -25,7 +25,8 @@ mean_dist_to <- function(target) {
 
 #' Apply expressions to data.frames
 #'
-#' Creates a function that evaluates expressions in a future data.frame.
+#' Creates a function that evaluates expressions in a future data.frame. Is like
+#' `with()`, but you pass the data after.
 #'
 #' @param ... Expressions that will be evaluated.
 #'
@@ -38,12 +39,12 @@ mean_dist_to <- function(target) {
 #' return named vectors.
 #'
 #' @examples
-#' some_stats <- with_data(mean_x = mean(x), mean(y), sd(x), coef(lm(x ~ y)))
+#' some_stats <- inverse_with(mean_x = mean(x), mean(y), sd(x), coef(lm(x ~ y)))
 #' data <- data.frame(x = rnorm(20) , y = rnorm(20))
 #' some_stats(data)
 #'
 #' @export
-with_data <- function(...) {
+inverse_with <- function(...) {
   funs <- match.call(expand.dots = FALSE)$`...`
   function(data) {
     unlist(lapply(funs, function(x) eval(x, data)))

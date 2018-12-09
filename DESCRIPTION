@@ -14,11 +14,11 @@ LazyData: true
 Imports:
   FNN,
   progress,
-  shiny, 
-  miniUI,
   methods,
   data.table
 Suggests:
-  datasauRus
+  datasauRus,
+  shiny, 
+  miniUI
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1

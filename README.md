@@ -111,8 +111,8 @@ ggplot(metamers[[length(metamers)]], aes(x, y)) +
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
 
-Finally, we can animate the whole thing. Since 9727 metamers is
-overkill, first we keep only 200 of them.
+We can animate the whole thing. Since 9727 metamers is overkill, first
+we keep only 200 of them.
 
 ``` r
 library(gganimate)
@@ -124,6 +124,10 @@ ggplot(as.data.frame(metamers_anim), aes(x, y)) +
 ```
 
 <img src="man/figures/README-unnamed-chunk-6-1.gif" width="100%" />
+
+You can freehand your own starting or target data with the `draw_data()`
+utility, that will open a shiny interface. You might need to install
+`shiny` and `miniUI` with `install.packages(c("shiny", "miniUI"))`.
 
 Metamerizing operations can be chained while changing the minimizing
 function.
