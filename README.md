@@ -24,7 +24,7 @@ pictures.
 ![](man/figures/lemon.jpg)
 
 (from the excellent [Color: From Hexcodes to
-Eyeballs](jamie-wong.com/post/color/) by [Jamie
+Eyeballs](http://jamie-wong.com/post/color/) by [Jamie
 Wong](https://github.com/jlfwong))
 
 Statistical transformations such as mean, standard deviation and
