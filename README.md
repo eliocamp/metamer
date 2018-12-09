@@ -119,7 +119,7 @@ we keep only 200 of them.
 
 ``` r
 library(gganimate)
-metamers_anim <- keep(metamers, 200)
+metamers_anim <- trim(metamers, 200)
 
 ggplot(as.data.frame(metamers_anim), aes(x, y)) +
   geom_point() +
@@ -153,7 +153,7 @@ metamers <- metamerize(start,
 And the full sequence
 
 ``` r
-keep(metamers, 450) %>% 
+trim(metamers, 450) %>% 
   as.data.frame() %>% 
   ggplot(aes(x, y)) +
   geom_point() +

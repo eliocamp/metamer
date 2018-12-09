@@ -95,7 +95,7 @@ We can animate the whole thing. Since `r length(metamers)` metamers is overkill,
 
 ```{r, gganimate = list(duration = 2)}
 library(gganimate)
-metamers_anim <- keep(metamers, 200)
+metamers_anim <- trim(metamers, 200)
 
 ggplot(as.data.frame(metamers_anim), aes(x, y)) +
   geom_point() +
@@ -124,7 +124,7 @@ metamers <- metamerize(start,
 And the full sequence 
 
 ```{r, gganimate = list(duration = 3, fps = 30)}
-keep(metamers, 450) %>% 
+trim(metamers, 450) %>% 
   as.data.frame() %>% 
   ggplot(aes(x, y)) +
   geom_point() +

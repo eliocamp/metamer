@@ -65,7 +65,7 @@ reverse_with <- function(...) {
 #' A `metamer_list` object with `n` equally spaced metamers.
 #'
 #' @export
-keep <- function(object, n = length(object)) {
+trim <- function(object, n = length(object)) {
   N <- length(object)
   new <- object[seq(1, N, length.out = n)]
   mostattributes(new) <- attributes(object)
