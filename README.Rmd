@@ -42,14 +42,16 @@ You can construct metamers from a starting dataset and a vector of statistical p
 
 ```{r example}
 library(metamer)
-# Start with the datasaur
+# Start with the datasaurus
+# install.packages("datasauRus")
 start <- subset(datasauRus::datasaurus_dozen, dataset == "dino")
 start$dataset <- NULL
 
 # And we want to preserve means and correlation
 mean_cor <- delayed_with(mean(x), mean(y), cor(x, y)) 
-
-metamers <- metamerize(start, preserve = mean_cor, N = 10000)
+N <- 20000
+set.seed(42) # To make results reproducible
+metamers <- metamerize(start, preserve = mean_cor, N = N)
 print(metamers)
 ```
 
@@ -80,7 +82,7 @@ target1$dataset <- NULL
 ```{r}
 metamers <- metamerize(metamers, 
                        minimize = mean_dist_to(target1), 
-                       N = 10000)
+                       N = N)
 ```
 
 Now the result is a bit more impressive. 
@@ -93,9 +95,9 @@ ggplot(metamers[[length(metamers)]], aes(x, y)) +
 
 We can animate the whole thing. Since `r length(metamers)` metamers is overkill, first we keep only 200 of them. 
 
-```{r, gganimate = list(duration = 2)}
+```{r, gganimate = list(fps = 30)}
 library(gganimate)
-metamers_anim <- trim(metamers, 200)
+metamers_anim <- trim(metamers, 30*2)
 
 ggplot(as.data.frame(metamers_anim), aes(x, y)) +
   geom_point() +
@@ -114,17 +116,17 @@ target2$dataset <- NULL
 metamers <- metamerize(start,
                        preserve = mean_cor, 
                        minimize = mean_dist_to(target1),
-                       N = 10000) %>% 
+                       N = N) %>% 
   set_minimize(mean_dist_to(target2)) %>% 
-  metamerize(N = 10000) %>% 
+  metamerize(N = N) %>% 
   set_minimize(mean_dist_to(start)) %>% 
-  metamerize(N = 10000)
+  metamerize(N = N)
 ```
 
 And the full sequence 
 
-```{r, gganimate = list(duration = 3, fps = 30)}
-trim(metamers, 450) %>% 
+```{r, gganimate = list(nframes = 30*3, fps = 30)}
+trim(metamers, 30*3) %>% 
   as.data.frame() %>% 
   ggplot(aes(x, y)) +
   geom_point() +
