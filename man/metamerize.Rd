@@ -4,8 +4,9 @@
 \alias{metamerize}
 \title{Create metamers}
 \usage{
-metamerize(data, preserve, minimize, signif = 2, N = 100,
-  cols = colnames(data), annealing = TRUE, verbose = interactive())
+metamerize(data, preserve, minimize, change = colnames(data),
+  signif = 2, N = 100, annealing = TRUE, perturbation = 0.08,
+  verbose = interactive())
 }
 \arguments{
 \item{data}{A \code{data.frame} with the starting data or a \code{metamer_list} object returned
@@ -17,15 +18,17 @@ Must take the data as argument and return a numeric vector.}
 \item{minimize}{An optional function to minimize in the process. Must take
 the data as argument and return a single numeric.}
 
+\item{change}{A character vector with the names of the columns that need to be
+changed.}
+
 \item{signif}{The number of significant digits of \code{preserve} that need to be
 preserved.}
 
 \item{N}{Number of iterations.}
 
-\item{cols}{A character vector with the names of the columns that need to be
-changed.}
-
 \item{annealing}{Logical indicating whether to perform annealing.}
+
+\item{perturbation}{Numeric with the magnitude of the random perturbations.}
 
 \item{verbose}{Logical indicating whether to show a progress bar.}
 }

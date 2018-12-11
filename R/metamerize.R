@@ -8,11 +8,12 @@
 #' Must take the data as argument and return a numeric vector.
 #' @param minimize An optional function to minimize in the process. Must take
 #' the data as argument and return a single numeric.
-#' @param cols A character vector with the names of the columns that need to be
+#' @param change A character vector with the names of the columns that need to be
 #' changed.
 #' @param signif The number of significant digits of `preserve` that need to be
 #' preserved.
 #' @param N Number of iterations.
+#' @param perturbation Numeric with the magnitude of the random perturbations.
 #' @param annealing Logical indicating whether to perform annealing.
 #' @param verbose Logical indicating whether to show a progress bar.
 #'
@@ -45,10 +46,11 @@
 metamerize <- function(data,
                        preserve,
                        minimize,
+                       change = colnames(data),
                        signif = 2,
                        N = 100,
-                       cols = colnames(data),
                        annealing = TRUE,
+                       perturbation = 0.08,
                        verbose = interactive()) {
   if (inherits(data, "metamer_list")) {
     metamers <- data
@@ -92,7 +94,7 @@ metamerize <- function(data,
   }
 
   call.args <- list(preserve = preserve,
-                    cols = cols,
+                    change = change,
                     signif = 2,
                     N = N,
                     minimize = minimize,
@@ -101,7 +103,7 @@ metamerize <- function(data,
 
   new_data <- data
 
-  ncols <- length(cols)
+  ncols <- length(change)
   nrows <- nrow(data)
   npoints <- ncols*nrows
 
@@ -127,7 +129,7 @@ metamerize <- function(data,
     bar_tick <- bar_tick - 1
     temp <- M_temp + ((i-1)/(N-1))^2*(m_temp - M_temp)
 
-    new_data[, c(cols)] <- metamers[[m]][, c(cols)] + matrix(rnorm(npoints, 0, 0.08),
+    new_data[, c(change)] <- metamers[[m]][, c(change)] + matrix(rnorm(npoints, 0, perturbation),
                                                              nrow = nrows, ncol = ncols)
     new_exact <- preserve(new_data)
 
