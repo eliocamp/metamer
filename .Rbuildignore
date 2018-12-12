@@ -1,4 +1,5 @@
 ^\.github$
+^CONTRIBUTING\.md$
 ^\.travis\.yml$
 ^README_cache$
 ^README\.Rmd$
