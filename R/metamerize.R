@@ -45,45 +45,64 @@
 #' @importFrom stats rnorm runif
 metamerize <- function(data,
                        preserve,
-                       minimize,
+                       minimize = NULL,
                        change = colnames(data),
                        signif = 2,
                        N = 100,
                        annealing = TRUE,
                        perturbation = 0.08,
                        verbose = interactive()) {
+  thiscall <- match.call()
   if (inherits(data, "metamer_list")) {
-    metamers <- data
-    m <- length(metamers)
-    data <- data[[m]]
-
-    if (!hasArg(minimize)) {
-      minimize <- attr(metamers, "call.args")$minimize
-    }
-
-    if (!is.null(minimize)) {
-      history <- attr(metamers, "history")
-    }
-
-    if (!hasArg(preserve)) {
-      preserve <- attr(metamers, "call.args")$preserve
-      org_exact <- attr(metamers, "org_exact")
-    }
+    preserve     <- .get_attr(data, "preserve", thiscall)
+    minimize     <- .get_attr(data, "minimize", thiscall)
+    change       <- .get_attr(data, "change", thiscall)
+    signif       <- .get_attr(data, "signif", thiscall)
+    annealing    <- .get_attr(data, "annealing", thiscall)
+    perturbation <- .get_attr(data, "perturbation", thiscall)
+    old_metamers <- data
+    data         <- as.data.frame(data[[length(data)]])
   } else {
-    metamers <- vector(mode = "list", length = N)
-    m <- 1
-    data <- as.data.frame(data)
-    metamers[[m]] <- data
-
-    if (!hasArg(minimize)) {
-      minimize <- NULL
-    }
-
-    history <- vector(mode = "numeric", length = N)
-
-    preserve <- match.fun(preserve)
-    org_exact <- preserve(data)
+    old_metamers <- list()
   }
+
+  new_metamers <- metamerize.data.frame(data = data,
+                                        preserve = preserve,
+                                        minimize = minimize,
+                                        change = change,
+                                        signif = signif,
+                                        N = N,
+                                        annealing = annealing,
+                                        perturbation = perturbation,
+                                        verbose = verbose)
+  return(append_metamer(old_metamers, new_metamers))
+}
+
+
+metamerize.data.frame <- function(data,
+                                  preserve,
+                                  minimize,
+                                  change = colnames(data),
+                                  signif = 2,
+                                  N = 100,
+                                  annealing = TRUE,
+                                  perturbation = 0.08,
+                                  verbose = interactive()) {
+
+  metamers <- vector(mode = "list", length = N)
+  m <- 1
+  data <- as.data.frame(data)
+  metamers[[m]] <- data
+
+  if (!hasArg(minimize)) {
+    minimize <- NULL
+  }
+
+  history <- vector(mode = "numeric", length = N)
+
+  preserve <- match.fun(preserve)
+  org_exact <- preserve(data)
+
 
   pb_format <- " :m metamers [:bar] ~ eta: :eta"
   if (!is.null(minimize)) {
@@ -130,7 +149,7 @@ metamerize <- function(data,
     temp <- M_temp + ((i-1)/(N-1))^2*(m_temp - M_temp)
 
     new_data[, c(change)] <- metamers[[m]][, c(change)] + matrix(rnorm(npoints, 0, perturbation),
-                                                             nrow = nrows, ncol = ncols)
+                                                                 nrow = nrows, ncol = ncols)
     new_exact <- preserve(new_data)
 
     if (!all(signif(new_exact, signif) - signif(org_exact, signif) == 0)) {
@@ -154,17 +173,16 @@ metamerize <- function(data,
     }
   }
   p_bar$terminate()
-  return(.metamer(metamers, history, m, call.args, org_exact))
+  return(new_metamer_list(metamers,
+                          history,
+                          preserve,
+                          minimize,
+                          change,
+                          signif,
+                          org_exact,
+                          annealing,
+                          perturbation,
+                          m))
 }
 
-
-.metamer <- function(metamers, history, m, call.args, org_exact) {
-  metamers <- metamers[seq_len(m)]
-  history <- history[seq_len(m)]
-  class(metamers) <- class(metamers) <- c("metamer_list", "list")
-  attr(metamers, "history") <- history
-  attr(metamers, "call.args") <- call.args
-  attr(metamers, "org_exact") <- org_exact
-  return(metamers)
-}
 

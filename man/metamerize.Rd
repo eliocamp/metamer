@@ -4,7 +4,7 @@
 \alias{metamerize}
 \title{Create metamers}
 \usage{
-metamerize(data, preserve, minimize, change = colnames(data),
+metamerize(data, preserve, minimize = NULL, change = colnames(data),
   signif = 2, N = 100, annealing = TRUE, perturbation = 0.08,
   verbose = interactive())
 }

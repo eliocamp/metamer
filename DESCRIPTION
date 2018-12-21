@@ -4,8 +4,9 @@ Version: 0.0.0.9000
 Authors@R: 
     person(given = "Elio",
            family = "Campitelli",
-           role = c("aut", "cre"),
-           email = "elio.campitelli@cima.fcen.uba.ar")
+           role = c("cre", "aut"),
+           email = "elio.campitelli@cima.fcen.uba.ar",
+           comment = c(ORCID = "0000-0002-7742-9230"))
 Description: Creates data with identical statistics (metamers) using an iterative 
    altorithm proposed by Matejka & Fitzmaurice (2017). 
 License: GPL-3
