@@ -9,6 +9,7 @@
 #' A `data.frame` with the x and y values of your data.
 #'
 #' @export
+#' @family helper functions
 #' @importFrom graphics par points plot
 draw_data <- function(data = NULL) {
   shiny.available <- requireNamespace("shiny", quietly = TRUE)

@@ -27,3 +27,8 @@ data <- data.frame(x = rnorm(20) , y = rnorm(20))
 some_stats(data)
 
 }
+\seealso{
+Other helper functions: \code{\link{draw_data}},
+  \code{\link{mean_dist_to}}, \code{\link{moments_n}}
+}
+\concept{helper functions}

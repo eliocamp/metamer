@@ -14,6 +14,7 @@
 #' distance <- mean_dist_to(target)
 #' distance(data)
 #'
+#' @family helper functions
 #' @export
 mean_dist_to <- function(target) {
   target <- as.matrix(target)
@@ -43,6 +44,7 @@ mean_dist_to <- function(target) {
 #' data <- data.frame(x = rnorm(20) , y = rnorm(20))
 #' some_stats(data)
 #'
+#' @family helper functions
 #' @export
 delayed_with <- function(...) {
   funs <- match.call(expand.dots = FALSE)$`...`
@@ -70,4 +72,47 @@ trim <- function(object, n = length(object)) {
   new <- object[seq(1, N, length.out = n)]
   mostattributes(new) <- attributes(object)
   new
+}
+
+
+#' Compute moments
+#'
+#' Returns a function that will return uncentered moments
+#'
+#' @param orders Numeric with the order of the uncentered moments that will
+#' be computed.
+#' @param cols Character vector with the name of the columns of the data for which
+#' moments will be computed
+#'
+#' @return
+#' A function that takes a `data.frame` and return a named numeric vector of the
+#' uncentered moments of the columns.
+#'
+#' @examples
+#' data <- data.frame(x = rnorm(100), y = rnorm(100))
+#' moments_3 <- moments_n(1:3)
+#'
+#' moments_3(data)
+#'
+#' moments_3 <- moments_n(1:3, "x")
+#' moments_3(data)
+#'
+#' @family helper functions
+#' @export
+moments_n <- function(orders, cols = NULL) {
+  force(orders)
+  force(cols)
+  function(data) {
+    if (is.null(cols)) cols <- colnames(data)
+    ms <- unlist(lapply(cols, function(col) moments_(data[[col]], orders)))
+    stats::setNames(ms, paste0(rep(cols, each = length(orders)), "_", orders))
+  }
+}
+
+moment_ <- function(x, order) {
+  sum(x^order)/length(x)
+}
+
+moments_ <- function(x, orders) {
+  vapply(orders, function(o) moment_(x, o), 1)
 }

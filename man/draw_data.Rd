@@ -16,3 +16,8 @@ A \code{data.frame} with the x and y values of your data.
 \description{
 Opens up a dialogue that lets you draw your data.
 }
+\seealso{
+Other helper functions: \code{\link{delayed_with}},
+  \code{\link{mean_dist_to}}, \code{\link{moments_n}}
+}
+\concept{helper functions}
