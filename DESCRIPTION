@@ -19,7 +19,6 @@ Imports:
   progress,
   methods
 Suggests:
-  datasauRus,
   shiny, 
   miniUI
 Roxygen: list(markdown = TRUE)
