@@ -5,8 +5,8 @@
 \title{Create metamers}
 \usage{
 metamerize(data, preserve, minimize = NULL, change = colnames(data),
-  signif = 2, N = 100, annealing = TRUE, perturbation = 0.08,
-  verbose = interactive())
+  signif = 2, N = 100, trim = N, annealing = TRUE,
+  perturbation = 0.08, verbose = interactive())
 }
 \arguments{
 \item{data}{A \code{data.frame} with the starting data or a \code{metamer_list} object returned
@@ -25,6 +25,8 @@ changed.}
 preserved.}
 
 \item{N}{Number of iterations.}
+
+\item{trim}{Max number of metamers to return.}
 
 \item{annealing}{Logical indicating whether to perform annealing.}
 

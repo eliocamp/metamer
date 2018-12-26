@@ -13,6 +13,7 @@
 #' @param signif The number of significant digits of `preserve` that need to be
 #' preserved.
 #' @param N Number of iterations.
+#' @param trim Max number of metamers to return.
 #' @param perturbation Numeric with the magnitude of the random perturbations.
 #' @param annealing Logical indicating whether to perform annealing.
 #' @param verbose Logical indicating whether to show a progress bar.
@@ -49,6 +50,7 @@ metamerize <- function(data,
                        change = colnames(data),
                        signif = 2,
                        N = 100,
+                       trim = N,
                        annealing = TRUE,
                        perturbation = 0.08,
                        verbose = interactive()) {
@@ -72,6 +74,7 @@ metamerize <- function(data,
                                         change = change,
                                         signif = signif,
                                         N = N,
+                                        trim = trim,
                                         annealing = annealing,
                                         perturbation = perturbation,
                                         verbose = verbose)
@@ -85,6 +88,7 @@ metamerize.data.frame <- function(data,
                                   change = colnames(data),
                                   signif = 2,
                                   N = 100,
+                                  trim = trim,
                                   annealing = TRUE,
                                   perturbation = 0.08,
                                   verbose = interactive()) {
@@ -173,16 +177,18 @@ metamerize.data.frame <- function(data,
     }
   }
   p_bar$terminate()
-  return(new_metamer_list(metamers,
-                          history,
+
+  keep <- seq(1, m, length.out = min(m, trim))
+
+  return(new_metamer_list(metamers[keep],
+                          history[keep],
                           preserve,
                           minimize,
                           change,
                           signif,
                           org_exact,
                           annealing,
-                          perturbation,
-                          m))
+                          perturbation))
 }
 
 
