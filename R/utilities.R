@@ -116,3 +116,37 @@ moment_ <- function(x, order) {
 moments_ <- function(x, orders) {
   vapply(orders, function(o) moment_(x, o), 1)
 }
+
+
+#' Increase resolution of data
+#'
+#' Interpolates between the output of [draw_data()] and increases the point
+#' density of each stroke.Useful for avoiding sparse targets that result in
+#' clumping of points when metamerizing. It only has an effect on strokes (made
+#' by double clicking).
+#'
+#' @param data A `data.frame` with columns `x`, `y` and `.group`.
+#' @param res A numeric indicating the multiplicative resolution (i.e. 2 =
+#' double resolution).
+#'
+#' @return
+#' A `data.frame` with the `x` and `y` values of your data and a `.group` column
+#' that identifies each stroke.
+#'
+#' @family  helper functions
+#' @export
+densify <- function(data, res = 2) {
+  data <- by(data, data$.group,
+             function(d) {
+               N <- nrow(d)
+               id <- seq_len(N)
+               if (N > 1) {
+                 data.frame(x = stats::approx(id, d$x, n = N*res)$y,
+                            y = stats::approx(id, d$y, n = N*res)$y,
+                            .group = d$.group)
+               } else {
+                 d
+               }
+             })
+  do.call(rbind, data)
+}

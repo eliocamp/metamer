@@ -15,7 +15,8 @@ Create metamers with the \code{\link[=metamerize]{metamerize()}} function.
 
 Some helper functions included:
 \itemize{
-\item \code{\link[=draw_data]{draw_data()}} fordrawing 2D datasets by hand.
+\item \code{\link[=draw_data]{draw_data()}} for drawing 2D datasets by hand and \code{\link[=densify]{densify()}} for increasing
+the point density of those drawings.
 \item \code{\link[=delayed_with]{delayed_with()}} for defining statistics to preserve.
 \item \code{\link[=moments_n]{moments_n()}} for preserving moments of order n.
 \item \code{\link[=mean_dist_to]{mean_dist_to()}} for minimizing the mean distance to a known target dataset.

@@ -25,6 +25,7 @@ distance(data)
 }
 \seealso{
 Other helper functions: \code{\link{delayed_with}},
-  \code{\link{draw_data}}, \code{\link{moments_n}}
+  \code{\link{densify}}, \code{\link{draw_data}},
+  \code{\link{moments_n}}
 }
 \concept{helper functions}
