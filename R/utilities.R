@@ -82,7 +82,7 @@ trim <- function(object, n = length(object)) {
 #' @param orders Numeric with the order of the uncentered moments that will
 #' be computed.
 #' @param cols Character vector with the name of the columns of the data for which
-#' moments will be computed
+#' moments will be computed. If `NULL`, will use all columns.
 #'
 #' @return
 #' A function that takes a `data.frame` and return a named numeric vector of the

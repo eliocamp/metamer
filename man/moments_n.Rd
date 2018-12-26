@@ -11,7 +11,7 @@ moments_n(orders, cols = NULL)
 be computed.}
 
 \item{cols}{Character vector with the name of the columns of the data for which
-moments will be computed}
+moments will be computed. If \code{NULL}, will use all columns.}
 }
 \value{
 A function that takes a \code{data.frame} and return a named numeric vector of the
