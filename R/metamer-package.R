@@ -2,7 +2,7 @@
 #' Create metamers with the [metamerize()] function.
 #'
 #' Some helper functions included:
-#' * [draw_data()] fordrawing 2D datasets by hand.
+#' * [draw_data()] for drawing 2D datasets by hand.
 #'
 #' * [delayed_with()] for defining statistics to preserve.
 #'
