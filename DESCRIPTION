@@ -8,7 +8,7 @@ Authors@R:
            email = "elio.campitelli@cima.fcen.uba.ar",
            comment = c(ORCID = "0000-0002-7742-9230"))
 Description: Creates data with identical statistics (metamers) using an iterative 
-   altorithm proposed by Matejka & Fitzmaurice (2017). 
+   algorithm proposed by Matejka & Fitzmaurice (2017). 
 License: GPL-3
 Encoding: UTF-8
 ByteCompile: yes

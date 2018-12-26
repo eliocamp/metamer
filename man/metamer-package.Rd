@@ -7,12 +7,23 @@
 \title{metamer: Creates data with identical statistics}
 \description{
 Creates data with identical statistics (metamers) using an iterative 
-   altorithm proposed by Matejka & Fitzmaurice (2017).
+   algorithm proposed by Matejka & Fitzmaurice (2017).
 }
 \section{Overview}{
 
-Create metamers with the \code{\link[=metamerize]{metamerize()}} function. Use the \code{\link[=delayed_with]{delayed_with()}}
-to define the statistical transformation you want to preserve.
+Create metamers with the \code{\link[=metamerize]{metamerize()}} function.
+
+Some helper functions included:
+\itemize{
+\item \code{\link[=draw_data]{draw_data()}} fordrawing 2D datasets by hand.
+\item \code{\link[=delayed_with]{delayed_with()}} for defining statistics to preserve.
+\item \code{\link[=moments_n]{moments_n()}} for preserving moments of order n.
+\item \code{\link[=mean_dist_to]{mean_dist_to()}} for minimizing the mean distance to a known target dataset.
+\item \code{\link[=trim]{trim()}} for keeping only some metamers.
+}
+
+The \code{\link[=as.data.frame]{as.data.frame()}} method included will turn a \code{metamer_list} into a tidy
+data.frame.
 
 Inspired by Matejka & Fitzmaurice (2017) awesome paper.
 }

@@ -53,6 +53,31 @@ If \code{data} is a \code{metamer_list}, the function will start the algorithm f
 last metamer of the list. Furthermore, if \code{preserve} and/or \code{minimize}
 are missing, the previous functions will be carried over from the previous call.
 }
+\examples{
+data(cars)
+# Metamers of `cars` with the same mean speed and dist, and correlation
+# between the two.
+means_and_cor <- delayed_with(mean_speed = mean(speed),
+                              mean_dist = mean(dist),
+                              cor = cor(speed, dist))
+set.seed(42)  # for reproducibility.
+metamers <- metamerize(cars,
+                       preserve = means_and_cor,
+                       signif = 3,
+                       N = 500)
+print(metamers)
+
+last <- metamers[[length(metamers)]]
+
+# Confirm that the statistics are the same
+cbind(original = means_and_cor(cars),
+      metamer = means_and_cor(last))
+
+# Visualize
+plot(metamers[[length(metamers)]])
+points(cars, col = "red")
+
+}
 \references{
 Matejka, J., & Fitzmaurice, G. (2017). Same Stats, Different Graphs. Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems  - CHI ’17, 1290–1294. https://doi.org/10.1145/3025453.3025912
 }

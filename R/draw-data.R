@@ -110,7 +110,7 @@ draw_data <- function(data = NULL) {
              main = "Single click to add points, double click to draw lines")
       }
 
-      points(target$x, target$y, pch = 19, col = "red")
+      points(target$x, target$y, pch = 19, col = "#337AB6")
     })
 
     shiny::observeEvent(input$done, {
