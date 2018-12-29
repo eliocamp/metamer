@@ -66,7 +66,7 @@ set.seed(42)  # for reproducibility.
 metamers <- metamerize(cars,
                        preserve = means_and_cor,
                        signif = 3,
-                       N = 500)
+                       N = 1000)
 print(metamers)
 
 last <- metamers[[length(metamers)]]

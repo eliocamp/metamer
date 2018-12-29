@@ -70,8 +70,15 @@ delayed_with <- function(...) {
 trim <- function(object, n = length(object)) {
   N <- length(object)
   gap <- round((N - 3)/(n-2))
-  new <- object[c(1, round(seq(1 + gap, N - gap, length.out = n - 2)) , N)]
+  if (N > n) {
+    gap <- round((N - 3)/(n - 2))
+    keep <- c(1, round(seq(1 + gap, N - gap, length.out = n - 2)), N)
+  } else {
+    keep <- seq_len(N)
+  }
+  new <- object[keep]
   mostattributes(new) <- attributes(object)
+  attr(new, "name") <- attr(object, "name")[keep]
   new
 }
 

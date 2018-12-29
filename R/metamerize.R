@@ -53,7 +53,7 @@
 #' metamers <- metamerize(cars,
 #'                        preserve = means_and_cor,
 #'                        signif = 3,
-#'                        N = 500)
+#'                        N = 1000)
 #' print(metamers)
 #'
 #' last <- metamers[[length(metamers)]]
@@ -164,21 +164,19 @@ metamerize.data.frame <- function(data,
 
   random_pass <- FALSE
 
-  p_bar <- progress::progress_bar$new(total = N, format = pb_format)
-  bar_tick <- 0  # Don't update the progress bar every iteration
+  p_bar <- progress::progress_bar$new(total = N, format = pb_format,
+                                      clear = FALSE)
+  bar_every <- 500
 
   for (i in seq_len(N)) {
-    if (verbose & bar_tick == 0) {
+    if (verbose & (i %% bar_every == 0)) {
       if (!is.null(minimize)) {
         bar_list <- list(m = m, d = signif(history[m]/minimize_org, 2))
       } else {
         bar_list <- list(m = m)
       }
-
       p_bar$update(i/N, tokens = bar_list)
-      bar_tick <- 500
     }
-    bar_tick <- bar_tick - 1
     temp <- M_temp + ((i-1)/(N-1))^2*(m_temp - M_temp)
 
     new_data[, c(change)] <- metamers[[m]][, c(change)] + matrix(rnorm(npoints, 0, perturbation),
@@ -207,11 +205,8 @@ metamerize.data.frame <- function(data,
   }
   p_bar$terminate()
 
-  gap <- round((m - 3)/(trim - 2))
-  keep <- c(1, round(seq(1 + gap, m - gap, length.out = trim - 2)), m)
-
-  return(new_metamer_list(metamers[keep],
-                          history[keep],
+  metamers <- new_metamer_list(metamers[seq_len(m)],
+                          history[seq_len(m)],
                           preserve,
                           minimize,
                           change,
@@ -219,7 +214,8 @@ metamerize.data.frame <- function(data,
                           org_exact,
                           annealing,
                           perturbation,
-                          name = rep(name, length(keep))))
+                          name = rep(name, length(m)))
+  return(trim(metamers, trim))
 }
 
 
