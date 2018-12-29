@@ -69,7 +69,8 @@ delayed_with <- function(...) {
 #' @export
 trim <- function(object, n = length(object)) {
   N <- length(object)
-  new <- object[seq(1, N, length.out = n)]
+  gap <- round((N - 3)/(n-2))
+  new <- object[c(1, round(seq(1 + gap, N - gap, length.out = n - 2)) , N)]
   mostattributes(new) <- attributes(object)
   new
 }

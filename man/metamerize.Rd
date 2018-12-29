@@ -6,7 +6,7 @@
 \usage{
 metamerize(data, preserve, minimize = NULL, change = colnames(data),
   signif = 2, N = 100, trim = N, annealing = TRUE,
-  perturbation = 0.08, verbose = interactive())
+  perturbation = 0.08, name = NULL, verbose = interactive())
 }
 \arguments{
 \item{data}{A \code{data.frame} with the starting data or a \code{metamer_list} object returned
@@ -31,6 +31,8 @@ preserved.}
 \item{annealing}{Logical indicating whether to perform annealing.}
 
 \item{perturbation}{Numeric with the magnitude of the random perturbations.}
+
+\item{name}{Character for naming the metamers.}
 
 \item{verbose}{Logical indicating whether to show a progress bar.}
 }

@@ -16,6 +16,7 @@
 #' @param trim Max number of metamers to return.
 #' @param perturbation Numeric with the magnitude of the random perturbations.
 #' @param annealing Logical indicating whether to perform annealing.
+#' @param name Character for naming the metamers.
 #' @param verbose Logical indicating whether to show a progress bar.
 #'
 #' @details
@@ -77,6 +78,7 @@ metamerize <- function(data,
                        trim = N,
                        annealing = TRUE,
                        perturbation = 0.08,
+                       name = NULL,
                        verbose = interactive()) {
   thiscall <- match.call()
   if (inherits(data, "metamer_list")) {
@@ -86,6 +88,7 @@ metamerize <- function(data,
     signif       <- .get_attr(data, "signif", thiscall)
     annealing    <- .get_attr(data, "annealing", thiscall)
     perturbation <- .get_attr(data, "perturbation", thiscall)
+    name         <- .get_attr(data, "name", thiscall)[1]
     old_metamers <- data
     data         <- as.data.frame(data[[length(data)]])
   } else {
@@ -101,6 +104,7 @@ metamerize <- function(data,
                                         trim = trim,
                                         annealing = annealing,
                                         perturbation = perturbation,
+                                        name = name,
                                         verbose = verbose)
   return(append_metamer(old_metamers, new_metamers))
 }
@@ -115,6 +119,7 @@ metamerize.data.frame <- function(data,
                                   trim = trim,
                                   annealing = TRUE,
                                   perturbation = 0.08,
+                                  name = NULL,
                                   verbose = interactive()) {
 
   metamers <- vector(mode = "list", length = N)
@@ -202,7 +207,8 @@ metamerize.data.frame <- function(data,
   }
   p_bar$terminate()
 
-  keep <- seq(1, m, length.out = min(m, trim))
+  gap <- round((m - 3)/(trim - 2))
+  keep <- c(1, round(seq(1 + gap, m - gap, length.out = trim - 2)), m)
 
   return(new_metamer_list(metamers[keep],
                           history[keep],
@@ -212,7 +218,8 @@ metamerize.data.frame <- function(data,
                           signif,
                           org_exact,
                           annealing,
-                          perturbation))
+                          perturbation,
+                          name = rep(name, length(keep))))
 }
 
 
