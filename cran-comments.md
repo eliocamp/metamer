@@ -1,3 +1,11 @@
+## Resubmission
+
+This is a resubmission. In this version I have:
+
+* Converted the DESCRIPTION title to title case.
+
+* Added DOI of Matejka & Fitzmaurice (2017) in description. 
+
 ## Test environments
 
 * local elementary OS Loki (ubuntu 16.04), R 3.5.2

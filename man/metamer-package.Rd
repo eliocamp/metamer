@@ -4,10 +4,10 @@
 \name{metamer-package}
 \alias{metamer}
 \alias{metamer-package}
-\title{metamer: Creates data with identical statistics}
+\title{metamer: Creates Data with Identical Statistics}
 \description{
 Creates data with identical statistics (metamers) using an iterative 
-   algorithm proposed by Matejka & Fitzmaurice (2017).
+   algorithm proposed by Matejka & Fitzmaurice (2017) <DOI:10.1145/3025453.3025912>.
 }
 \section{Overview}{
 
