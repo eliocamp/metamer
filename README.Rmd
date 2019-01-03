@@ -29,7 +29,13 @@ Statistical transformations such as mean, standard deviation and correlation beh
 
 ## Installation
 
-You can install the development version of metamer with:
+You can install metamer with:
+
+```r
+install.packages("metamer")
+```
+
+or install the development version with:
 
 ``` r
 # install.packages("devtools")
