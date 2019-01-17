@@ -4,7 +4,7 @@
 \name{metamer-package}
 \alias{metamer}
 \alias{metamer-package}
-\title{metamer: Creates Data with Identical Statistics}
+\title{metamer: Create Data with Identical Statistics}
 \description{
 Creates data with identical statistics (metamers) using an iterative 
    algorithm proposed by Matejka & Fitzmaurice (2017) <DOI:10.1145/3025453.3025912>.
@@ -31,6 +31,14 @@ Inspired by Matejka & Fitzmaurice (2017) awesome paper.
 
 \references{
 Matejka, J., & Fitzmaurice, G. (2017). Same Stats, Different Graphs. Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems  - CHI ’17, 1290–1294. https://doi.org/10.1145/3025453.3025912
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/eliocamp/metamer}
+  \item Report bugs at \url{https://github.com/eliocamp/metamer/issues}
+}
+
 }
 \author{
 \strong{Maintainer}: Elio Campitelli \email{elio.campitelli@cima.fcen.uba.ar} (0000-0002-7742-9230)
