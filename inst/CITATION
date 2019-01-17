@@ -1,6 +1,21 @@
 year <- sub("-.*", "", meta$Date)
 note <- sprintf("R package version %s", meta$Version)
 
+desc <- utils::packageDescription("metamer")
+
+is_github <- !is.null(desc$GithubRepo)
+
+if (is_github) {
+  url <- with(desc, paste0("https://github.com/",
+                           GithubUsername, "/",
+                           GithubRepo, "/",
+                           "tree/",
+                           desc$GithubSHA1))
+} else {
+  url <- "https://doi.org/10.5281/zenodo.2542868"
+}
+
+
 bibentry(bibtype = "Manual",
          key = "R-metamer",
          title = "metamer: Create Data with Identical Statistics",
@@ -8,5 +23,5 @@ bibentry(bibtype = "Manual",
                          family = "Campitelli"),
          year = year,
          note = note,
-         url = "https://doi.org/10.5281/zenodo.2542868",
-         doi = "10.5281/zenodo.2542867")
+         url  = url,
+         doi  = "10.5281/zenodo.2542867")
