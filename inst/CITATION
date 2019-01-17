@@ -1,0 +1,11 @@
+year <- sub("-.*", "", meta$Date)
+note <- sprintf("R package version %s", meta$Version)
+
+bibentry(bibtype = "Manual",
+         title = "metamer: Create Data with Identical Statistics",
+         author = person(given = "Elio",
+                         family = "Campitelli"),
+         year = year,
+         note = note,
+         url = meta$url,
+         doi = "10.5281/zenodo.2542867")
