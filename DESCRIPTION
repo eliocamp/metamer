@@ -9,6 +9,8 @@ Authors@R:
 Description: Creates data with identical statistics (metamers) using an iterative 
    altorithm proposed by Matejka & Fitzmaurice (2017). 
 License: GPL-3
+URL: https://github.com/eliocamp/metamer
+BugReports: https://github.com/eliocamp/metamer/issues
 Encoding: UTF-8
 ByteCompile: yes
 LazyData: true
