@@ -17,7 +17,7 @@ LazyData: true
 Language: en-US
 Imports:
   FNN,
-  progress,
+  progress (>= 1.2.0),
   methods
 Suggests:
   datasauRus,
