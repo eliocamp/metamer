@@ -8,12 +8,15 @@
 #' Must take the data as argument and return a numeric vector.
 #' @param minimize An optional function to minimize in the process. Must take
 #' the data as argument and return a single numeric.
-#' @param cols A character vector with the names of the columns that need to be
+#' @param change A character vector with the names of the columns that need to be
 #' changed.
 #' @param signif The number of significant digits of `preserve` that need to be
 #' preserved.
 #' @param N Number of iterations.
+#' @param trim Max number of metamers to return.
+#' @param perturbation Numeric with the magnitude of the random perturbations.
 #' @param annealing Logical indicating whether to perform annealing.
+#' @param name Character for naming the metamers.
 #' @param verbose Logical indicating whether to show a progress bar.
 #'
 #' @details
@@ -39,49 +42,100 @@
 #' @references
 #' Matejka, J., & Fitzmaurice, G. (2017). Same Stats, Different Graphs. Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems  - CHI ’17, 1290–1294. https://doi.org/10.1145/3025453.3025912
 #'
+#' @examples
+#' data(cars)
+#' # Metamers of `cars` with the same mean speed and dist, and correlation
+#' # between the two.
+#' means_and_cor <- delayed_with(mean_speed = mean(speed),
+#'                               mean_dist = mean(dist),
+#'                               cor = cor(speed, dist))
+#' set.seed(42)  # for reproducibility.
+#' metamers <- metamerize(cars,
+#'                        preserve = means_and_cor,
+#'                        signif = 3,
+#'                        N = 1000)
+#' print(metamers)
+#'
+#' last <- metamers[[length(metamers)]]
+#'
+#' # Confirm that the statistics are the same
+#' cbind(original = means_and_cor(cars),
+#'       metamer = means_and_cor(last))
+#'
+#' # Visualize
+#' plot(metamers[[length(metamers)]])
+#' points(cars, col = "red")
+#'
 #' @export
 #' @importFrom methods hasArg
 #' @importFrom stats rnorm runif
 metamerize <- function(data,
                        preserve,
-                       minimize,
+                       minimize = NULL,
+                       change = colnames(data),
                        signif = 2,
                        N = 100,
-                       cols = colnames(data),
+                       trim = N,
                        annealing = TRUE,
+                       perturbation = 0.08,
+                       name = NULL,
                        verbose = interactive()) {
+  thiscall <- match.call()
   if (inherits(data, "metamer_list")) {
-    metamers <- data
-    m <- length(metamers)
-    data <- data[[m]]
-
-    if (!hasArg(minimize)) {
-      minimize <- attr(metamers, "call.args")$minimize
-    }
-
-    if (!is.null(minimize)) {
-      history <- attr(metamers, "history")
-    }
-
-    if (!hasArg(preserve)) {
-      preserve <- attr(metamers, "call.args")$preserve
-      org_exact <- attr(metamers, "org_exact")
-    }
+    preserve     <- .get_attr(data, "preserve", thiscall)
+    minimize     <- .get_attr(data, "minimize", thiscall)
+    change       <- .get_attr(data, "change", thiscall)
+    signif       <- .get_attr(data, "signif", thiscall)
+    annealing    <- .get_attr(data, "annealing", thiscall)
+    perturbation <- .get_attr(data, "perturbation", thiscall)
+    name         <- .get_attr(data, "name", thiscall)[1]
+    old_metamers <- data
+    data         <- as.data.frame(data[[length(data)]])
   } else {
-    metamers <- vector(mode = "list", length = N)
-    m <- 1
-    data <- as.data.frame(data)
-    metamers[[m]] <- data
-
-    if (!hasArg(minimize)) {
-      minimize <- NULL
-    }
-
-    history <- vector(mode = "numeric", length = N)
-
-    preserve <- match.fun(preserve)
-    org_exact <- preserve(data)
+    old_metamers <- list()
   }
+
+  new_metamers <- metamerize.data.frame(data = data,
+                                        preserve = preserve,
+                                        minimize = minimize,
+                                        change = change,
+                                        signif = signif,
+                                        N = N,
+                                        trim = trim,
+                                        annealing = annealing,
+                                        perturbation = perturbation,
+                                        name = name,
+                                        verbose = verbose)
+  return(append_metamer(old_metamers, new_metamers))
+}
+
+
+metamerize.data.frame <- function(data,
+                                  preserve,
+                                  minimize,
+                                  change = colnames(data),
+                                  signif = 2,
+                                  N = 100,
+                                  trim = trim,
+                                  annealing = TRUE,
+                                  perturbation = 0.08,
+                                  name = NULL,
+                                  verbose = interactive()) {
+
+  metamers <- vector(mode = "list", length = N)
+  m <- 1
+  data <- as.data.frame(data)
+  metamers[[m]] <- data
+
+  if (!hasArg(minimize)) {
+    minimize <- NULL
+  }
+
+  history <- vector(mode = "numeric", length = N)
+
+  preserve <- match.fun(preserve)
+  org_exact <- preserve(data)
+
 
   pb_format <- " :m metamers [:bar] ~ eta: :eta"
   if (!is.null(minimize)) {
@@ -92,7 +146,7 @@ metamerize <- function(data,
   }
 
   call.args <- list(preserve = preserve,
-                    cols = cols,
+                    change = change,
                     signif = 2,
                     N = N,
                     minimize = minimize,
@@ -101,7 +155,7 @@ metamerize <- function(data,
 
   new_data <- data
 
-  ncols <- length(cols)
+  ncols <- length(change)
   nrows <- nrow(data)
   npoints <- ncols*nrows
 
@@ -110,25 +164,23 @@ metamerize <- function(data,
 
   random_pass <- FALSE
 
-  p_bar <- progress::progress_bar$new(total = N, format = pb_format)
-  bar_tick <- 0  # Don't update the progress bar every iteration
+  p_bar <- progress::progress_bar$new(total = N, format = pb_format,
+                                      clear = FALSE)
+  bar_every <- 500
 
   for (i in seq_len(N)) {
-    if (verbose & bar_tick == 0) {
+    if (verbose & (i %% bar_every == 0)) {
       if (!is.null(minimize)) {
         bar_list <- list(m = m, d = signif(history[m]/minimize_org, 2))
       } else {
         bar_list <- list(m = m)
       }
-
       p_bar$update(i/N, tokens = bar_list)
-      bar_tick <- 500
     }
-    bar_tick <- bar_tick - 1
     temp <- M_temp + ((i-1)/(N-1))^2*(m_temp - M_temp)
 
-    new_data[, c(cols)] <- metamers[[m]][, c(cols)] + matrix(rnorm(npoints, 0, 0.08),
-                                                             nrow = nrows, ncol = ncols)
+    new_data[, c(change)] <- metamers[[m]][, c(change)] + matrix(rnorm(npoints, 0, perturbation),
+                                                                 nrow = nrows, ncol = ncols)
     new_exact <- preserve(new_data)
 
     if (!all(signif(new_exact, signif) - signif(org_exact, signif) == 0)) {
@@ -152,17 +204,18 @@ metamerize <- function(data,
     }
   }
   p_bar$terminate()
-  return(.metamer(metamers, history, m, call.args, org_exact))
+
+  metamers <- new_metamer_list(metamers[seq_len(m)],
+                          history[seq_len(m)],
+                          preserve,
+                          minimize,
+                          change,
+                          signif,
+                          org_exact,
+                          annealing,
+                          perturbation,
+                          name = rep(name, length(m)))
+  return(trim(metamers, trim))
 }
 
-
-.metamer <- function(metamers, history, m, call.args, org_exact) {
-  metamers <- metamers[seq_len(m)]
-  history <- history[seq_len(m)]
-  class(metamers) <- class(metamers) <- c("metamer_list", "list")
-  attr(metamers, "history") <- history
-  attr(metamers, "call.args") <- call.args
-  attr(metamers, "org_exact") <- org_exact
-  return(metamers)
-}
 

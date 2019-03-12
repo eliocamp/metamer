@@ -1,3 +1,7 @@
+^CRAN-RELEASE$
+^cran-comments\.md$
+^\.github$
+^CONTRIBUTING\.md$
 ^\.travis\.yml$
 ^README_cache$
 ^README\.Rmd$

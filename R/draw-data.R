@@ -6,9 +6,11 @@
 #' background to guide your drawing.
 #'
 #' @return
-#' A `data.frame` with the x and y values of your data.
+#' A `data.frame` with the `x` and `y` values of your data and a `.group` column
+#' that identifies each stroke.
 #'
 #' @export
+#' @family helper functions
 #' @importFrom graphics par points plot
 draw_data <- function(data = NULL) {
   shiny.available <- requireNamespace("shiny", quietly = TRUE)
@@ -33,10 +35,10 @@ draw_data <- function(data = NULL) {
     miniUI::gadgetTitleBar("Draw your target figure"),
     miniUI::miniContentPanel(
       shiny::plotOutput("plot", width = "100%", height = "90%",
-                 hover = shiny::hoverOpts(id = "hover", delay = 100,
-                                   delayType = "throttle", clip = TRUE, nullOutside = TRUE),
-                 click = "click",
-                 dblclick = "dblclick"),
+                        hover = shiny::hoverOpts(id = "hover", delay = 100,
+                                                 delayType = "throttle", clip = TRUE, nullOutside = TRUE),
+                        click = "click",
+                        dblclick = "dblclick"),
       miniUI::miniButtonBlock(
         shiny::actionButton("reset_prev", "Clear last group"),
         shiny::actionButton("reset_all", "Clear all"),
@@ -109,12 +111,13 @@ draw_data <- function(data = NULL) {
              main = "Single click to add points, double click to draw lines")
       }
 
-      points(target$x, target$y, pch = 19, col = "red")
+      points(target$x, target$y, pch = 19, col = "#337AB6")
     })
 
     shiny::observeEvent(input$done, {
       returnValue <- data.frame(x = target$x,
-                                y = target$y)
+                                y = target$y,
+                                .group = target$group)
       shiny::stopApp(returnValue)
     })
 
@@ -125,3 +128,6 @@ draw_data <- function(data = NULL) {
 
   shiny::runGadget(ui, server, stopOnCancel = TRUE, viewer = shiny::dialogViewer(""))
 }
+
+
+

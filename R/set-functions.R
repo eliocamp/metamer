@@ -10,22 +10,22 @@
 #'
 #' @export
 set_minimize <- function(object, minimize) {
-  attr(object, "call.args")$minimize <- minimize
+  attr(object, "minimize") <- minimize
   object
 }
 
 #' @rdname set_minimize
 get_minimize <- function(object) {
-  attr(object, "call.args")$minimize
+  attr(object, "minimize")
 }
 
 #' @rdname set_minimize
 set_preserve <- function(object, preserve) {
-  attr(object, "call.args")$preserve <- preserve
+  attr(object, "preserve") <- preserve
   object
 }
 
 #' @rdname set_minimize
 get_preserve <- function(object) {
-  attr(object, "call.args")$preserve
+  attr(object, "preserve")
 }

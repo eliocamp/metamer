@@ -11,8 +11,15 @@ draw_data(data = NULL)
 background to guide your drawing.}
 }
 \value{
-A \code{data.frame} with the x and y values of your data.
+A \code{data.frame} with the \code{x} and \code{y} values of your data and a \code{.group} column
+that identifies each stroke.
 }
 \description{
 Opens up a dialogue that lets you draw your data.
 }
+\seealso{
+Other helper functions: \code{\link{delayed_with}},
+  \code{\link{densify}}, \code{\link{mean_dist_to}},
+  \code{\link{moments_n}}
+}
+\concept{helper functions}

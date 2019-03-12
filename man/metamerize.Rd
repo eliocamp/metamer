@@ -4,8 +4,9 @@
 \alias{metamerize}
 \title{Create metamers}
 \usage{
-metamerize(data, preserve, minimize, signif = 2, N = 100,
-  cols = colnames(data), annealing = TRUE, verbose = interactive())
+metamerize(data, preserve, minimize = NULL, change = colnames(data),
+  signif = 2, N = 100, trim = N, annealing = TRUE,
+  perturbation = 0.08, name = NULL, verbose = interactive())
 }
 \arguments{
 \item{data}{A \code{data.frame} with the starting data or a \code{metamer_list} object returned
@@ -17,15 +18,21 @@ Must take the data as argument and return a numeric vector.}
 \item{minimize}{An optional function to minimize in the process. Must take
 the data as argument and return a single numeric.}
 
+\item{change}{A character vector with the names of the columns that need to be
+changed.}
+
 \item{signif}{The number of significant digits of \code{preserve} that need to be
 preserved.}
 
 \item{N}{Number of iterations.}
 
-\item{cols}{A character vector with the names of the columns that need to be
-changed.}
+\item{trim}{Max number of metamers to return.}
 
 \item{annealing}{Logical indicating whether to perform annealing.}
+
+\item{perturbation}{Numeric with the magnitude of the random perturbations.}
+
+\item{name}{Character for naming the metamers.}
 
 \item{verbose}{Logical indicating whether to show a progress bar.}
 }
@@ -47,6 +54,31 @@ local minimums.
 If \code{data} is a \code{metamer_list}, the function will start the algorithm from the
 last metamer of the list. Furthermore, if \code{preserve} and/or \code{minimize}
 are missing, the previous functions will be carried over from the previous call.
+}
+\examples{
+data(cars)
+# Metamers of `cars` with the same mean speed and dist, and correlation
+# between the two.
+means_and_cor <- delayed_with(mean_speed = mean(speed),
+                              mean_dist = mean(dist),
+                              cor = cor(speed, dist))
+set.seed(42)  # for reproducibility.
+metamers <- metamerize(cars,
+                       preserve = means_and_cor,
+                       signif = 3,
+                       N = 1000)
+print(metamers)
+
+last <- metamers[[length(metamers)]]
+
+# Confirm that the statistics are the same
+cbind(original = means_and_cor(cars),
+      metamer = means_and_cor(last))
+
+# Visualize
+plot(metamers[[length(metamers)]])
+points(cars, col = "red")
+
 }
 \references{
 Matejka, J., & Fitzmaurice, G. (2017). Same Stats, Different Graphs. Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems  - CHI ’17, 1290–1294. https://doi.org/10.1145/3025453.3025912
