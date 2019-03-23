@@ -29,6 +29,8 @@ In colour theory, [metamers](https://en.wikipedia.org/wiki/Metamerism_(color)) a
 
 Statistical transformations such as mean, standard deviation and correlation behave very similarly in that they summarise data with just a few numbers for the benefit of our limited cognitive capacity. Thus, statistical metamers are sets of data that share some statistical properties. 
 
+[This article](https://eliocamp.github.io/codigo-r/en/2019/01/statistical-metamerism/) explores statistical metamerism in more detail. 
+
 ## Installation
 
 You can install metamer with:

@@ -33,6 +33,10 @@ a few numbers for the benefit of our limited cognitive capacity. Thus,
 statistical metamers are sets of data that share some statistical
 properties.
 
+[This
+article](https://eliocamp.github.io/codigo-r/en/2019/01/statistical-metamerism/)
+explores statistical metamerism in more detail.
+
 ## Installation
 
 You can install metamer with:
