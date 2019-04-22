@@ -168,6 +168,11 @@ metamerize.data.frame <- function(data,
                                       clear = FALSE)
   bar_every <- 500
 
+  perturb_ok <- length(perturbation) == 1 || length(perturbation) == ncols
+  if (!perturb_ok) {
+    stop("perturbation must be of length 1 or ncol(data)")
+  }
+
   for (i in seq_len(N)) {
     if (verbose & (i %% bar_every == 0)) {
       if (!is.null(minimize)) {
@@ -179,8 +184,10 @@ metamerize.data.frame <- function(data,
     }
     temp <- M_temp + ((i-1)/(N-1))^2*(m_temp - M_temp)
 
-    new_data[, c(change)] <- metamers[[m]][, c(change)] + matrix(rnorm(npoints, 0, perturbation),
-                                                                 nrow = nrows, ncol = ncols)
+    new_change <- matrix(rnorm(npoints, 0, perturbation),
+                     nrow = nrows, ncol = ncols, byrow = TRUE)
+    new_data[, c(change)] <- metamers[[m]][, c(change)] + new_change
+
     new_exact <- preserve(new_data)
 
     if (!all(signif(new_exact, signif) - signif(org_exact, signif) == 0)) {
@@ -206,15 +213,15 @@ metamerize.data.frame <- function(data,
   p_bar$terminate()
 
   metamers <- new_metamer_list(metamers[seq_len(m)],
-                          history[seq_len(m)],
-                          preserve,
-                          minimize,
-                          change,
-                          signif,
-                          org_exact,
-                          annealing,
-                          perturbation,
-                          name = rep(name, length(m)))
+                               history[seq_len(m)],
+                               preserve,
+                               minimize,
+                               change,
+                               signif,
+                               org_exact,
+                               annealing,
+                               perturbation,
+                               name = rep(name, length(m)))
   return(trim(metamers, trim))
 }
 
