@@ -15,6 +15,7 @@
 #' @param N Number of iterations.
 #' @param trim Max number of metamers to return.
 #' @param perturbation Numeric with the magnitude of the random perturbations.
+#' Can be of length 1 or `length(change)`.
 #' @param annealing Logical indicating whether to perform annealing.
 #' @param name Character for naming the metamers.
 #' @param verbose Logical indicating whether to show a progress bar.
@@ -170,7 +171,7 @@ metamerize.data.frame <- function(data,
 
   perturb_ok <- length(perturbation) == 1 || length(perturbation) == ncols
   if (!perturb_ok) {
-    stop("perturbation must be of length 1 or ncol(data)")
+    stop("perturbation must be of length 1 or length(change)")
   }
 
   for (i in seq_len(N)) {

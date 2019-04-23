@@ -30,7 +30,8 @@ preserved.}
 
 \item{annealing}{Logical indicating whether to perform annealing.}
 
-\item{perturbation}{Numeric with the magnitude of the random perturbations.}
+\item{perturbation}{Numeric with the magnitude of the random perturbations.
+Can be of length 1 or \code{length(change)}.}
 
 \item{name}{Character for naming the metamers.}
 
