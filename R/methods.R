@@ -20,8 +20,8 @@ print.metamer_list <- function(x, ...) {
 
 # Dynamically exported. From:
 # https://community.rstudio.com/t/write-s3-methods-for-generics-from-other-packages-without-importing-that-package/8884/4
-fortify.metamer_list <- function(model, data, ...) {
-  as.data.frame(model, ...)
+fortify.metamer_list <- function(model, data, ..., n = 6) {
+  as.data.frame(model, ..., n = n)
 }
 
 
