@@ -7,6 +7,8 @@
 * The `perturbation` argument in `metamerize()` can now be a vector of equal in 
 length to `change`
 
+* Small speed improvement.
+
 # metamer 0.1.0
 
 * First release

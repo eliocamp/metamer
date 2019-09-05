@@ -187,7 +187,11 @@ metamerize.data.frame <- function(data,
 
     new_change <- matrix(rnorm(npoints, 0, perturbation),
                      nrow = nrows, ncol = ncols, byrow = TRUE)
-    new_data[, c(change)] <- metamers[[m]][, c(change)] + new_change
+
+    old <- as.matrix(metamers[[m]][change])
+    new <- old + new_change
+
+    new_data[change] <- new
 
     new_exact <- preserve(new_data)
 
