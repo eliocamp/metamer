@@ -33,9 +33,15 @@
 #' last metamer of the list. Furthermore, if `preserve` and/or `minimize`
 #' are missing, the previous functions will be carried over from the previous call.
 #'
+#' `minimize` can be also a *vector* of functions. In that case, the process minimizes
+#' the product of the functinos applied to the data.
+#'
 #' @seealso [delayed_with()] for a convenient way of making functions suitable for
 #' `preserve`, [mean_dist_to()] for a convenient way of minimizing the distance
-#' to a known target in `minimize`.
+#' to a known target in `minimize`, [mean_self_closeness()] for maximizing the
+#' "self distance" to prevent data clumpiing.
+#'
+#'
 #'
 #' @return
 #' A `metamer_list` object (a list of data.frames).
@@ -140,7 +146,15 @@ metamerize.data.frame <- function(data,
 
   pb_format <- " :m metamers [:bar] ~ eta: :eta"
   if (!is.null(minimize)) {
-    minimize <- match.fun(minimize)
+    if (length(minimize) > 1) {
+      min_funs <- minimize
+      minimize <- function(data) {
+        Reduce("*", lapply(seq_along(minimize), function(i) match.fun(min_funs[[i]])(data)))
+      }
+    } else {
+      minimize <- match.fun(minimize)
+    }
+
     history[m] <- minimize(data)
     minimize_org <- history[m]
     pb_format <- ":m metamers [:bar] ratio: :d ~ eta: :eta"

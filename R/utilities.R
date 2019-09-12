@@ -23,6 +23,20 @@ mean_dist_to <- function(target) {
   }
 }
 
+#' Inverse of the mean self distance
+#'
+#' Returns the inverse of the mean minimum distance between differnet pairs of points.
+#' It's intended to be used as a minimizing function to, then, maximize the distance bwetween
+#' points.
+#'
+#' @param data a data.frame
+#'
+#' @family helper functions
+#' @export
+mean_self_closeness <- function(data) {
+  data <- as.matrix(data)
+  1/mean(FNN::get.knnx(data, as.matrix(data), k = 2)$nn.dist[, 2])
+}
 
 #' Apply expressions to data.frames
 #'
