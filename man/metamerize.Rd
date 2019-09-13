@@ -90,6 +90,6 @@ Matejka, J., & Fitzmaurice, G. (2017). Same Stats, Different Graphs. Proceedings
 \seealso{
 \code{\link[=delayed_with]{delayed_with()}} for a convenient way of making functions suitable for
 \code{preserve}, \code{\link[=mean_dist_to]{mean_dist_to()}} for a convenient way of minimizing the distance
-to a known target in \code{minimize}, \code{\link[=mean_self_closeness]{mean_self_closeness()}} for maximizing the
+to a known target in \code{minimize}, \code{\link[=mean_self_proximity]{mean_self_proximity()}} for maximizing the
 "self distance" to prevent data clumpiing.
 }

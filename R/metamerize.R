@@ -38,7 +38,7 @@
 #'
 #' @seealso [delayed_with()] for a convenient way of making functions suitable for
 #' `preserve`, [mean_dist_to()] for a convenient way of minimizing the distance
-#' to a known target in `minimize`, [mean_self_closeness()] for maximizing the
+#' to a known target in `minimize`, [mean_self_proximity()] for maximizing the
 #' "self distance" to prevent data clumpiing.
 #'
 #'
