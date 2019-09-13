@@ -30,7 +30,7 @@ some_stats(data)
 \seealso{
 Other helper functions: \code{\link{densify}},
   \code{\link{draw_data}}, \code{\link{mean_dist_to}},
-  \code{\link{mean_self_closeness}},
+  \code{\link{mean_self_proximity}},
   \code{\link{moments_n}}
 }
 \concept{helper functions}

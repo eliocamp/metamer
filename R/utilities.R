@@ -17,6 +17,7 @@
 #' @family helper functions
 #' @export
 mean_dist_to <- function(target) {
+  force(target)
   target <- as.matrix(target)
   function(data) {
     mean(FNN::get.knnx(target, as.matrix(data), k = 1)$nn.dist)
@@ -33,9 +34,9 @@ mean_dist_to <- function(target) {
 #'
 #' @family helper functions
 #' @export
-mean_self_closeness <- function(data) {
+mean_self_proximity <- function(data) {
   data <- as.matrix(data)
-  1/mean(FNN::get.knnx(data, as.matrix(data), k = 2)$nn.dist[, 2])
+  1/mean(FNN::get.knnx(data, data, k = 2)$nn.dist[, 2])
 }
 
 #' Apply expressions to data.frames

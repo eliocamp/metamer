@@ -34,6 +34,6 @@ moments_3(data)
 Other helper functions: \code{\link{delayed_with}},
   \code{\link{densify}}, \code{\link{draw_data}},
   \code{\link{mean_dist_to}},
-  \code{\link{mean_self_closeness}}
+  \code{\link{mean_self_proximity}}
 }
 \concept{helper functions}
