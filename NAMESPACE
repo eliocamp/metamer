@@ -2,7 +2,6 @@
 
 S3method(as.data.frame,metamer_list)
 S3method(print,metamer_list)
-export(as.data.table.metamer_list)
 export(delayed_with)
 export(densify)
 export(draw_data)

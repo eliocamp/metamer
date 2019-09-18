@@ -10,14 +10,7 @@ as.data.frame.metamer_list <- function(x, ..., n = length(x)) {
   return(df)
 }
 
-#' @export
-as.data.table.metamer_list <- function(x, ..., n = length(x)) {
-  if (!requireNamespace("data.table", quietly = TRUE)) {
-    stop("data.table is not installed. Install it with `install.packages(\"data.table\")`.")
-  }
-  x <- trim(x, n = n)
-  data.table::rbindlist(x, idcol = ".metamer")
-}
+
 
 
 #' @export
@@ -31,6 +24,15 @@ print.metamer_list <- function(x, ...) {
 fortify.metamer_list <- function(model, data, ..., n = 6) {
   as.data.frame(model, ..., n = n)
 }
+
+as.data.table.metamer_list <- function(x, ..., n = length(x)) {
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    stop("data.table is not installed. Install it with `install.packages(\"data.table\")`.")
+  }
+  x <- trim(x, n = n)
+  data.table::rbindlist(x, idcol = ".metamer")
+}
+
 
 # nocov start
 .onLoad <- function(...) {
