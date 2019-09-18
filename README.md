@@ -3,8 +3,14 @@
 
 # metamer
 
+<!-- badges: start -->
+
+[![DOI](https://zenodo.org/badge/159563811.svg)](https://zenodo.org/badge/latestdoi/159563811)
 [![Travis build
-status](https://travis-ci.org/eliocamp/metamer.svg?branch=master)](https://travis-ci.org/eliocamp/metamer)[![DOI](https://zenodo.org/badge/159563811.svg)](https://zenodo.org/badge/latestdoi/159563811)
+status](https://travis-ci.org/eliocamp/metamer.svg?branch=master)](https://travis-ci.org/eliocamp/metamer)
+[![Codecov test
+coverage](https://codecov.io/gh/eliocamp/metamer/branch/master/graph/badge.svg)](https://codecov.io/gh/eliocamp/metamer?branch=master)
+<!-- badges: end -->
 
 Implements the algorithm proposed by [Matejka & Fitzmaurice
 (2017)](https://www.autodeskresearch.com/publications/samestats) to
@@ -71,10 +77,10 @@ N <- 20000
 set.seed(42) # To make results reproducible
 metamers <- metamerize(start, preserve = mean_cor, N = N)
 print(metamers)
-#> List of 12782 metamers
+#> List of 12791 metamers
 ```
 
-We found 12782 metamers. Let’s see the final one, with the starting
+We found 12791 metamers. Let’s see the final one, with the starting
 dataset as background.
 
 ``` r
@@ -126,7 +132,7 @@ ggplot(metamers[[length(metamers)]], aes(x, y)) +
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
 
-We can animate the whole thing. Since 19048 metamers is overkill, first
+We can animate the whole thing. Since 19552 metamers is overkill, first
 we keep only 200 of them.
 
 ``` r

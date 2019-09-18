@@ -7,9 +7,10 @@ as.data.frame.metamer_list <- function(x, ..., n = length(x)) {
   df$.name <- rep(attr(x, "name"), each = n)
   lc <- length(colnames(df))
   df <- df[, c(lc, 1:(lc-1))]
-  attr(df, "convergence") <- attr(x, "convergence")
   return(df)
 }
+
+
 
 
 #' @export
@@ -24,9 +25,19 @@ fortify.metamer_list <- function(model, data, ..., n = 6) {
   as.data.frame(model, ..., n = n)
 }
 
+as.data.table.metamer_list <- function(x, ..., n = length(x)) {
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    stop("data.table is not installed. Install it with `install.packages(\"data.table\")`.")
+  }
+  x <- trim(x, n = n)
+  data.table::rbindlist(x, idcol = ".metamer")
+}
 
+
+# nocov start
 .onLoad <- function(...) {
   register_s3_method("ggplot2", "fortify", "metamer_list")
+  register_s3_method("data.table", "as.data.table", "metamer_list")
   invisible()
 }
 
@@ -53,3 +64,4 @@ register_s3_method <- function(pkg, generic, class, fun = NULL) {
     }
   )
 }
+# nocov end

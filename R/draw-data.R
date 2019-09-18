@@ -13,6 +13,9 @@
 #' @family helper functions
 #' @importFrom graphics par points plot
 draw_data <- function(data = NULL) {
+  if (!interactive()) {
+    stop("draw_data can only be run in an interactive session.")
+  }
   shiny.available <- requireNamespace("shiny", quietly = TRUE)
   minuUI.available <- requireNamespace("miniUI", quietly = TRUE)
 
