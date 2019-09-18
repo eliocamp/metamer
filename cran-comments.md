@@ -1,20 +1,12 @@
-## Resubmission
-
-This is a resubmission. In this version I have:
-
-* Converted the DESCRIPTION title to title case.
-
-* Added DOI of Matejka & Fitzmaurice (2017) in description. 
-
 ## Test environments
 
-* local elementary OS Loki (ubuntu 16.04), R 3.5.2
-* ubuntu 14.04 (on travis-ci), R 3.5.2
-* win-builder (devel, release and oldrelease)
+* local elementary OS Loki (ubuntu 18.04), R 3.6.1
+* Ubuntu 16.04.6 LTS (on travis-ci), R 3.6.1
+* Windows Server 2008 R2 SP1, R-devel, 32/64 bit (R-hub)
+* Ubuntu Linux 16.04 LTS, R-release, GCC (R-hub)
+* Fedora Linux, R-devel, clang, gfortran (R-hub)
 
 ## R CMD check results
 
-0 errors | 0 warnings | 2 notes
+0 errors | 0 warnings | 0 notes
 
-* This is a new release.
-* 1 note in win oldrelease: "Author field differs from that derived from Authors@R". Seems to be related to the way the ORCID id parses to a full URL.
