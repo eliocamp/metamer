@@ -10,8 +10,8 @@ mean_self_proximity(data)
 \item{data}{a data.frame}
 }
 \description{
-Returns the inverse of the mean minimum distance between differnet pairs of points.
-It's intended to be used as a minimizing function to, then, maximize the distance bwetween
+Returns the inverse of the mean minimum distance between different pairs of points.
+It's intended to be used as a minimizing function to, then, maximize the distance between
 points.
 }
 \seealso{
