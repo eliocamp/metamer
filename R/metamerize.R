@@ -34,12 +34,12 @@
 #' are missing, the previous functions will be carried over from the previous call.
 #'
 #' `minimize` can be also a *vector* of functions. In that case, the process minimizes
-#' the product of the functinos applied to the data.
+#' the product of the functions applied to the data.
 #'
 #' @seealso [delayed_with()] for a convenient way of making functions suitable for
 #' `preserve`, [mean_dist_to()] for a convenient way of minimizing the distance
 #' to a known target in `minimize`, [mean_self_proximity()] for maximizing the
-#' "self distance" to prevent data clumpiing.
+#' "self distance" to prevent data clumping.
 #'
 #'
 #'

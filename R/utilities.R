@@ -26,8 +26,8 @@ mean_dist_to <- function(target) {
 
 #' Inverse of the mean self distance
 #'
-#' Returns the inverse of the mean minimum distance between differnet pairs of points.
-#' It's intended to be used as a minimizing function to, then, maximize the distance bwetween
+#' Returns the inverse of the mean minimum distance between different pairs of points.
+#' It's intended to be used as a minimizing function to, then, maximize the distance between
 #' points.
 #'
 #' @param data a data.frame
