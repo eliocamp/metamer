@@ -22,7 +22,10 @@ Imports:
   progress (>= 1.2.0),
   methods
 Suggests:
-  shiny, 
-  miniUI
+    shiny,
+    miniUI,
+    testthat (>= 2.1.0),
+    data.table,
+    covr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1

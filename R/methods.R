@@ -32,7 +32,7 @@ fortify.metamer_list <- function(model, data, ..., n = 6) {
   as.data.frame(model, ..., n = n)
 }
 
-
+# nocov start
 .onLoad <- function(...) {
   register_s3_method("ggplot2", "fortify", "metamer_list")
   register_s3_method("data.table", "as.data.table", "metamer_list")
@@ -62,3 +62,4 @@ register_s3_method <- function(pkg, generic, class, fun = NULL) {
     }
   )
 }
+# nocov end
