@@ -16,6 +16,7 @@ draw_data <- function(data = NULL) {
   if (!interactive()) {
     stop("draw_data can only be run in an interactive session.")
   }
+  # nocov start
   shiny.available <- requireNamespace("shiny", quietly = TRUE)
   minuUI.available <- requireNamespace("miniUI", quietly = TRUE)
 
@@ -33,6 +34,7 @@ draw_data <- function(data = NULL) {
     stop("draw_data needs package 'miniUI'. ",
          "Install it with 'install.packages(\"miniUI\")'")
   }
+
 
   ui <- miniUI::miniPage(
     miniUI::gadgetTitleBar("Draw your target figure"),
@@ -130,6 +132,7 @@ draw_data <- function(data = NULL) {
   }
 
   shiny::runGadget(ui, server, stopOnCancel = TRUE, viewer = shiny::dialogViewer(""))
+  # nocov end
 }
 
 
