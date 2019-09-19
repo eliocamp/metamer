@@ -9,3 +9,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^codecov\.yml$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
