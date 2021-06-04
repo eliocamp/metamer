@@ -4,9 +4,21 @@
 \alias{metamerize}
 \title{Create metamers}
 \usage{
-metamerize(data, preserve, minimize = NULL, change = colnames(data),
-  signif = 2, N = 100, trim = N, annealing = TRUE,
-  perturbation = 0.08, name = NULL, verbose = interactive())
+metamerize(
+  data,
+  preserve,
+  minimize = NULL,
+  change = colnames(data),
+  signif = 2,
+  N = 100,
+  trim = N,
+  annealing = TRUE,
+  K = 0.02,
+  start_probability = 0.5,
+  perturbation = 0.08,
+  name = NULL,
+  verbose = interactive()
+)
 }
 \arguments{
 \item{data}{A \code{data.frame} with the starting data or a \code{metamer_list} object returned
@@ -30,6 +42,10 @@ preserved.}
 
 \item{annealing}{Logical indicating whether to perform annealing.}
 
+\item{K}{speed/quality tradeoff parameter.}
+
+\item{start_probability}{initial probability of rejecting bad solutions.}
+
 \item{perturbation}{Numeric with the magnitude of the random perturbations.
 Can be of length 1 or \code{length(change)}.}
 
@@ -51,6 +67,8 @@ and if \code{minimize} has been lowered, and accepts the solution for the next
 round. If \code{annealing} is \code{TRUE}, it also accepts solutions with bigger
 \code{minimize} with an ever decreasing probability to help the algorithm avoid
 local minimums.
+
+The annealing scheme is adapted from de Vicente et al. (2003).
 
 If \code{data} is a \code{metamer_list}, the function will start the algorithm from the
 last metamer of the list. Furthermore, if \code{preserve} and/or \code{minimize}
@@ -86,6 +104,7 @@ points(cars, col = "red")
 }
 \references{
 Matejka, J., & Fitzmaurice, G. (2017). Same Stats, Different Graphs. Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems  - CHI ’17, 1290–1294. https://doi.org/10.1145/3025453.3025912
+de Vicente, Juan, Juan Lanchares, and Román Hermida. (2003). ‘Placement by Thermodynamic Simulated Annealing’. Physics Letters A 317(5): 415–23.
 }
 \seealso{
 \code{\link[=delayed_with]{delayed_with()}} for a convenient way of making functions suitable for

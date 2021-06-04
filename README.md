@@ -15,17 +15,17 @@ coverage](https://codecov.io/gh/eliocamp/metamer/branch/master/graph/badge.svg)]
 Implements the algorithm proposed by [Matejka & Fitzmaurice
 (2017)](https://www.autodeskresearch.com/publications/samestats) to
 create metamers (datasets with identical statistical properties but very
-different graphs).
+different graphs) with an annealing scheme derived from [de Vicente et
+al. (2003)](https://www.sciencedirect.com/science/article/abs/pii/S0375960103013653?via%3Dihub).
 
 In colour theory,
-[metamers](https://en.wikipedia.org/wiki/Metamerism_\(color\)) are
-colours that have very different wavelength distribution but are
-perceived as equal by out visual system. This happens because out eyes
-essentially summarise a continuous distribution of wavelength by just 3
-numbers: the amount that each type of cone cell is exited. Colour
-metamerism is how artists can reproduce so many colours with a few
-pigments, or how PC monitors use only 3 lights to show colourful
-pictures.
+[metamers](https://en.wikipedia.org/wiki/Metamerism_(color)) are colours
+that have very different wavelength distribution but are perceived as
+equal by out visual system. This happens because out eyes essentially
+summarise a continuous distribution of wavelength by just 3 numbers: the
+amount that each type of cone cell is exited. Colour metamerism is how
+artists can reproduce so many colours with a few pigments, or how PC
+monitors use only 3 lights to show colourful pictures.
 
 ![](man/figures/lemon.jpg)
 
@@ -68,14 +68,14 @@ significant figures).
 library(metamer)
 # Start with the datasaurus
 # install.packages("datasauRus")
-start <- subset(datasauRus::datasaurus_dozen, dataset == "dino")
-start$dataset <- NULL
+dino <- subset(datasauRus::datasaurus_dozen, dataset == "dino")
+dino$dataset <- NULL
 
 # And we want to preserve means and correlation
 mean_cor <- delayed_with(mean(x), mean(y), cor(x, y)) 
 N <- 20000
 set.seed(42) # To make results reproducible
-metamers <- metamerize(start, preserve = mean_cor, N = N)
+metamers <- metamerize(dino, preserve = mean_cor, N = N)
 print(metamers)
 #> List of 12791 metamers
 ```
@@ -87,7 +87,7 @@ dataset as background.
 library(ggplot2)
 
 ggplot(metamers[[length(metamers)]], aes(x, y)) +
-  geom_point(data = start, color = "red", alpha = 0.5, size = 0.4) +
+  geom_point(data = dino, color = "red", alpha = 0.5, size = 0.4) +
   geom_point()
 ```
 
@@ -97,7 +97,7 @@ We can check that the statistical properties have been preserved up to 2
 significant figures:
 
 ``` r
-cbind(dino = signif(mean_cor(start), 2),
+cbind(dino = signif(mean_cor(dino), 2),
       last = signif(mean_cor(metamers[[length(metamers)]]), 2))
 #>        dino   last
 #> [1,] 54.000 54.000
@@ -112,13 +112,13 @@ previous run if the `data` argument is a list of metamers and append the
 result.
 
 ``` r
-target1 <- subset(datasauRus::datasaurus_dozen, dataset == "x_shape")
-target1$dataset <- NULL
+x_shape <- subset(datasauRus::datasaurus_dozen, dataset == "x_shape")
+x_shape$dataset <- NULL
 ```
 
 ``` r
 metamers <- metamerize(metamers, 
-                       minimize = mean_dist_to(target1), 
+                       minimize = mean_dist_to(x_shape),
                        N = N)
 ```
 
@@ -126,23 +126,21 @@ Now the result is a bit more impressive.
 
 ``` r
 ggplot(metamers[[length(metamers)]], aes(x, y)) +
-  geom_point(data = start, color = "red", alpha = 0.5, size = 0.4) +
+  geom_point(data = dino, color = "red", alpha = 0.5, size = 0.4) +
   geom_point()
 ```
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
 
-We can animate the whole thing. Since 19552 metamers is overkill, first
+We can animate the whole thing. Since 14857 metamers is overkill, first
 we keep only 200 of them.
 
 ``` r
 library(gganimate)
-metamers_anim <- trim(metamers, 30*2)
 
-ggplot(as.data.frame(metamers_anim), aes(x, y)) +
+ggplot(metamers, aes(x, y), n = 200) +
   geom_point() +
   transition_manual(.metamer)
-#> nframes and fps adjusted to match transition
 ```
 
 <img src="man/figures/README-unnamed-chunk-6-1.gif" width="100%" />
@@ -156,25 +154,24 @@ function.
 
 ``` r
 library(magrittr)
-target2 <- subset(datasauRus::datasaurus_dozen, dataset == "star")
-target2$dataset <- NULL
-
-metamers <- metamerize(start,
+star <- subset(datasauRus::datasaurus_dozen, dataset == "star")
+star$dataset <- NULL
+set.seed(42)
+metamers <- metamerize(dino,
                        preserve = mean_cor, 
-                       minimize = mean_dist_to(target1),
+                       minimize = mean_dist_to(x_shape),
                        N = N) %>% 
-  set_minimize(mean_dist_to(target2)) %>% 
+  set_minimize(mean_dist_to(star)) %>% 
   metamerize(N = N) %>% 
-  set_minimize(mean_dist_to(start)) %>% 
-  metamerize(N = N)
+  set_minimize(mean_dist_to(dino)) %>% 
+  metamerize(N = N) 
 ```
 
 And the full sequence
 
 ``` r
-trim(metamers, 30*3) %>% 
-  as.data.frame() %>% 
-  ggplot(aes(x, y)) +
+metamers %>%
+  ggplot(aes(x, y), n = 30*3) +
   geom_point() +
   transition_manual(.metamer)
 ```

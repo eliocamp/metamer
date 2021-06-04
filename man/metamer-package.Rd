@@ -41,7 +41,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Elio Campitelli \email{elio.campitelli@cima.fcen.uba.ar} (0000-0002-7742-9230)
+\strong{Maintainer}: Elio Campitelli \email{elio.campitelli@cima.fcen.uba.ar} (\href{https://orcid.org/0000-0002-7742-9230}{ORCID})
 
 }
 \keyword{internal}

@@ -18,9 +18,11 @@ that identifies each stroke.
 Opens up a dialogue that lets you draw your data.
 }
 \seealso{
-Other helper functions: \code{\link{delayed_with}},
-  \code{\link{densify}}, \code{\link{mean_dist_to}},
-  \code{\link{mean_self_proximity}},
-  \code{\link{moments_n}}
+Other helper functions: 
+\code{\link{delayed_with}()},
+\code{\link{densify}()},
+\code{\link{mean_dist_to}()},
+\code{\link{mean_self_proximity}()},
+\code{\link{moments_n}()}
 }
 \concept{helper functions}

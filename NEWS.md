@@ -15,6 +15,8 @@ it to clump.
 
 * Small speed improvement.
 
+* Tweaked annealing algorithm.
+
 # metamer 0.1.0
 
 * First release

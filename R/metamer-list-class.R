@@ -6,7 +6,9 @@ new_metamer_list <- function(list, history, preserve, minimize,
                              annealing,
                              perturbation,
                              keep = length(list),
-                             name) {
+                             name,
+                             K,
+                             start_probability) {
   metamers <- list[seq_len(keep)]
   history <- history[seq_len(keep)]
   structure(metamers,
@@ -18,7 +20,9 @@ new_metamer_list <- function(list, history, preserve, minimize,
             minimize = minimize,
             annealing = annealing,
             perturbation = perturbation,
-            name = name)
+            name = name,
+            K = K,
+            start_probability = start_probability)
 }
 
 
@@ -32,6 +36,8 @@ append_metamer <- function(old, new) {
                    preserve_original = attr(new, "preserve_original"),
                    minimize = attr(new, "minimize"),
                    annealing = attr(new, "annealing"),
+                   K = attr(new, "K"),
+                   start_probability  = attr(new, "start_probability"),
                    perturbation = attr(new, "perturbation"),
                    name = c(attr(old, "name"), attr(new, "name")))
 }
