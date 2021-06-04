@@ -117,7 +117,8 @@ x_shape$dataset <- NULL
 ```
 
 ``` r
-metamers <- metamerize(metamers, 
+metamers <- metamerize(dino, 
+                       preserve = mean_cor,
                        minimize = mean_dist_to(x_shape),
                        N = N)
 ```
@@ -132,7 +133,7 @@ ggplot(metamers[[length(metamers)]], aes(x, y)) +
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
 
-We can animate the whole thing. Since 14857 metamers is overkill, first
+We can animate the whole thing. Since 2107 metamers is overkill, first
 we keep only 200 of them.
 
 ``` r
