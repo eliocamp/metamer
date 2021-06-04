@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -37,7 +41,6 @@
 
 <meta property="og:title" content="Create metamers — metamerize" />
 <meta property="og:description" content="Produces very dissimilar datasets with the same statistical properties." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -55,7 +58,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -77,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -90,8 +93,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/eliocamp/metamer">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/eliocamp/metamer/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -117,9 +120,21 @@
     <p>Produces very dissimilar datasets with the same statistical properties.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>metamerize</span>(<span class='no'>data</span>, <span class='no'>preserve</span>, <span class='kw'>minimize</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>change</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>data</span>),
-  <span class='kw'>signif</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>N</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>trim</span> <span class='kw'>=</span> <span class='no'>N</span>, <span class='kw'>annealing</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>perturbation</span> <span class='kw'>=</span> <span class='fl'>0.08</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>())</pre>
+    <pre class="usage"><span class='fu'>metamerize</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  <span class='va'>preserve</span>,
+  minimize <span class='op'>=</span> <span class='cn'>NULL</span>,
+  change <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>,
+  signif <span class='op'>=</span> <span class='fl'>2</span>,
+  N <span class='op'>=</span> <span class='fl'>100</span>,
+  trim <span class='op'>=</span> <span class='va'>N</span>,
+  annealing <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  K <span class='op'>=</span> <span class='fl'>0.02</span>,
+  start_probability <span class='op'>=</span> <span class='fl'>0.5</span>,
+  perturbation <span class='op'>=</span> <span class='fl'>0.08</span>,
+  name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  verbose <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,6 +177,14 @@ preserved.</p></td>
       <td><p>Logical indicating whether to perform annealing.</p></td>
     </tr>
     <tr>
+      <th>K</th>
+      <td><p>speed/quality tradeoff parameter.</p></td>
+    </tr>
+    <tr>
+      <th>start_probability</th>
+      <td><p>initial probability of rejecting bad solutions.</p></td>
+    </tr>
+    <tr>
       <th>perturbation</th>
       <td><p>Numeric with the magnitude of the random perturbations.
 Can be of length 1 or <code><a href='https://rdrr.io/r/base/length.html'>length(change)</a></code>.</p></td>
@@ -188,6 +211,7 @@ and if <code>minimize</code> has been lowered, and accepts the solution for the 
 round. If <code>annealing</code> is <code>TRUE</code>, it also accepts solutions with bigger
 <code>minimize</code> with an ever decreasing probability to help the algorithm avoid
 local minimums.</p>
+<p>The annealing scheme is adapted from de Vicente et al. (2003).</p>
 <p>If <code>data</code> is a <code>metamer_list</code>, the function will start the algorithm from the
 last metamer of the list. Furthermore, if <code>preserve</code> and/or <code>minimize</code>
 are missing, the previous functions will be carried over from the previous call.</p>
@@ -195,7 +219,8 @@ are missing, the previous functions will be carried over from the previous call.
 the product of the functions applied to the data.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Matejka, J., &amp; Fitzmaurice, G. (2017). Same Stats, Different Graphs. Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems  - CHI ’17, 1290–1294. https://doi.org/10.1145/3025453.3025912</p>
+    <p>Matejka, J., &amp; Fitzmaurice, G. (2017). Same Stats, Different Graphs. Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems  - CHI ’17, 1290–1294. https://doi.org/10.1145/3025453.3025912
+de Vicente, Juan, Juan Lanchares, and Román Hermida. (2003). ‘Placement by Thermodynamic Simulated Annealing’. Physics Letters A 317(5): 415–23.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='delayed_with.html'>delayed_with()</a></code> for a convenient way of making functions suitable for
@@ -204,41 +229,38 @@ to a known target in <code>minimize</code>, <code><a href='mean_self_proximity.h
 "self distance" to prevent data clumping.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>cars</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>cars</span><span class='op'>)</span>
 <span class='co'># Metamers of `cars` with the same mean speed and dist, and correlation</span>
 <span class='co'># between the two.</span>
-<span class='no'>means_and_cor</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='delayed_with.html'>delayed_with</a></span>(<span class='kw'>mean_speed</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>speed</span>),
-                              <span class='kw'>mean_dist</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>dist</span>),
-                              <span class='kw'>cor</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span>(<span class='no'>speed</span>, <span class='no'>dist</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>42</span>)  <span class='co'># for reproducibility.</span>
-<span class='no'>metamers</span> <span class='kw'>&lt;-</span> <span class='fu'>metamerize</span>(<span class='no'>cars</span>,
-                       <span class='kw'>preserve</span> <span class='kw'>=</span> <span class='no'>means_and_cor</span>,
-                       <span class='kw'>signif</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-                       <span class='kw'>N</span> <span class='kw'>=</span> <span class='fl'>1000</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>metamers</span>)</div><div class='output co'>#&gt; List of 257 metamers</div><div class='input'>
-<span class='no'>last</span> <span class='kw'>&lt;-</span> <span class='no'>metamers</span><span class='kw'>[[</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>metamers</span>)]]
+<span class='va'>means_and_cor</span> <span class='op'>&lt;-</span> <span class='fu'><a href='delayed_with.html'>delayed_with</a></span><span class='op'>(</span>mean_speed <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>speed</span><span class='op'>)</span>,
+                              mean_dist <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>dist</span><span class='op'>)</span>,
+                              cor <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>speed</span>, <span class='va'>dist</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>42</span><span class='op'>)</span>  <span class='co'># for reproducibility.</span>
+<span class='va'>metamers</span> <span class='op'>&lt;-</span> <span class='fu'>metamerize</span><span class='op'>(</span><span class='va'>cars</span>,
+                       preserve <span class='op'>=</span> <span class='va'>means_and_cor</span>,
+                       signif <span class='op'>=</span> <span class='fl'>3</span>,
+                       N <span class='op'>=</span> <span class='fl'>1000</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>metamers</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; List of 257 metamers</div><div class='input'>
+<span class='va'>last</span> <span class='op'>&lt;-</span> <span class='va'>metamers</span><span class='op'>[[</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>metamers</span><span class='op'>)</span><span class='op'>]</span><span class='op'>]</span>
 
 <span class='co'># Confirm that the statistics are the same</span>
-<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='kw'>original</span> <span class='kw'>=</span> <span class='fu'>means_and_cor</span>(<span class='no'>cars</span>),
-      <span class='kw'>metamer</span> <span class='kw'>=</span> <span class='fu'>means_and_cor</span>(<span class='no'>last</span>))</div><div class='output co'>#&gt;              original    metamer
+<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span>original <span class='op'>=</span> <span class='fu'>means_and_cor</span><span class='op'>(</span><span class='va'>cars</span><span class='op'>)</span>,
+      metamer <span class='op'>=</span> <span class='fu'>means_and_cor</span><span class='op'>(</span><span class='va'>last</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;              original    metamer
 #&gt; mean_speed 15.4000000 15.4083841
 #&gt; mean_dist  42.9800000 42.9869770
 #&gt; cor         0.8068949  0.8074312</div><div class='input'>
 <span class='co'># Visualize</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>metamers</span><span class='kw'>[[</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>metamers</span>)]])</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/points.html'>points</a></span>(<span class='no'>cars</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"red"</span>)</div><div class='img'><img src='metamerize-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>metamers</span><span class='op'>[[</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>metamers</span><span class='op'>)</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>
+</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/points.html'>points</a></span><span class='op'>(</span><span class='va'>cars</span>, col <span class='op'>=</span> <span class='st'>"red"</span><span class='op'>)</span>
+</div><div class='img'><img src='metamerize-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#references">References</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -249,7 +271,7 @@ to a known target in <code>minimize</code>, <code><a href='mean_self_proximity.h
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://eliocamp.github.io/metamer/index.html</loc>
+  </url>
+  <url>
+    <loc>https://eliocamp.github.io/metamer/reference/delayed_with.html</loc>
+  </url>
+  <url>
+    <loc>https://eliocamp.github.io/metamer/reference/densify.html</loc>
+  </url>
+  <url>
+    <loc>https://eliocamp.github.io/metamer/reference/draw_data.html</loc>
+  </url>
+  <url>
+    <loc>https://eliocamp.github.io/metamer/reference/mean_dist_to.html</loc>
+  </url>
+  <url>
+    <loc>https://eliocamp.github.io/metamer/reference/mean_self_proximity.html</loc>
+  </url>
+  <url>
+    <loc>https://eliocamp.github.io/metamer/reference/metamer-package.html</loc>
+  </url>
+  <url>
+    <loc>https://eliocamp.github.io/metamer/reference/metamerize.html</loc>
+  </url>
+  <url>
+    <loc>https://eliocamp.github.io/metamer/reference/moments_n.html</loc>
+  </url>
+  <url>
+    <loc>https://eliocamp.github.io/metamer/reference/set_minimize.html</loc>
+  </url>
+  <url>
+    <loc>https://eliocamp.github.io/metamer/reference/trim.html</loc>
+  </url>
+</urlset>
