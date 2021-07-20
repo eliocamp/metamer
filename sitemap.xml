@@ -25,12 +25,15 @@
     <loc>https://eliocamp.github.io/metamer/reference/metamer-package.html</loc>
   </url>
   <url>
-    <loc>https://eliocamp.github.io/metamer/reference/metamer_list.html</loc>
-  </url>
-  <url>
     <loc>https://eliocamp.github.io/metamer/reference/metamerise.html</loc>
   </url>
   <url>
     <loc>https://eliocamp.github.io/metamer/reference/moments_n.html</loc>
+  </url>
+  <url>
+    <loc>https://eliocamp.github.io/metamer/reference/set_params.html</loc>
+  </url>
+  <url>
+    <loc>https://eliocamp.github.io/metamer/reference/stop-conditions.html</loc>
   </url>
 </urlset>

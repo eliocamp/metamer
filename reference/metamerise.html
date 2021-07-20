@@ -126,7 +126,7 @@
   minimize <span class='op'>=</span> <span class='cn'>NULL</span>,
   change <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>,
   signif <span class='op'>=</span> <span class='fl'>2</span>,
-  stop_if <span class='op'>=</span> <span class='fu'>n_tries</span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>,
+  stop_if <span class='op'>=</span> <span class='fu'><a href='n_tries.html'>n_tries</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>,
   keep <span class='op'>=</span> <span class='cn'>NULL</span>,
   annealing <span class='op'>=</span> <span class='cn'>TRUE</span>,
   K <span class='op'>=</span> <span class='fl'>0.02</span>,
@@ -142,7 +142,7 @@
   minimize <span class='op'>=</span> <span class='cn'>NULL</span>,
   change <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>,
   signif <span class='op'>=</span> <span class='fl'>2</span>,
-  stop_if <span class='op'>=</span> <span class='fu'>n_tries</span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>,
+  stop_if <span class='op'>=</span> <span class='fu'><a href='n_tries.html'>n_tries</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>,
   keep <span class='op'>=</span> <span class='cn'>NULL</span>,
   annealing <span class='op'>=</span> <span class='cn'>TRUE</span>,
   K <span class='op'>=</span> <span class='fl'>0.02</span>,
@@ -255,7 +255,7 @@ to a known target in <code>minimize</code>, <code><a href='mean_self_proximity.h
 <span class='va'>metamers</span> <span class='op'>&lt;-</span> <span class='fu'>metamerize</span><span class='op'>(</span><span class='va'>cars</span>,
                        preserve <span class='op'>=</span> <span class='va'>means_and_cor</span>,
                        signif <span class='op'>=</span> <span class='fl'>3</span>,
-                       stop_if <span class='op'>=</span> <span class='fu'>n_tries</span><span class='op'>(</span><span class='fl'>1000</span><span class='op'>)</span><span class='op'>)</span>
+                       stop_if <span class='op'>=</span> <span class='fu'><a href='n_tries.html'>n_tries</a></span><span class='op'>(</span><span class='fl'>1000</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>metamers</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; List of 257 metamers</div><div class='input'>
 <span class='va'>last</span> <span class='op'>&lt;-</span> <span class='va'>metamers</span><span class='op'>$</span><span class='fu'>last_metamer</span><span class='op'>(</span><span class='op'>)</span>

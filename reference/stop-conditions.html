@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>metamer: Create Data with Identical Statistics — metamer-package • metamer</title>
+<title>Stop conditions — n_tries • metamer</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="metamer: Create Data with Identical Statistics — metamer-package" />
-<meta property="og:description" content="Creates data with identical statistics (metamers) using an iterative 
-   algorithm proposed by Matejka &amp;amp; Fitzmaurice (2017) &amp;lt;DOI:10.1145/3025453.3025912&amp;gt;." />
+<meta property="og:title" content="Stop conditions — n_tries" />
+<meta property="og:description" content="Stop conditions" />
 
 
 
@@ -112,48 +111,36 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>metamer: Create Data with Identical Statistics</h1>
-    <small class="dont-index">Source: <a href='https://github.com/eliocamp/metamer/blob/master/R/metamer-package.R'><code>R/metamer-package.R</code></a></small>
-    <div class="hidden name"><code>metamer-package.Rd</code></div>
+    <h1>Stop conditions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/eliocamp/metamer/blob/master/R/stop-conditions.R'><code>R/stop-conditions.R</code></a></small>
+    <div class="hidden name"><code>stop-conditions.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Creates data with identical statistics (metamers) using an iterative 
-   algorithm proposed by Matejka &amp; Fitzmaurice (2017) &lt;DOI:10.1145/3025453.3025912&gt;.</p>
+    <p>Stop conditions</p>
     </div>
 
+    <pre class="usage"><span class='fu'>n_tries</span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span>
 
+<span class='fu'>n_metamers</span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span>
 
-    <h2 class="hasAnchor" id="overview"><a class="anchor" href="#overview"></a>Overview</h2>
+<span class='fu'>minimize_ratio</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></pre>
 
-    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>n</th>
+      <td><p>integer number of tries or metamers.</p></td>
+    </tr>
+    <tr>
+      <th>r</th>
+      <td><p>Ratio of minimize value to shoot for. If <code>0.5</code>,
+the stop condition is that the iteration will stop if the value
+to minimize gets to one-half of the starting value.</p></td>
+    </tr>
+    </table>
 
-<p>Create metamers with the <code><a href='metamerise.html'>metamerize()</a></code> function.</p>
-<p>Some helper functions included:</p><ul>
-<li><p><code><a href='draw_data.html'>draw_data()</a></code> for drawing 2D datasets by hand and <code><a href='densify.html'>densify()</a></code> for increasing
-the point density of those drawings.</p></li>
-<li><p><code><a href='delayed_with.html'>delayed_with()</a></code> for defining statistics to preserve.</p></li>
-<li><p><code><a href='moments_n.html'>moments_n()</a></code> for preserving moments of order n.</p></li>
-<li><p><code><a href='mean_dist_to.html'>mean_dist_to()</a></code> for minimizing the mean distance to a known target dataset.</p></li>
-</ul>
-
-<p>The <code><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame()</a></code>/<code>[data.table::as.data.table()] methods included will turn a </code>metamer_list` into a tidy
-data.frame.</p>
-<p>Inspired by Matejka &amp; Fitzmaurice (2017) awesome paper.</p>
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
-
-    <p>Matejka, J., &amp; Fitzmaurice, G. (2017). Same Stats, Different Graphs. Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems  - CHI ’17, 1290–1294. https://doi.org/10.1145/3025453.3025912</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Useful links:</p><ul>
-<li><p><a href='https://eliocamp.github.io/metamer'>https://eliocamp.github.io/metamer</a></p></li>
-<li><p>Report bugs at <a href='https://github.com/eliocamp/metamer/issues'>https://github.com/eliocamp/metamer/issues</a></p></li>
-</ul>
-
-</div>
-    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
-
-    <p><strong>Maintainer</strong>: Elio Campitelli <a href='mailto:elio.campitelli@cima.fcen.uba.ar'>elio.campitelli@cima.fcen.uba.ar</a> (<a href='https://orcid.org/0000-0002-7742-9230'>ORCID</a>)</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
