@@ -120,7 +120,7 @@
     <p>Creates a function to get the mean minimum distance between two sets of points.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mean_dist_to</span><span class='op'>(</span><span class='va'>target</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>mean_dist_to</span><span class='op'>(</span><span class='va'>target</span>, squared <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -128,6 +128,11 @@
     <tr>
       <th>target</th>
       <td><p>A <code>data.frame</code> with all numeric columns.</p></td>
+    </tr>
+    <tr>
+      <th>squared</th>
+      <td><p>Logical indicating whether to compute the mean squared
+distance (if <code>TRUE</code>) or the mean distance.</p></td>
     </tr>
     </table>
 
@@ -141,6 +146,7 @@
 <code><a href='delayed_with.html'>delayed_with</a>()</code>,
 <code><a href='densify.html'>densify</a>()</code>,
 <code><a href='draw_data.html'>draw_data</a>()</code>,
+<code><a href='mean_dist_to_sf.html'>mean_dist_to_sf</a>()</code>,
 <code><a href='mean_self_proximity.html'>mean_self_proximity</a>()</code>,
 <code><a href='moments_n.html'>moments_n</a>()</code></p></div>
 
@@ -149,7 +155,7 @@
 <span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>distance</span> <span class='op'>&lt;-</span> <span class='fu'>mean_dist_to</span><span class='op'>(</span><span class='va'>target</span><span class='op'>)</span>
 <span class='fu'>distance</span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 0.2436247</div><div class='input'>
+</div><div class='output co'>#&gt; [1] 0.1041971</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -105,65 +105,71 @@
 
 <span class="co"># And we want to preserve means and correlation</span>
 <span class="va">mean_cor</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/delayed_with.html">delayed_with</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> 
-<span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">20000</span>
+
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span> <span class="co"># To make results reproducible</span>
-<span class="va">metamers</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/metamerize.html">metamerize</a></span><span class="op">(</span><span class="va">dino</span>, preserve <span class="op">=</span> <span class="va">mean_cor</span>, N <span class="op">=</span> <span class="va">N</span><span class="op">)</span>
+<span class="va">metamers</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/metamerise.html">metamerise</a></span><span class="op">(</span><span class="va">dino</span>, preserve <span class="op">=</span> <span class="va">mean_cor</span>, 
+                       stop_if <span class="op">=</span> <span class="fu">n_metamers</span><span class="op">(</span><span class="fl">300</span><span class="op">)</span>, 
+                       perturbation <span class="op">=</span> <span class="fl">1</span>,
+                       keep <span class="op">=</span> <span class="fl">19</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">metamers</span><span class="op">)</span>
-<span class="co">#&gt; List of 12791 metamers</span></code></pre></div>
-<p>We found 12791 metamers. Let’s see the final one, with the starting dataset as background.</p>
+<span class="co">#&gt; List of 20 metamers</span></code></pre></div>
+<p>We found 29 metamers. Let’s see the final one, with the starting dataset as background.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">ggplot2</span><span class="op">)</span>
 
-<span class="fu">ggplot</span><span class="op">(</span><span class="va">metamers</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">metamers</span><span class="op">)</span><span class="op">]</span><span class="op">]</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+<span class="fu">ggplot</span><span class="op">(</span><span class="va">metamers</span><span class="op">$</span><span class="fu">last_metamer</span><span class="op">(</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">geom_point</span><span class="op">(</span>data <span class="op">=</span> <span class="va">dino</span>, color <span class="op">=</span> <span class="st">"red"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span>, size <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-1-1.png" width="100%"></p>
 <p>We can check that the statistical properties have been preserved up to 2 significant figures:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>dino <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">signif</a></span><span class="op">(</span><span class="fu">mean_cor</span><span class="op">(</span><span class="va">dino</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>,
-      last <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">signif</a></span><span class="op">(</span><span class="fu">mean_cor</span><span class="op">(</span><span class="va">metamers</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">metamers</span><span class="op">)</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+      last <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">signif</a></span><span class="op">(</span><span class="fu">mean_cor</span><span class="op">(</span><span class="va">metamers</span><span class="op">$</span><span class="fu">last_metamer</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;        dino   last</span>
 <span class="co">#&gt; [1,] 54.000 54.000</span>
 <span class="co">#&gt; [2,] 48.000 48.000</span>
 <span class="co">#&gt; [3,] -0.064 -0.064</span></code></pre></div>
-<p>However, a semi random cloud of points is not that interesting, so we can specify a minimizing function so that the result is similar to another dataset. <code>metamerize</code> will start from the last metamer of the previous run if the <code>data</code> argument is a list of metamers and append the result.</p>
+<p>However, a semi random cloud of points is not that interesting, so we can specify a minimizing function so that the result is similar to another dataset. <code>metamerise</code> will start from the last metamer of the previous run if the <code>data</code> argument is a list of metamers and append the result.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x_shape</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="fu">datasauRus</span><span class="fu">::</span><span class="va">datasaurus_dozen</span>, <span class="va">dataset</span> <span class="op">==</span> <span class="st">"x_shape"</span><span class="op">)</span>
 <span class="va">x_shape</span><span class="op">$</span><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">metamers</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/metamerize.html">metamerize</a></span><span class="op">(</span><span class="va">dino</span>, 
+<code class="sourceCode R"><span class="va">metamers</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/metamerise.html">metamerise</a></span><span class="op">(</span><span class="va">dino</span>, 
                        preserve <span class="op">=</span> <span class="va">mean_cor</span>,
                        minimize <span class="op">=</span> <span class="fu"><a href="reference/mean_dist_to.html">mean_dist_to</a></span><span class="op">(</span><span class="va">x_shape</span><span class="op">)</span>,
-                       N <span class="op">=</span> <span class="va">N</span><span class="op">)</span></code></pre></div>
+                       stop_if <span class="op">=</span> <span class="fu">minimize_ratio</span><span class="op">(</span><span class="fl">0.02</span><span class="op">)</span>,
+                       keep <span class="op">=</span> <span class="fl">99</span><span class="op">)</span></code></pre></div>
 <p>Now the result is a bit more impressive.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">metamers</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">metamers</span><span class="op">)</span><span class="op">]</span><span class="op">]</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">metamers</span><span class="op">$</span><span class="fu">last_metamer</span><span class="op">(</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">geom_point</span><span class="op">(</span>data <span class="op">=</span> <span class="va">dino</span>, color <span class="op">=</span> <span class="st">"red"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span>, size <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="100%"></p>
-<p>We can animate the whole thing. Since 2107 metamers is overkill, first we keep only 200 of them.</p>
+<p>We can animate the whole thing.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">gganimate</span><span class="op">)</span>
 
-<span class="fu">ggplot</span><span class="op">(</span><span class="va">metamers</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">200</span><span class="op">)</span> <span class="op">+</span>
+<span class="fu">ggplot</span><span class="op">(</span><span class="va">metamers</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">transition_manual</span><span class="op">(</span><span class="va">.metamer</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-6-1.gif" width="100%"></p>
 <p>You can freehand your own starting or target data with the <code><a href="reference/draw_data.html">draw_data()</a></code> utility, that will open a shiny interface. You might need to install <code>shiny</code> and <code>miniUI</code> with <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages(c("shiny", "miniUI"))</a></code>.</p>
 <p>Metamerizing operations can be chained while changing the minimizing function.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span>
-<span class="va">star</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="fu">datasauRus</span><span class="fu">::</span><span class="va">datasaurus_dozen</span>, <span class="va">dataset</span> <span class="op">==</span> <span class="st">"star"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">star</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="fu">datasauRus</span><span class="fu">::</span><span class="va">datasaurus_dozen</span>, <span class="va">dataset</span> <span class="op">==</span> <span class="st">"star"</span><span class="op">)</span>
 <span class="va">star</span><span class="op">$</span><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span>
-<span class="va">metamers</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/metamerize.html">metamerize</a></span><span class="op">(</span><span class="va">dino</span>,
+<span class="va">metamers</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/metamerise.html">metamerise</a></span><span class="op">(</span><span class="va">dino</span>,
                        preserve <span class="op">=</span> <span class="va">mean_cor</span>, 
                        minimize <span class="op">=</span> <span class="fu"><a href="reference/mean_dist_to.html">mean_dist_to</a></span><span class="op">(</span><span class="va">x_shape</span><span class="op">)</span>,
-                       N <span class="op">=</span> <span class="va">N</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="reference/set_minimize.html">set_minimize</a></span><span class="op">(</span><span class="fu"><a href="reference/mean_dist_to.html">mean_dist_to</a></span><span class="op">(</span><span class="va">star</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="reference/metamerize.html">metamerize</a></span><span class="op">(</span>N <span class="op">=</span> <span class="va">N</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="reference/set_minimize.html">set_minimize</a></span><span class="op">(</span><span class="fu"><a href="reference/mean_dist_to.html">mean_dist_to</a></span><span class="op">(</span><span class="va">dino</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="reference/metamerize.html">metamerize</a></span><span class="op">(</span>N <span class="op">=</span> <span class="va">N</span><span class="op">)</span> </code></pre></div>
+                       stop_if <span class="op">=</span> <span class="fu">minimize_ratio</span><span class="op">(</span><span class="fl">0.05</span><span class="op">)</span>,
+                       keep <span class="op">=</span> <span class="fl">29</span><span class="op">)</span><span class="op">$</span>
+  <span class="fu">set_minimize</span><span class="op">(</span><span class="fu"><a href="reference/mean_dist_to.html">mean_dist_to</a></span><span class="op">(</span><span class="va">star</span><span class="op">)</span><span class="op">)</span><span class="op">$</span>
+  <span class="fu">metamerise</span><span class="op">(</span>stop_if <span class="op">=</span>  <span class="fu">minimize_ratio</span><span class="op">(</span><span class="fl">0.05</span><span class="op">)</span>,
+             keep <span class="op">=</span> <span class="fl">30</span><span class="op">)</span><span class="op">$</span>
+  <span class="fu">set_minimize</span><span class="op">(</span><span class="fu"><a href="reference/mean_dist_to.html">mean_dist_to</a></span><span class="op">(</span><span class="va">dino</span><span class="op">)</span><span class="op">)</span><span class="op">$</span>
+  <span class="fu">metamerise</span><span class="op">(</span>stop_if <span class="op">=</span>  <span class="fu">minimize_ratio</span><span class="op">(</span><span class="fl">0.05</span><span class="op">)</span>, 
+             keep <span class="op">=</span> <span class="fl">30</span><span class="op">)</span> </code></pre></div>
 <p>And the full sequence</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">metamers</span> <span class="op">%&gt;%</span>

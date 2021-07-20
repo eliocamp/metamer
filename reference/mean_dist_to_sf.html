@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Inverse of the mean self distance — mean_self_proximity • metamer</title>
+<title>Mean distance to an sf object — mean_dist_to_sf • metamer</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,8 @@
 
 
 
-<meta property="og:title" content="Inverse of the mean self distance — mean_self_proximity" />
-<meta property="og:description" content="Returns the inverse of the mean minimum distance between different pairs of points.
-It's intended to be used as a minimizing function to, then, maximize the distance between
-points." />
+<meta property="og:title" content="Mean distance to an sf object — mean_dist_to_sf" />
+<meta property="og:description" content="Mean distance to an sf object" />
 
 
 
@@ -113,25 +111,38 @@ points." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Inverse of the mean self distance</h1>
+    <h1>Mean distance to an sf object</h1>
     <small class="dont-index">Source: <a href='https://github.com/eliocamp/metamer/blob/master/R/utilities.R'><code>R/utilities.R</code></a></small>
-    <div class="hidden name"><code>mean_self_proximity.Rd</code></div>
+    <div class="hidden name"><code>mean_dist_to_sf.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Returns the inverse of the mean minimum distance between different pairs of points.
-It's intended to be used as a minimizing function to, then, maximize the distance between
-points.</p>
+    <p>Mean distance to an sf object</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mean_self_proximity</span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>mean_dist_to_sf</span><span class='op'>(</span><span class='va'>target</span>, coords <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"x"</span>, <span class='st'>"y"</span><span class='op'>)</span>, buffer <span class='op'>=</span> <span class='fl'>0</span>, squared <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>data</th>
-      <td><p>a data.frame</p></td>
+      <th>target</th>
+      <td><p>An sf object.</p></td>
+    </tr>
+    <tr>
+      <th>coords</th>
+      <td><p>Character vector with the columns of the data object
+that define de coordinates.</p></td>
+    </tr>
+    <tr>
+      <th>buffer</th>
+      <td><p>Buffer around the sf object. Distances smaller
+than <code>buffer</code> are replaced with 0.</p></td>
+    </tr>
+    <tr>
+      <th>squared</th>
+      <td><p>Logical indicating whether to compute the mean squared
+distance (if <code>TRUE</code>) or the mean distance.</p></td>
     </tr>
     </table>
 
@@ -141,8 +152,8 @@ points.</p>
 <code><a href='delayed_with.html'>delayed_with</a>()</code>,
 <code><a href='densify.html'>densify</a>()</code>,
 <code><a href='draw_data.html'>draw_data</a>()</code>,
-<code><a href='mean_dist_to_sf.html'>mean_dist_to_sf</a>()</code>,
 <code><a href='mean_dist_to.html'>mean_dist_to</a>()</code>,
+<code><a href='mean_self_proximity.html'>mean_self_proximity</a>()</code>,
 <code><a href='moments_n.html'>moments_n</a>()</code></p></div>
 
   </div>
