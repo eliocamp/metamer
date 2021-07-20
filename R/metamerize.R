@@ -10,9 +10,9 @@
 #' the data as argument and return a single numeric.
 #' @param change A character vector with the names of the columns that need to be
 #' changed.
-#' @param signif The number of significant digits of `preserve` that need to be
-#' preserved.
-#' @param stop_if A stopping criterium.
+#' @param round A function to apply to the result of `preserve` to round
+#' numbers. See [rounding].
+#' @param stop_if A stopping criterium. See [stop-conditions].
 #' @param keep Max number of metamers to return.
 #' @param perturbation Numeric with the magnitude of the random perturbations.
 #' Can be of length 1 or `length(change)`.
@@ -63,18 +63,18 @@
 #' set.seed(42)  # for reproducibility.
 #' metamers <- metamerize(cars,
 #'                        preserve = means_and_cor,
-#'                        signif = 3,
+#'                        round = truncate_to(2),
 #'                        stop_if = n_tries(1000))
 #' print(metamers)
 #'
-#' last <- metamers$last_metamer()
+#' last <- tail(metamers)
 #'
 #' # Confirm that the statistics are the same
 #' cbind(original = means_and_cor(cars),
 #'       metamer = means_and_cor(last))
 #'
 #' # Visualize
-#' plot(metamers$last_metamer())
+#' plot(tail(metamers))
 #' points(cars, col = "red")
 #'
 #' @export
@@ -84,7 +84,7 @@ metamerise <- function(data,
                        preserve,
                        minimize = NULL,
                        change = colnames(data),
-                       signif = 2,
+                       round = truncate_to(2),
                        stop_if = n_tries(100),
                        keep = NULL,
                        annealing = TRUE,
@@ -94,7 +94,7 @@ metamerise <- function(data,
                        name = "",
                        verbose = interactive()) {
   if (inherits(data, "data.frame")) {
-    data <- metamer_list$new(data, preserve = preserve, signif = signif)
+    data <- metamer_list$new(data, preserve = preserve, round = round)
   }
 
   data <- data$clone()
@@ -128,3 +128,9 @@ metamerise <- function(data,
 #' @export
 #' @rdname metamerise
 metamerize <- metamerise
+
+#' @export
+#' @rdname metamerise
+new_metamer <- function(data, preserve, round = truncate_to(2)) {
+  metamer_list$new(data, preserve = preserve, round = round)
+}

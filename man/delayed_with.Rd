@@ -34,6 +34,7 @@ Other helper functions:
 \code{\link{mean_dist_to_sf}()},
 \code{\link{mean_dist_to}()},
 \code{\link{mean_self_proximity}()},
-\code{\link{moments_n}()}
+\code{\link{moments_n}()},
+\code{\link{truncate_to}()}
 }
 \concept{helper functions}

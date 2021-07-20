@@ -10,6 +10,16 @@ clear_minimize <- function(metamer_list) {
 }
 #' @export
 #' @rdname set_params
+clear_minimise <- function(metamer_list) {
+  metamer_list$clone()$clear_minimize()
+}
+#' @export
+#' @rdname set_params
+set_minimise <- function(metamer_list, minimize) {
+  metamer_list$clone()$set_minimize(minimize)
+}
+#' @export
+#' @rdname set_params
 set_minimize <- function(metamer_list, minimize) {
   metamer_list$clone()$set_minimize(minimize)
 }

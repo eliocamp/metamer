@@ -110,6 +110,31 @@ delayed_with <- function(...) {
 }
 
 
+#' Rounding functions
+#'
+#' @param digits Number of significant digits.
+#' @family helper functions
+#' @export
+#' @rdname rounding
+truncate_to <- function(digits) {
+  base <- 10^digits
+  function(x) {
+    trunc(x*base)/base
+  }
+
+}
+
+#' @family helper functions
+#' @export
+#' @rdname rounding
+round_to <- function(digits) {
+  force(digits)
+  function(x) {
+    round(x, digits)
+  }
+
+}
+
 trim <- function(object, n = length(object)) {
   N <- length(object)
   if (n == 2) {

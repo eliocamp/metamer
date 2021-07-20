@@ -28,6 +28,7 @@ Other helper functions:
 \code{\link{draw_data}()},
 \code{\link{mean_dist_to}()},
 \code{\link{mean_self_proximity}()},
-\code{\link{moments_n}()}
+\code{\link{moments_n}()},
+\code{\link{truncate_to}()}
 }
 \concept{helper functions}

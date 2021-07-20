@@ -1,7 +1,7 @@
 metamer_list <- R6::R6Class("metamer_list",
   public = list(
     preserve = NULL,
-    signif = NULL,
+    round = NULL,
     pb_format = ":name -> :spin :n_metamers n_metamers",
     minimize_fun = NULL,
     metamers = NULL,
@@ -16,9 +16,9 @@ metamer_list <- R6::R6Class("metamer_list",
 
     initialize = function(data,
                           preserve = NULL,
-                          signif   = 2) {
+                          round = round) {
       self$preserve <-  preserve
-      self$signif <-  signif
+      self$round <- round
       self$metamers <- list(data)
       self$set_change(colnames(data))
 
@@ -146,7 +146,7 @@ metamer_list <- R6::R6Class("metamer_list",
       new_history <- rep(NA, length = upper_bound)
 
       data <- self$last_metamer()
-      stats <- signif(self$preserve(data), self$signif)
+      stats <- self$round(self$preserve(data))
       data <- as.data.frame(data)
 
       n_tries <- 0
@@ -205,7 +205,7 @@ metamer_list <- R6::R6Class("metamer_list",
                                           clear = TRUE)
       preserve <- self$preserve
 
-      signif_num <- self$signif
+      round <- self$round
       minimize <- self$minimize
       bar_every <- 500
 
@@ -230,7 +230,7 @@ metamer_list <- R6::R6Class("metamer_list",
 
         data_try <- perturb_data(data)
         new_stats <- preserve(data_try)
-        if (!all((signif(new_stats, signif_num) - stats) == 0)) {
+        if (!all((round(new_stats) - stats) == 0)) {
           next
         }
 

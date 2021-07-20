@@ -2,6 +2,8 @@
 % Please edit documentation in R/functionals.R
 \name{clear_minimize}
 \alias{clear_minimize}
+\alias{clear_minimise}
+\alias{set_minimise}
 \alias{set_minimize}
 \alias{get_last_metamer}
 \alias{set_annealing}
@@ -12,6 +14,10 @@
 \title{Set metamer parameters}
 \usage{
 clear_minimize(metamer_list)
+
+clear_minimise(metamer_list)
+
+set_minimise(metamer_list, minimize)
 
 set_minimize(metamer_list, minimize)
 

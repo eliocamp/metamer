@@ -3,6 +3,7 @@
 \name{metamerise}
 \alias{metamerise}
 \alias{metamerize}
+\alias{new_metamer}
 \title{Create metamers}
 \usage{
 metamerise(
@@ -10,7 +11,7 @@ metamerise(
   preserve,
   minimize = NULL,
   change = colnames(data),
-  signif = 2,
+  round = truncate_to(2),
   stop_if = n_tries(100),
   keep = NULL,
   annealing = TRUE,
@@ -26,7 +27,7 @@ metamerize(
   preserve,
   minimize = NULL,
   change = colnames(data),
-  signif = 2,
+  round = truncate_to(2),
   stop_if = n_tries(100),
   keep = NULL,
   annealing = TRUE,
@@ -36,6 +37,8 @@ metamerize(
   name = "",
   verbose = interactive()
 )
+
+new_metamer(data, preserve, round = truncate_to(2))
 }
 \arguments{
 \item{data}{A \code{data.frame} with the starting data or a \code{metamer_list} object returned
@@ -50,10 +53,10 @@ the data as argument and return a single numeric.}
 \item{change}{A character vector with the names of the columns that need to be
 changed.}
 
-\item{signif}{The number of significant digits of \code{preserve} that need to be
-preserved.}
+\item{round}{A function to apply to the result of \code{preserve} to round
+numbers. See \link{rounding}.}
 
-\item{stop_if}{A stopping criterium.}
+\item{stop_if}{A stopping criterium. See \link{stop-conditions}.}
 
 \item{keep}{Max number of metamers to return.}
 
@@ -104,18 +107,18 @@ means_and_cor <- delayed_with(mean_speed = mean(speed),
 set.seed(42)  # for reproducibility.
 metamers <- metamerize(cars,
                        preserve = means_and_cor,
-                       signif = 3,
+                       round = truncate_to(2),
                        stop_if = n_tries(1000))
 print(metamers)
 
-last <- metamers$last_metamer()
+last <- tail(metamers)
 
 # Confirm that the statistics are the same
 cbind(original = means_and_cor(cars),
       metamer = means_and_cor(last))
 
 # Visualize
-plot(metamers$last_metamer())
+plot(tail(metamers))
 points(cars, col = "red")
 
 }

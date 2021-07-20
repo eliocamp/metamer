@@ -14,7 +14,6 @@ test_that("metamerize runs", {
   expect_s3_class(metamers <- metamerize(data,
                                           preserve = moments_n(1:2),
                                           perturbation = 0.02,
-                                          signif = 2,
                                           stop_if = n_tries(1000)),
                   "metamer_list")
   expect_identical(data, metamers$metamers[[1]])
@@ -24,7 +23,6 @@ test_that("metamerize runs", {
 metamers <- metamerize(data,
                         preserve = moments_n(1:2),
                         perturbation = 0.02,
-                        signif = 2,
                         stop_if = n_tries(1000))
 
 test_that("metamerize can be chained", {
@@ -35,7 +33,7 @@ test_that("metamerize can be chained", {
 
 test_that("metamers are metamers", {
   skip_if_not(exists("metamers"))
-  values <- lapply(metamers$metamers, function(data) signif(moments_n(1:2)(data), 2))
+  values <- lapply(metamers$metamers, function(data) metamers$round(metamers$preserve(data)))
 
   value1 <- values[[1]]
 
@@ -53,7 +51,6 @@ test_that("minimization works", {
                              perturbation = 0.01,
                              minimize = mean_self_proximity,
                              verbose = TRUE,
-                             signif = 2,
                              stop_if = n_tries(1000)),
                   "metamer_list")
 
@@ -62,7 +59,6 @@ test_that("minimization works", {
                              perturbation = 0.01,
                              minimize = c(mean_self_proximity,
                                           mean_dist_to(target)),
-                             signif = 2,
                              stop_if = n_tries(1000)),
                   "metamer_list")
 })
