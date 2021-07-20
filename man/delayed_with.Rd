@@ -18,7 +18,7 @@ Creates a function that evaluates expressions in a future data.frame. Is like
 \code{with()}, but the data argument is passed at a later step.
 }
 \details{
-Each expression in \code{...} must return numeric values. They can be named or
+Each expression in \code{...} must return a single numeric value. They can be named or
 return named vectors.
 }
 \examples{
@@ -31,6 +31,7 @@ some_stats(data)
 Other helper functions: 
 \code{\link{densify}()},
 \code{\link{draw_data}()},
+\code{\link{mean_dist_to_sf}()},
 \code{\link{mean_dist_to}()},
 \code{\link{mean_self_proximity}()},
 \code{\link{moments_n}()}

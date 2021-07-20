@@ -3,6 +3,8 @@
 #' Creates a function to get the mean minimum distance between two sets of points.
 #'
 #' @param target A `data.frame` with all numeric columns.
+#' @param squared Logical indicating whether to compute the mean squared
+#' distance (if `TRUE`) or the mean distance.
 #'
 #' @return
 #' A function that takes a `data.frame` with the same number of columns as
@@ -16,11 +18,50 @@
 #'
 #' @family helper functions
 #' @export
-mean_dist_to <- function(target) {
+mean_dist_to <- function(target, squared = TRUE) {
   force(target)
+  if (squared) {
+    d <- 2
+  } else {
+    d <- 1
+  }
+
   target <- as.matrix(target)
   function(data) {
-    mean(FNN::get.knnx(target, as.matrix(data), k = 1)$nn.dist)
+    mean(FNN::get.knnx(target, as.matrix(data), k = 1)$nn.dist^d)
+  }
+}
+
+#' Mean distance to an sf object
+#'
+#' @param target An sf object.
+#' @param coords Character vector with the columns of the data object
+#' that define de coordinates.
+#' @param buffer Buffer around the sf object. Distances smaller
+#' than `buffer` are replaced with 0.
+#' @param squared Logical indicating whether to compute the mean squared
+#' distance (if `TRUE`) or the mean distance.
+#'
+#'
+#' @family helper functions
+#' @export
+mean_dist_to_sf <- function(target, coords = c("x", "y"), buffer = 0, squared = TRUE) {
+  if (!requireNamespace("sf", quietly = TRUE)) {
+    stop("'mean_dist_to_sf' needs the sf package installed. Install it with 'install.packages(\"sf\").")
+  }
+
+  force(target)
+  force(coords)
+  if (squared) {
+    d <- 2
+  } else {
+    d <- 1
+  }
+  function(data) {
+    data <- sf::st_as_sf(data, coords = coords)
+    ds <- sf::st_distance(data, target)
+    ds[ds < buffer] <- 0
+    mean(ds^d)
   }
 }
 
@@ -51,7 +92,7 @@ mean_self_proximity <- function(data) {
 #' evaluated in an environment constructed from it.
 #'
 #' @details
-#' Each expression in `...` must return numeric values. They can be named or
+#' Each expression in `...` must return a single numeric value. They can be named or
 #' return named vectors.
 #'
 #' @examples
@@ -69,19 +110,6 @@ delayed_with <- function(...) {
 }
 
 
-#' Trim a `metamer_list`
-#'
-#' When creating metamers, [metamerize()] can produce thousands of very similar
-#' metamers. This function is intended to keep only a subset of them for easier
-#' and faster handling and plotting.
-#'
-#' @param object A `metamer_list` object returned by [metamerize()]
-#' @param n The number of metamers to keep.
-#'
-#' @return
-#' A `metamer_list` object with `n` equally spaced metamers.
-#'
-#' @export
 trim <- function(object, n = length(object)) {
   N <- length(object)
   if (n == 2) {
@@ -177,3 +205,5 @@ densify <- function(data, res = 2) {
              })
   do.call(rbind, data)
 }
+
+.datatable.aware <- TRUE

@@ -27,6 +27,7 @@ Suggests:
     miniUI,
     testthat (>= 2.1.0),
     data.table,
-    covr
+    covr,
+    sf
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1

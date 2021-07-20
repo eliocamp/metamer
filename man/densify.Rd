@@ -26,6 +26,7 @@ by double clicking).
 Other helper functions: 
 \code{\link{delayed_with}()},
 \code{\link{draw_data}()},
+\code{\link{mean_dist_to_sf}()},
 \code{\link{mean_dist_to}()},
 \code{\link{mean_self_proximity}()},
 \code{\link{moments_n}()}

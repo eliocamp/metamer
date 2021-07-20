@@ -12,8 +12,8 @@
 #' changed.
 #' @param signif The number of significant digits of `preserve` that need to be
 #' preserved.
-#' @param N Number of iterations.
-#' @param trim Max number of metamers to return.
+#' @param stop_if A stopping criterium.
+#' @param keep Max number of metamers to return.
 #' @param perturbation Numeric with the magnitude of the random perturbations.
 #' Can be of length 1 or `length(change)`.
 #' @param annealing Logical indicating whether to perform annealing.
@@ -64,248 +64,66 @@
 #' metamers <- metamerize(cars,
 #'                        preserve = means_and_cor,
 #'                        signif = 3,
-#'                        N = 1000)
+#'                        stop_if = n_tries(1000))
 #' print(metamers)
 #'
-#' last <- metamers[[length(metamers)]]
+#' last <- metamers$last_metamer()
 #'
 #' # Confirm that the statistics are the same
 #' cbind(original = means_and_cor(cars),
 #'       metamer = means_and_cor(last))
 #'
 #' # Visualize
-#' plot(metamers[[length(metamers)]])
+#' plot(metamers$last_metamer())
 #' points(cars, col = "red")
 #'
 #' @export
 #' @importFrom methods hasArg
 #' @importFrom stats rnorm runif
-metamerize <- function(data,
+metamerise <- function(data,
                        preserve,
                        minimize = NULL,
                        change = colnames(data),
                        signif = 2,
-                       N = 100,
-                       trim = N,
+                       stop_if = n_tries(100),
+                       keep = NULL,
                        annealing = TRUE,
                        K = 0.02,
                        start_probability = 0.5,
                        perturbation = 0.08,
-                       name = NULL,
+                       name = "",
                        verbose = interactive()) {
-  thiscall <- match.call()
-  if (inherits(data, "metamer_list")) {
-    preserve     <- .get_attr(data, "preserve", thiscall)
-    minimize     <- .get_attr(data, "minimize", thiscall)
-    change       <- .get_attr(data, "change", thiscall)
-    signif       <- .get_attr(data, "signif", thiscall)
-    annealing    <- .get_attr(data, "annealing", thiscall)
-    perturbation <- .get_attr(data, "perturbation", thiscall)
-    K            <- .get_attr(data, "K", thiscall)
-    start_probability <- .get_attr(data, "start_probability", thiscall)
-    name         <- .get_attr(data, "name", thiscall)[1]
-    old_metamers <- data
-    data         <- as.data.frame(data[[length(data)]])
-  } else {
-    old_metamers <- list()
+  if (inherits(data, "data.frame")) {
+    data <- metamer_list$new(data, preserve = preserve, signif = signif)
   }
 
-  new_metamers <- metamerize.data.frame(data = data,
-                                        preserve = preserve,
-                                        minimize = minimize,
-                                        change = change,
-                                        signif = signif,
-                                        N = N,
-                                        trim = trim,
-                                        annealing = annealing,
-                                        perturbation = perturbation,
-                                        name = name,
-                                        verbose = verbose,
-                                        K = K,
-                                        start_probability = start_probability)
-  return(append_metamer(old_metamers, new_metamers))
+  data <- data$clone()
+
+  if (hasArg("minimize")) {
+    data$set_minimize(minimize)
+  }
+  if (hasArg("change")) {
+    data$set_change(change)
+  }
+  if (hasArg("K")) {
+    data$set_k(K)
+  }
+  if (hasArg("perturbation")) {
+    data$set_perturbation(perturbation)
+  }
+  if (hasArg("start_probability")) {
+    data$set_start_probability(start_probability)
+  }
+  if (hasArg("annealing")) {
+    data$set_annealing(annealing)
+  }
+
+  data$metamerise(stop_if = stop_if,
+                  name = name,
+                  keep = keep,
+                  verbose = verbose)
+  return(data)
 }
 
 
-metamerize.data.frame <- function(data,
-                                  preserve,
-                                  minimize,
-                                  change = colnames(data),
-                                  signif = 2,
-                                  N = 100,
-                                  trim = trim,
-                                  annealing = TRUE,
-                                  K = 0.002,
-                                  start_probability = 0.4,
-                                  perturbation = 0.08,
-                                  name = NULL,
-                                  verbose = interactive()) {
-  metamers <- vector(mode = "list", length = N)
-  m <- 1
-  data <- as.data.frame(data)
-  metamers[[m]] <- data
-
-  if (!hasArg(minimize)) {
-    minimize <- NULL
-  }
-
-  history <- vector(mode = "numeric", length = N)
-
-  preserve <- match.fun(preserve)
-  org_exact <- preserve(data)
-
-
-  pb_format <- " :m metamers [:bar] ~ eta: :eta"
-  if (!is.null(minimize)) {
-    if (length(minimize) > 1) {
-      min_funs <- minimize
-      minimize <- function(data) {
-        Reduce("*", lapply(seq_along(minimize), function(i) match.fun(min_funs[[i]])(data)))
-      }
-    } else {
-      minimize <- match.fun(minimize)
-    }
-
-    history[m] <- minimize(data)
-    minimize_org <- history[m]
-    pb_format <- ":m metamers [:bar] ratio: :d ~ eta: :eta"
-  }
-
-  call.args <- list(preserve = preserve,
-                    change = change,
-                    signif = 2,
-                    N = N,
-                    minimize = minimize,
-                    annealing = annealing)
-
-
-  new_data <- data
-
-  ncols <- length(change)
-  nrows <- nrow(data)
-  npoints <- ncols*nrows
-
-  perturb_ok <- length(perturbation) == 1 || length(perturbation) == ncols
-  if (!perturb_ok) {
-    stop("perturbation must be of length 1 or length(change)")
-  }
-  M_temp <- 0
-  if (annealing & !is.null(minimize)) {
-    # To estimate initial temperature, create random samples, compute
-    # minimize and take the average absolute change. Initial
-    # temperature then is that value /log(0.4) so that on average
-    # the algo initially accepts bad solutiosn with 40% probability.
-    warmup <- 50
-    tries <- replicate(warmup, {
-      new_change <- matrix(rnorm(npoints, 0, perturbation),
-                           nrow = nrows, ncol = ncols, byrow = TRUE)
-
-      old <- as.matrix(metamers[[m]][change])
-      new <- old + new_change
-
-      new_data[change] <- new
-      minimize(new_data)
-    })
-
-    M_temp <- -mean(abs(tries - history[m]))/log(start_probability)
-    temp <- M_temp
-    m_temp <- 0
-
-  }
-
-  random_pass <- FALSE
-
-  p_bar <- progress::progress_bar$new(total = N, format = pb_format,
-                                      clear = FALSE)
-  bar_every <- 500
-
-  worse <- 0
-  delta_cost <- 0
-  cost_change <- 0
-  for (i in seq_len(N)) {
-    if (verbose & (i %% bar_every == 0)) {
-      if (!is.null(minimize)) {
-        bar_list <- list(m = m, d = signif(history[m]/minimize_org, 2))
-      } else {
-        bar_list <- list(m = m)
-      }
-      p_bar$update(i/N, tokens = bar_list)
-    }
-
-
-    new_change <- matrix(rnorm(npoints, 0, perturbation),
-                         nrow = nrows, ncol = ncols, byrow = TRUE)
-
-    old <- as.matrix(metamers[[m]][change])
-    new <- old + new_change
-
-    new_data[change] <- new
-
-    new_exact <- preserve(new_data)
-
-    if (!all((signif(new_exact, signif) - signif(org_exact, signif)) == 0)) {
-      next
-    }
-    keep <- TRUE
-    if (!is.null(minimize)) {
-      new_minimize <- minimize(new_data)
-      random_pass <- FALSE
-
-      if (annealing) {
-        # browser()
-        # temp <- M_temp + ((i-1)/(N-1))^2*(m_temp - M_temp)
-        # temp <- max(temp*.8, m_temp)
-        # temp <- M_temp - (i - 1) * (M_temp - m_temp)/(N - 1)
-
-        cost_change <- (new_minimize - history[m])
-        if (cost_change > 0) {
-          worse <- worse + cost_change/temp
-        }
-
-        prob <- ifelse(cost_change > 0, exp(-(cost_change/temp)), 1)
-
-        random_pass <- runif(1) <= prob
-      }
-
-      keep <- (new_minimize <= history[m] || random_pass)
-    }
-
-    if (keep) {
-      delta_cost <- delta_cost + cost_change
-      m <- m + 1
-      metamers[[m]] <- new_data
-      if (!is.null(minimize)) {
-        history[m] <- new_minimize
-      }
-      data <- new_data
-    }
-
-    if (annealing) {
-      if (worse == 0 || delta_cost >= 0) {
-        temp <- M_temp
-      } else {
-        temp <- -K*delta_cost/worse
-      }
-
-    }
-
-
-  }
-  p_bar$terminate()
-
-  metamers <- new_metamer_list(metamers[seq_len(m)],
-                               history[seq_len(m)],
-                               preserve,
-                               minimize,
-                               change,
-                               signif,
-                               org_exact,
-                               annealing,
-                               perturbation,
-                               name = rep(name, length(m)),
-                               K= K,
-                               start_probability = start_probability)
-  return(trim(metamers, trim))
-}
-
-
+metamerize <- metamerise

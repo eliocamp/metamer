@@ -35,7 +35,7 @@ Matejka, J., & Fitzmaurice, G. (2017). Same Stats, Different Graphs. Proceedings
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/eliocamp/metamer}
+  \item \url{https://eliocamp.github.io/metamer}
   \item Report bugs at \url{https://github.com/eliocamp/metamer/issues}
 }
 

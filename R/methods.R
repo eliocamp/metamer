@@ -1,22 +1,8 @@
 #' @export
 as.data.frame.metamer_list <- function(x, ..., n = length(x)) {
-  x <- trim(x, n = n)
-  n <- nrow(x[[1]])
-  df <- do.call(rbind, x)
-  df$.metamer <- rep(1:length(x), each = n)
-  df$.name <- rep(attr(x, "name"), each = n)
-  lc <- length(colnames(df))
-  df <- df[, c(lc, 1:(lc-1))]
-  return(df)
+  return(x$as.data.frame())
 }
 
-
-
-
-#' @export
-print.metamer_list <- function(x, ...) {
-  cat("List of ", length(x), " metamers", sep = "")
-}
 
 
 # Dynamically exported. From:
@@ -29,8 +15,7 @@ as.data.table.metamer_list <- function(x, ..., n = length(x)) {
   if (!requireNamespace("data.table", quietly = TRUE)) {
     stop("data.table is not installed. Install it with `install.packages(\"data.table\")`.")
   }
-  x <- trim(x, n = n)
-  data.table::rbindlist(x, idcol = ".metamer")
+  return(x$as.data.table())
 }
 
 
