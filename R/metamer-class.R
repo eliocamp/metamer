@@ -1,6 +1,3 @@
-#' Metamer list object
-#'
-#' @export
 metamer_list <- R6::R6Class("metamer_list",
   public = list(
     preserve = NULL,
@@ -17,12 +14,6 @@ metamer_list <- R6::R6Class("metamer_list",
     change = NULL,
     names = "",
 
-    #' @description
-    #' Creates a new metamer
-    #'
-    #' @inheritParams metamerize
-    #'
-    #' @return A `metamer_list` object
     initialize = function(data,
                           preserve = NULL,
                           signif   = 2) {
@@ -47,16 +38,11 @@ metamer_list <- R6::R6Class("metamer_list",
       self$minimize_fun(data)
     },
 
-    #' @description
-    #' Removes minimize function.
     clear_minimize = function() {
       self$set_minimize(minimize = NULL)
       return(invisible(self))
     },
 
-    #' @description
-    #' Sets the minimize function.
-    #' @inheritParams metamerize
     set_minimize = function(minimize) {
       pb_format <- ":name -> :spin :n_metamers n_metamers"
 
@@ -86,25 +72,15 @@ metamer_list <- R6::R6Class("metamer_list",
       return(invisible(self))
     },
 
-    #' @description
-    #' Gets the last metamer.
-    #'
-    #' @return A `data.frame`.
     last_metamer = function() {
       return(tail(self$metamers, 1)[[1]])
     },
 
-    #' @description
-    #' Sets `annealing`
-    #' @inheritParams metamerize
     set_annealing = function(annealing) {
       self$annealing <- annealing
       return(invisible(self))
     },
 
-    #' @description
-    #' Sets `perturbation`
-    #' @inheritParams metamerize
     set_perturbation = function(perturbation) {
       perturbation_ok <- length(perturbation) == 1 || length(perturbation) == ncol(self$last_metamer())
 
@@ -116,25 +92,16 @@ metamer_list <- R6::R6Class("metamer_list",
       return(invisible(self))
     },
 
-    #' @description
-    #' Sets `start_probability`
-    #' @inheritParams metamerize
     set_start_probability = function(start_probability) {
       self$start_probability <- start_probability
       return(invisible(self))
     },
 
-    #' @description
-    #' Sets `K`
-    #' @inheritParams metamerize
     set_K = function(K) {
       self$K <- K
       return(invisible(self))
     },
 
-    #' @description
-    #' Sets `change`
-    #' @inheritParams metamerize
     set_change = function(change) {
       if (is.null(change)) {
         change <- colnames(self$last_metamer())
@@ -144,9 +111,6 @@ metamer_list <- R6::R6Class("metamer_list",
       return(invisible(self))
     },
 
-    #' @description
-    #' Gets all metamers as a tidy data.table.
-    #' @return A `data.table`
     as.data.table = function() {
       if (!requireNamespace("data.table", quietly = TRUE)) {
         stop("'as.data.table' needs the data.table package installed. Install it with 'install.packages(\"data.table\").")
@@ -158,9 +122,6 @@ metamer_list <- R6::R6Class("metamer_list",
       return(metamers)
     },
 
-    #' @description
-    #' Gets all metamers as a tidy data.frame
-    #' @return A `data.table`
     as.data.frame = function() {
       id_metamers <- data.frame(.name = self$names,
                                 .metamer = seq_along(self$metamers))
@@ -176,10 +137,6 @@ metamer_list <- R6::R6Class("metamer_list",
       return(df)
     },
 
-    #' @description
-    #' Creates new metamers
-    #' @inheritParams metamerize
-    #' @return A `metamer_list` object with more metamers.
     metamerise = function(stop_if = n_tries(10),
                           name = "",
                           keep = NULL,

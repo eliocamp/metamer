@@ -70,12 +70,12 @@ metamers <- metamerise(dino, preserve = mean_cor,
 print(metamers)
 ```
 
-We found `r length(metamers)` metamers. Let's see the final one, with the starting dataset as background. 
+We found `r length(metamers$metamers)` metamers. Let's see the final one, with the starting dataset as background. 
 
 ```{r}
 library(ggplot2)
 
-ggplot(metamers$last_metamer(), aes(x, y)) +
+ggplot(tail(metamers), aes(x, y)) +
   geom_point(data = dino, color = "red", alpha = 0.5, size = 0.4) +
   geom_point()
 ```
@@ -84,7 +84,7 @@ We can check that the statistical properties have been preserved up to 2 signifi
 
 ```{r}
 cbind(dino = signif(mean_cor(dino), 2),
-      last = signif(mean_cor(metamers$last_metamer()), 2))
+      last = signif(mean_cor(tail(metamers)), 2))
 ```
 
 However, a semi random cloud of points is not that interesting, so we can specify a minimizing function so that the result is similar to another dataset. `metamerise` will start from the last metamer of the previous run if the `data` argument is a list of metamers and append the result. 
@@ -105,7 +105,7 @@ metamers <- metamerise(dino,
 Now the result is a bit more impressive. 
 
 ```{r}
-ggplot(metamers$last_metamer(), aes(x, y)) +
+ggplot(tail(metamers), aes(x, y)) +
   geom_point(data = dino, color = "red", alpha = 0.5, size = 0.4) +
   geom_point()
 ```
@@ -133,11 +133,11 @@ metamers <- metamerise(dino,
                        preserve = mean_cor, 
                        minimize = mean_dist_to(x_shape),
                        stop_if = minimize_ratio(0.05),
-                       keep = 29)$
-  set_minimize(mean_dist_to(star))$
+                       keep = 29) |> 
+  set_minimize(mean_dist_to(star)) |> 
   metamerise(stop_if =  minimize_ratio(0.05),
-             keep = 30)$
-  set_minimize(mean_dist_to(dino))$
+             keep = 30) |> 
+  set_minimize(mean_dist_to(dino)) |> 
   metamerise(stop_if =  minimize_ratio(0.05), 
              keep = 30) 
 ```
@@ -145,8 +145,7 @@ metamers <- metamerise(dino,
 And the full sequence 
 
 ```{r, gganimate = list(nframes = 30*3, fps = 30)}
-metamers %>%
-  ggplot(aes(x, y), n = 30*3) +
+ggplot(metamers, aes(x, y)) +
   geom_point() +
   transition_manual(.metamer)
 ```

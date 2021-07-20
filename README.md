@@ -83,13 +83,13 @@ print(metamers)
 #> List of 20 metamers
 ```
 
-We found 29 metamers. Let’s see the final one, with the starting dataset
+We found 20 metamers. Let’s see the final one, with the starting dataset
 as background.
 
 ``` r
 library(ggplot2)
 
-ggplot(metamers$last_metamer(), aes(x, y)) +
+ggplot(tail(metamers), aes(x, y)) +
   geom_point(data = dino, color = "red", alpha = 0.5, size = 0.4) +
   geom_point()
 ```
@@ -101,7 +101,7 @@ significant figures:
 
 ``` r
 cbind(dino = signif(mean_cor(dino), 2),
-      last = signif(mean_cor(metamers$last_metamer()), 2))
+      last = signif(mean_cor(tail(metamers)), 2))
 #>        dino   last
 #> [1,] 54.000 54.000
 #> [2,] 48.000 48.000
@@ -130,7 +130,7 @@ metamers <- metamerise(dino,
 Now the result is a bit more impressive.
 
 ``` r
-ggplot(metamers$last_metamer(), aes(x, y)) +
+ggplot(tail(metamers), aes(x, y)) +
   geom_point(data = dino, color = "red", alpha = 0.5, size = 0.4) +
   geom_point()
 ```
@@ -164,11 +164,11 @@ metamers <- metamerise(dino,
                        preserve = mean_cor, 
                        minimize = mean_dist_to(x_shape),
                        stop_if = minimize_ratio(0.05),
-                       keep = 29)$
-  set_minimize(mean_dist_to(star))$
+                       keep = 29) |> 
+  set_minimize(mean_dist_to(star)) |> 
   metamerise(stop_if =  minimize_ratio(0.05),
-             keep = 30)$
-  set_minimize(mean_dist_to(dino))$
+             keep = 30) |> 
+  set_minimize(mean_dist_to(dino)) |> 
   metamerise(stop_if =  minimize_ratio(0.05), 
              keep = 30) 
 ```
@@ -176,8 +176,7 @@ metamers <- metamerise(dino,
 And the full sequence
 
 ``` r
-metamers %>%
-  ggplot(aes(x, y), n = 30*3) +
+ggplot(metamers, aes(x, y)) +
   geom_point() +
   transition_manual(.metamer)
 ```

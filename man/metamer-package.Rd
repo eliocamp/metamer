@@ -20,10 +20,9 @@ the point density of those drawings.
 \item \code{\link[=delayed_with]{delayed_with()}} for defining statistics to preserve.
 \item \code{\link[=moments_n]{moments_n()}} for preserving moments of order n.
 \item \code{\link[=mean_dist_to]{mean_dist_to()}} for minimizing the mean distance to a known target dataset.
-\item \code{\link[=trim]{trim()}} for keeping only some metamers.
 }
 
-The \code{\link[=as.data.frame]{as.data.frame()}} method included will turn a \code{metamer_list} into a tidy
+The \code{\link[=as.data.frame]{as.data.frame()}}/\verb{[data.table::as.data.table()] methods included will turn a }metamer_list` into a tidy
 data.frame.
 
 Inspired by Matejka & Fitzmaurice (2017) awesome paper.

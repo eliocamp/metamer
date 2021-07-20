@@ -11,9 +11,7 @@
 #'
 #' * [mean_dist_to()] for minimizing the mean distance to a known target dataset.
 #'
-#' * [trim()] for keeping only some metamers.
-#'
-#' The [as.data.frame()] method included will turn a `metamer_list` into a tidy
+#' The [as.data.frame()]/`[data.table::as.data.table()] methods included will turn a `metamer_list` into a tidy
 #' data.frame.
 #'
 #' Inspired by Matejka & Fitzmaurice (2017) awesome paper.
