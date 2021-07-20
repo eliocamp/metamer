@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Freehand drawing — draw_data • metamer</title>
+<title>Rounding functions — truncate_to • metamer</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Freehand drawing — draw_data" />
-<meta property="og:description" content="Opens up a dialogue that lets you draw your data." />
+<meta property="og:title" content="Rounding functions — truncate_to" />
+<meta property="og:description" content="Rounding functions" />
 
 
 
@@ -111,41 +111,46 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Freehand drawing</h1>
-    <small class="dont-index">Source: <a href='https://github.com/eliocamp/metamer/blob/master/R/draw-data.R'><code>R/draw-data.R</code></a></small>
-    <div class="hidden name"><code>draw_data.Rd</code></div>
+    <h1>Rounding functions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/eliocamp/metamer/blob/master/R/utilities.R'><code>R/utilities.R</code></a></small>
+    <div class="hidden name"><code>rounding.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Opens up a dialogue that lets you draw your data.</p>
+    <p>Rounding functions</p>
     </div>
 
-    <pre class="usage"><span class='fu'>draw_data</span><span class='op'>(</span>data <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>truncate_to</span><span class='op'>(</span><span class='va'>digits</span><span class='op'>)</span>
+
+<span class='fu'>round_to</span><span class='op'>(</span><span class='va'>digits</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>data</th>
-      <td><p>Optional <code>data.frame</code> with x and y values that can used as
-background to guide your drawing.</p></td>
+      <th>digits</th>
+      <td><p>Number of significant digits.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A <code>data.frame</code> with the <code>x</code> and <code>y</code> values of your data and a <code>.group</code> column
-that identifies each stroke.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other helper functions: 
 <code><a href='delayed_with.html'>delayed_with</a>()</code>,
 <code><a href='densify.html'>densify</a>()</code>,
+<code><a href='draw_data.html'>draw_data</a>()</code>,
 <code><a href='mean_dist_to_sf.html'>mean_dist_to_sf</a>()</code>,
 <code><a href='mean_dist_to.html'>mean_dist_to</a>()</code>,
 <code><a href='mean_self_proximity.html'>mean_self_proximity</a>()</code>,
-<code><a href='moments_n.html'>moments_n</a>()</code>,
-<code><a href='truncate_to.html'>truncate_to</a>()</code></p></div>
+<code><a href='moments_n.html'>moments_n</a>()</code></p>
+<p>Other helper functions: 
+<code><a href='delayed_with.html'>delayed_with</a>()</code>,
+<code><a href='densify.html'>densify</a>()</code>,
+<code><a href='draw_data.html'>draw_data</a>()</code>,
+<code><a href='mean_dist_to_sf.html'>mean_dist_to_sf</a>()</code>,
+<code><a href='mean_dist_to.html'>mean_dist_to</a>()</code>,
+<code><a href='mean_self_proximity.html'>mean_self_proximity</a>()</code>,
+<code><a href='moments_n.html'>moments_n</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

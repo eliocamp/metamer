@@ -125,7 +125,7 @@
   <span class='va'>preserve</span>,
   minimize <span class='op'>=</span> <span class='cn'>NULL</span>,
   change <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>,
-  signif <span class='op'>=</span> <span class='fl'>2</span>,
+  round <span class='op'>=</span> <span class='fu'><a href='truncate_to.html'>truncate_to</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span>,
   stop_if <span class='op'>=</span> <span class='fu'><a href='n_tries.html'>n_tries</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>,
   keep <span class='op'>=</span> <span class='cn'>NULL</span>,
   annealing <span class='op'>=</span> <span class='cn'>TRUE</span>,
@@ -141,7 +141,7 @@
   <span class='va'>preserve</span>,
   minimize <span class='op'>=</span> <span class='cn'>NULL</span>,
   change <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>,
-  signif <span class='op'>=</span> <span class='fl'>2</span>,
+  round <span class='op'>=</span> <span class='fu'><a href='truncate_to.html'>truncate_to</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span>,
   stop_if <span class='op'>=</span> <span class='fu'><a href='n_tries.html'>n_tries</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>,
   keep <span class='op'>=</span> <span class='cn'>NULL</span>,
   annealing <span class='op'>=</span> <span class='cn'>TRUE</span>,
@@ -150,7 +150,9 @@
   perturbation <span class='op'>=</span> <span class='fl'>0.08</span>,
   name <span class='op'>=</span> <span class='st'>""</span>,
   verbose <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>)</span></pre>
+<span class='op'>)</span>
+
+<span class='fu'>new_metamer</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>preserve</span>, round <span class='op'>=</span> <span class='fu'><a href='truncate_to.html'>truncate_to</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -176,13 +178,13 @@ the data as argument and return a single numeric.</p></td>
 changed.</p></td>
     </tr>
     <tr>
-      <th>signif</th>
-      <td><p>The number of significant digits of <code>preserve</code> that need to be
-preserved.</p></td>
+      <th>round</th>
+      <td><p>A function to apply to the result of <code>preserve</code> to round
+numbers. See rounding.</p></td>
     </tr>
     <tr>
       <th>stop_if</th>
-      <td><p>A stopping criterium.</p></td>
+      <td><p>A stopping criterium. See stop-conditions.</p></td>
     </tr>
     <tr>
       <th>keep</th>
@@ -254,21 +256,21 @@ to a known target in <code>minimize</code>, <code><a href='mean_self_proximity.h
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>42</span><span class='op'>)</span>  <span class='co'># for reproducibility.</span>
 <span class='va'>metamers</span> <span class='op'>&lt;-</span> <span class='fu'>metamerize</span><span class='op'>(</span><span class='va'>cars</span>,
                        preserve <span class='op'>=</span> <span class='va'>means_and_cor</span>,
-                       signif <span class='op'>=</span> <span class='fl'>3</span>,
+                       round <span class='op'>=</span> <span class='fu'><a href='truncate_to.html'>truncate_to</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span>,
                        stop_if <span class='op'>=</span> <span class='fu'><a href='n_tries.html'>n_tries</a></span><span class='op'>(</span><span class='fl'>1000</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>metamers</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; List of 257 metamers</div><div class='input'>
-<span class='va'>last</span> <span class='op'>&lt;-</span> <span class='va'>metamers</span><span class='op'>$</span><span class='fu'>last_metamer</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; List of 92 metamers</div><div class='input'>
+<span class='va'>last</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>tail</a></span><span class='op'>(</span><span class='va'>metamers</span><span class='op'>)</span>
 
 <span class='co'># Confirm that the statistics are the same</span>
 <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span>original <span class='op'>=</span> <span class='fu'>means_and_cor</span><span class='op'>(</span><span class='va'>cars</span><span class='op'>)</span>,
       metamer <span class='op'>=</span> <span class='fu'>means_and_cor</span><span class='op'>(</span><span class='va'>last</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;              original    metamer
-#&gt; mean_speed 15.4000000 15.4083841
-#&gt; mean_dist  42.9800000 42.9869770
-#&gt; cor         0.8068949  0.8074312</div><div class='input'>
+#&gt; mean_speed 15.4000000 15.4024926
+#&gt; mean_dist  42.9800000 42.9862221
+#&gt; cor         0.8068949  0.8011081</div><div class='input'>
 <span class='co'># Visualize</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>metamers</span><span class='op'>$</span><span class='fu'>last_metamer</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>tail</a></span><span class='op'>(</span><span class='va'>metamers</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/points.html'>points</a></span><span class='op'>(</span><span class='va'>cars</span>, col <span class='op'>=</span> <span class='st'>"red"</span><span class='op'>)</span>
 </div><div class='img'><img src='metamerise-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
