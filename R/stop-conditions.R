@@ -1,3 +1,4 @@
+#' @export
 n_tries <- function(n) {
   force(n)
   function() {
@@ -6,7 +7,7 @@ n_tries <- function(n) {
   }
 }
 
-
+#' @export
 n_metamers <- function(n) {
   force(n)
   function() {
@@ -14,7 +15,7 @@ n_metamers <- function(n) {
   }
 }
 
-
+#' @export
 minimize_ratio <- function(x) {
   force(x)
   function() {

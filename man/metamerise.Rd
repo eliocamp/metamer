@@ -2,9 +2,26 @@
 % Please edit documentation in R/metamerize.R
 \name{metamerise}
 \alias{metamerise}
+\alias{metamerize}
 \title{Create metamers}
 \usage{
 metamerise(
+  data,
+  preserve,
+  minimize = NULL,
+  change = colnames(data),
+  signif = 2,
+  stop_if = n_tries(100),
+  keep = NULL,
+  annealing = TRUE,
+  K = 0.02,
+  start_probability = 0.5,
+  perturbation = 0.08,
+  name = "",
+  verbose = interactive()
+)
+
+metamerize(
   data,
   preserve,
   minimize = NULL,

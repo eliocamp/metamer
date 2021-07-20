@@ -5,7 +5,7 @@ metamer_list <- R6::R6Class("metamer_list",
   public = list(
     preserve = NULL,
     signif = NULL,
-    pb_format = ":name\n:spin :n_metamers n_metamers",
+    pb_format = ":name -> :spin :n_metamers n_metamers",
     minimize_fun = NULL,
     metamers = NULL,
     history = NA,
@@ -35,7 +35,6 @@ metamer_list <- R6::R6Class("metamer_list",
     },
 
     print = function(...) {
-      browser()
       cat("List of ", length(self$metamers), " metamers", sep = "")
       return(invisible(self))
     },
@@ -59,11 +58,11 @@ metamer_list <- R6::R6Class("metamer_list",
     #' Sets the minimize function.
     #' @inheritParams metamerize
     set_minimize = function(minimize) {
-      pb_format <- ":name\n:spin :n_metamers n_metamers"
+      pb_format <- ":name -> :spin :n_metamers n_metamers"
 
       if (is.null(minimize)) {
         self$minimize_fun <- NULL
-        self$pb_format <- ":name\n:spin :n_metamers n_metamers"
+        self$pb_format <- ":name -> :spin :n_metamers n_metamers"
         return(invisible(self))
       }
 
@@ -82,7 +81,7 @@ metamer_list <- R6::R6Class("metamer_list",
         self$history <- self$minimize(self$last_metamer())
       }
 
-      self$pb_format <- ":name\n:spin :n_metamers metamers ratio: :minimize_ratio"
+      self$pb_format <- ":name -> :spin :n_metamers metamers ratio: :minimize_ratio"
 
       return(invisible(self))
     },
@@ -246,7 +245,7 @@ metamer_list <- R6::R6Class("metamer_list",
 
       p_bar <- progress::progress_bar$new(total = NA,
                                           format = self$pb_format,
-                                          clear = FALSE)
+                                          clear = TRUE)
       preserve <- self$preserve
 
       signif_num <- self$signif
@@ -326,6 +325,9 @@ metamer_list <- R6::R6Class("metamer_list",
 
 
       return(invisible(self))
+    },
+    metamerize = function(...) {
+      self$metamerise(...)
     }
   )
 

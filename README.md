@@ -73,20 +73,23 @@ dino$dataset <- NULL
 
 # And we want to preserve means and correlation
 mean_cor <- delayed_with(mean(x), mean(y), cor(x, y)) 
-N <- 20000
+
 set.seed(42) # To make results reproducible
-metamers <- metamerize(dino, preserve = mean_cor, N = N)
+metamers <- metamerise(dino, preserve = mean_cor, 
+                       stop_if = n_metamers(300), 
+                       perturbation = 1,
+                       keep = 19)
 print(metamers)
-#> List of 12791 metamers
+#> List of 20 metamers
 ```
 
-We found 12791 metamers. Let’s see the final one, with the starting
-dataset as background.
+We found 29 metamers. Let’s see the final one, with the starting dataset
+as background.
 
 ``` r
 library(ggplot2)
 
-ggplot(metamers[[length(metamers)]], aes(x, y)) +
+ggplot(metamers$last_metamer(), aes(x, y)) +
   geom_point(data = dino, color = "red", alpha = 0.5, size = 0.4) +
   geom_point()
 ```
@@ -98,7 +101,7 @@ significant figures:
 
 ``` r
 cbind(dino = signif(mean_cor(dino), 2),
-      last = signif(mean_cor(metamers[[length(metamers)]]), 2))
+      last = signif(mean_cor(metamers$last_metamer()), 2))
 #>        dino   last
 #> [1,] 54.000 54.000
 #> [2,] 48.000 48.000
@@ -107,7 +110,7 @@ cbind(dino = signif(mean_cor(dino), 2),
 
 However, a semi random cloud of points is not that interesting, so we
 can specify a minimizing function so that the result is similar to
-another dataset. `metamerize` will start from the last metamer of the
+another dataset. `metamerise` will start from the last metamer of the
 previous run if the `data` argument is a list of metamers and append the
 result.
 
@@ -117,29 +120,29 @@ x_shape$dataset <- NULL
 ```
 
 ``` r
-metamers <- metamerize(dino, 
+metamers <- metamerise(dino, 
                        preserve = mean_cor,
                        minimize = mean_dist_to(x_shape),
-                       N = N)
+                       stop_if = minimize_ratio(0.02),
+                       keep = 99)
 ```
 
 Now the result is a bit more impressive.
 
 ``` r
-ggplot(metamers[[length(metamers)]], aes(x, y)) +
+ggplot(metamers$last_metamer(), aes(x, y)) +
   geom_point(data = dino, color = "red", alpha = 0.5, size = 0.4) +
   geom_point()
 ```
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
 
-We can animate the whole thing. Since 2107 metamers is overkill, first
-we keep only 200 of them.
+We can animate the whole thing.
 
 ``` r
 library(gganimate)
 
-ggplot(metamers, aes(x, y), n = 200) +
+ggplot(metamers, aes(x, y)) +
   geom_point() +
   transition_manual(.metamer)
 ```
@@ -154,18 +157,20 @@ Metamerizing operations can be chained while changing the minimizing
 function.
 
 ``` r
-library(magrittr)
 star <- subset(datasauRus::datasaurus_dozen, dataset == "star")
 star$dataset <- NULL
 set.seed(42)
-metamers <- metamerize(dino,
+metamers <- metamerise(dino,
                        preserve = mean_cor, 
                        minimize = mean_dist_to(x_shape),
-                       N = N) %>% 
-  set_minimize(mean_dist_to(star)) %>% 
-  metamerize(N = N) %>% 
-  set_minimize(mean_dist_to(dino)) %>% 
-  metamerize(N = N) 
+                       stop_if = minimize_ratio(0.05),
+                       keep = 29)$
+  set_minimize(mean_dist_to(star))$
+  metamerise(stop_if =  minimize_ratio(0.05),
+             keep = 30)$
+  set_minimize(mean_dist_to(dino))$
+  metamerise(stop_if =  minimize_ratio(0.05), 
+             keep = 30) 
 ```
 
 And the full sequence

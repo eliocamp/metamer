@@ -25,6 +25,7 @@ Metamer list object
 \item \href{#method-as.data.table}{\code{metamer_list$as.data.table()}}
 \item \href{#method-as.data.frame}{\code{metamer_list$as.data.frame()}}
 \item \href{#method-metamerise}{\code{metamer_list$metamerise()}}
+\item \href{#method-metamerize}{\code{metamer_list$metamerize()}}
 \item \href{#method-clone}{\code{metamer_list$clone()}}
 }
 }
@@ -185,6 +186,15 @@ Creates new metamers
 \subsection{Returns}{
 A \code{metamer_list} object with more metamers.
 }
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-metamerize"></a>}}
+\if{latex}{\out{\hypertarget{method-metamerize}{}}}
+\subsection{Method \code{metamerize()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{metamer_list$metamerize(...)}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

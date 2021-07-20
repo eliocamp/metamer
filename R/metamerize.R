@@ -125,5 +125,6 @@ metamerise <- function(data,
   return(data)
 }
 
-
+#' @export
+#' @rdname metamerise
 metamerize <- metamerise
