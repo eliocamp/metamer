@@ -11,8 +11,8 @@
 #' @param change A character vector with the names of the columns that need to be
 #' changed.
 #' @param round A function to apply to the result of `preserve` to round
-#' numbers. See [rounding].
-#' @param stop_if A stopping criterium. See [stop-conditions].
+#' numbers. See [truncate_to].
+#' @param stop_if A stopping criterium. See [n_tries].
 #' @param keep Max number of metamers to return.
 #' @param perturbation Numeric with the magnitude of the random perturbations.
 #' Can be of length 1 or `length(change)`.

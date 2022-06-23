@@ -6,7 +6,7 @@
 #' to minimize gets to one-half of the starting value.
 #'
 #' @export
-#' @rdname stop-conditions
+#' @rdname stop_conditions
 n_tries <- function(n) {
   force(n)
   function() {
@@ -16,7 +16,7 @@ n_tries <- function(n) {
 }
 
 #' @export
-#' @rdname stop-conditions
+#' @rdname stop_conditions
 n_metamers <- function(n) {
   force(n)
   function() {
@@ -25,7 +25,7 @@ n_metamers <- function(n) {
 }
 
 #' @export
-#' @rdname stop-conditions
+#' @rdname stop_conditions
 minimize_ratio <- function(r) {
   force(r)
   function() {
