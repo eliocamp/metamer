@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://eliocamp.github.io/metamer/404.html</loc>
+  </url>
+  <url>
+    <loc>https://eliocamp.github.io/metamer/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://eliocamp.github.io/metamer/authors.html</loc>
+  </url>
+  <url>
     <loc>https://eliocamp.github.io/metamer/index.html</loc>
+  </url>
+  <url>
+    <loc>https://eliocamp.github.io/metamer/news/index.html</loc>
   </url>
   <url>
     <loc>https://eliocamp.github.io/metamer/reference/delayed_with.html</loc>
@@ -11,6 +23,9 @@
   </url>
   <url>
     <loc>https://eliocamp.github.io/metamer/reference/draw_data.html</loc>
+  </url>
+  <url>
+    <loc>https://eliocamp.github.io/metamer/reference/index.html</loc>
   </url>
   <url>
     <loc>https://eliocamp.github.io/metamer/reference/mean_dist_to.html</loc>
@@ -37,6 +52,6 @@
     <loc>https://eliocamp.github.io/metamer/reference/set_params.html</loc>
   </url>
   <url>
-    <loc>https://eliocamp.github.io/metamer/reference/stop-conditions.html</loc>
+    <loc>https://eliocamp.github.io/metamer/reference/stop_conditions.html</loc>
   </url>
 </urlset>

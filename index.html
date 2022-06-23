@@ -20,6 +20,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -32,18 +34,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">metamer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -53,7 +49,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/eliocamp/metamer/">
+  <a href="https://github.com/eliocamp/metamer/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -70,105 +66,104 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="metamer" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#metamer" class="anchor"></a>metamer</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="metamer">metamer<a class="anchor" aria-label="anchor" href="#metamer"></a>
+</h1></div>
 <!-- badges: start -->
-
-<p>Implements the algorithm proposed by <a href="https://www.autodeskresearch.com/publications/samestats">Matejka &amp; Fitzmaurice (2017)</a> to create metamers (datasets with identical statistical properties but very different graphs) with an annealing scheme derived from <a href="https://www.sciencedirect.com/science/article/abs/pii/S0375960103013653?via%3Dihub">de Vicente et al. (2003)</a>.</p>
-<p>In colour theory, <a href="https://en.wikipedia.org/wiki/Metamerism_(color)">metamers</a> are colours that have very different wavelength distribution but are perceived as equal by out visual system. This happens because out eyes essentially summarise a continuous distribution of wavelength by just 3 numbers: the amount that each type of cone cell is exited. Colour metamerism is how artists can reproduce so many colours with a few pigments, or how PC monitors use only 3 lights to show colourful pictures.</p>
+<p>Implements the algorithm proposed by <a href="https://www.autodeskresearch.com/publications/samestats" class="external-link">Matejka &amp; Fitzmaurice (2017)</a> to create metamers (datasets with identical statistical properties but very different graphs) with an annealing scheme derived from <a href="https://www.sciencedirect.com/science/article/abs/pii/S0375960103013653?via%3Dihub" class="external-link">de Vicente et al. (2003)</a>.</p>
+<p>In colour theory, <a href="https://en.wikipedia.org/wiki/Metamerism_(color)" class="external-link">metamers</a> are colours that have very different wavelength distribution but are perceived as equal by out visual system. This happens because out eyes essentially summarise a continuous distribution of wavelength by just 3 numbers: the amount that each type of cone cell is exited. Colour metamerism is how artists can reproduce so many colours with a few pigments, or how PC monitors use only 3 lights to show colourful pictures.</p>
 <p><img src="reference/figures/lemon.jpg"></p>
-<p>(from the excellent <a href="http://jamie-wong.com/post/color/">Color: From Hexcodes to Eyeballs</a> by <a href="https://github.com/jlfwong">Jamie Wong</a>)</p>
+<p>(from the excellent <a href="http://jamie-wong.com/post/color/" class="external-link">Color: From Hexcodes to Eyeballs</a> by <a href="https://github.com/jlfwong" class="external-link">Jamie Wong</a>)</p>
 <p>Statistical transformations such as mean, standard deviation and correlation behave very similarly in that they summarise data with just a few numbers for the benefit of our limited cognitive capacity. Thus, statistical metamers are sets of data that share some statistical properties.</p>
-<p><a href="https://eliocamp.github.io/codigo-r/en/2019/01/statistical-metamerism/">This article</a> explores statistical metamerism in more detail.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<p><a href="https://eliocamp.github.io/codigo-r/en/2019/01/statistical-metamerism/" class="external-link">This article</a> explores statistical metamerism in more detail.</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>You can install metamer with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"metamer"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"metamer"</span><span class="op">)</span></code></pre></div>
 <p>or install the development version with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"eliocamp/metamer"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
 <p>You can construct metamers from a starting dataset and a vector of statistical properties to remain constant (by default, up to 2 significant figures).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://eliocamp.github.io/metamer">metamer</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://eliocamp.github.io/metamer">metamer</a></span><span class="op">)</span>
 <span class="co"># Start with the datasaurus</span>
 <span class="co"># install.packages("datasauRus")</span>
-<span class="va">dino</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="fu">datasauRus</span><span class="fu">::</span><span class="va">datasaurus_dozen</span>, <span class="va">dataset</span> <span class="op">==</span> <span class="st">"dino"</span><span class="op">)</span>
+<span class="va">dino</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="fu">datasauRus</span><span class="fu">::</span><span class="va">datasaurus_dozen</span>, <span class="va">dataset</span> <span class="op">==</span> <span class="st">"dino"</span><span class="op">)</span>
 <span class="va">dino</span><span class="op">$</span><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
 
 <span class="co"># And we want to preserve means and correlation</span>
-<span class="va">mean_cor</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/delayed_with.html">delayed_with</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> 
+<span class="va">mean_cor</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/delayed_with.html">delayed_with</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> 
 
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span> <span class="co"># To make results reproducible</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span> <span class="co"># To make results reproducible</span>
 <span class="va">metamers</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/metamerise.html">metamerise</a></span><span class="op">(</span><span class="va">dino</span>, preserve <span class="op">=</span> <span class="va">mean_cor</span>, 
-                       stop_if <span class="op">=</span> <span class="fu"><a href="reference/n_tries.html">n_metamers</a></span><span class="op">(</span><span class="fl">300</span><span class="op">)</span>, 
+                       stop_if <span class="op">=</span> <span class="fu"><a href="reference/stop_conditions.html">n_metamers</a></span><span class="op">(</span><span class="fl">300</span><span class="op">)</span>, 
                        perturbation <span class="op">=</span> <span class="fl">1</span>,
                        keep <span class="op">=</span> <span class="fl">19</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">metamers</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">metamers</span><span class="op">)</span>
 <span class="co">#&gt; List of 20 metamers</span></code></pre></div>
 <p>We found 20 metamers. Let’s see the final one, with the starting dataset as background.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">ggplot2</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
 
-<span class="fu">ggplot</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">metamers</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+<span class="fu">ggplot</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">metamers</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">geom_point</span><span class="op">(</span>data <span class="op">=</span> <span class="va">dino</span>, color <span class="op">=</span> <span class="st">"red"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span>, size <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-1-1.png" width="100%"></p>
 <p>We can check that the statistical properties have been preserved up to 2 significant figures:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>dino <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">signif</a></span><span class="op">(</span><span class="fu">mean_cor</span><span class="op">(</span><span class="va">dino</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>,
-      last <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">signif</a></span><span class="op">(</span><span class="fu">mean_cor</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">metamers</span><span class="op">)</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>dino <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">signif</a></span><span class="op">(</span><span class="fu">mean_cor</span><span class="op">(</span><span class="va">dino</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>,
+      last <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">signif</a></span><span class="op">(</span><span class="fu">mean_cor</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">metamers</span><span class="op">)</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;        dino   last</span>
 <span class="co">#&gt; [1,] 54.000 54.000</span>
 <span class="co">#&gt; [2,] 48.000 48.000</span>
 <span class="co">#&gt; [3,] -0.064 -0.064</span></code></pre></div>
 <p>However, a semi random cloud of points is not that interesting, so we can specify a minimizing function so that the result is similar to another dataset. <code>metamerise</code> will start from the last metamer of the previous run if the <code>data</code> argument is a list of metamers and append the result.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x_shape</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="fu">datasauRus</span><span class="fu">::</span><span class="va">datasaurus_dozen</span>, <span class="va">dataset</span> <span class="op">==</span> <span class="st">"x_shape"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">x_shape</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="fu">datasauRus</span><span class="fu">::</span><span class="va">datasaurus_dozen</span>, <span class="va">dataset</span> <span class="op">==</span> <span class="st">"x_shape"</span><span class="op">)</span>
 <span class="va">x_shape</span><span class="op">$</span><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">metamers</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/metamerise.html">metamerise</a></span><span class="op">(</span><span class="va">dino</span>, 
                        preserve <span class="op">=</span> <span class="va">mean_cor</span>,
                        minimize <span class="op">=</span> <span class="fu"><a href="reference/mean_dist_to.html">mean_dist_to</a></span><span class="op">(</span><span class="va">x_shape</span><span class="op">)</span>,
-                       stop_if <span class="op">=</span> <span class="fu"><a href="reference/n_tries.html">minimize_ratio</a></span><span class="op">(</span><span class="fl">0.02</span><span class="op">)</span>,
+                       stop_if <span class="op">=</span> <span class="fu"><a href="reference/stop_conditions.html">minimize_ratio</a></span><span class="op">(</span><span class="fl">0.02</span><span class="op">)</span>,
                        keep <span class="op">=</span> <span class="fl">99</span><span class="op">)</span></code></pre></div>
 <p>Now the result is a bit more impressive.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">metamers</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">metamers</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">geom_point</span><span class="op">(</span>data <span class="op">=</span> <span class="va">dino</span>, color <span class="op">=</span> <span class="st">"red"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span>, size <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="100%"></p>
 <p>We can animate the whole thing.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">gganimate</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gganimate.com" class="external-link">gganimate</a></span><span class="op">)</span>
 
 <span class="fu">ggplot</span><span class="op">(</span><span class="va">metamers</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">transition_manual</span><span class="op">(</span><span class="va">.metamer</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-6-1.gif" width="100%"></p>
-<p>You can freehand your own starting or target data with the <code><a href="reference/draw_data.html">draw_data()</a></code> utility, that will open a shiny interface. You might need to install <code>shiny</code> and <code>miniUI</code> with <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages(c("shiny", "miniUI"))</a></code>.</p>
+<p>You can freehand your own starting or target data with the <code><a href="reference/draw_data.html">draw_data()</a></code> utility, that will open a shiny interface. You might need to install <code>shiny</code> and <code>miniUI</code> with <code>install.packages(c("shiny", "miniUI"))</code>.</p>
 <p>Metamerizing operations can be chained while changing the minimizing function.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">star</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="fu">datasauRus</span><span class="fu">::</span><span class="va">datasaurus_dozen</span>, <span class="va">dataset</span> <span class="op">==</span> <span class="st">"star"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">star</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="fu">datasauRus</span><span class="fu">::</span><span class="va">datasaurus_dozen</span>, <span class="va">dataset</span> <span class="op">==</span> <span class="st">"star"</span><span class="op">)</span>
 <span class="va">star</span><span class="op">$</span><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span>
 <span class="va">metamers</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/metamerise.html">metamerise</a></span><span class="op">(</span><span class="va">dino</span>,
                        preserve <span class="op">=</span> <span class="va">mean_cor</span>, 
                        minimize <span class="op">=</span> <span class="fu"><a href="reference/mean_dist_to.html">mean_dist_to</a></span><span class="op">(</span><span class="va">x_shape</span><span class="op">)</span>,
-                       stop_if <span class="op">=</span> <span class="fu"><a href="reference/n_tries.html">minimize_ratio</a></span><span class="op">(</span><span class="fl">0.05</span><span class="op">)</span>,
+                       stop_if <span class="op">=</span> <span class="fu"><a href="reference/stop_conditions.html">minimize_ratio</a></span><span class="op">(</span><span class="fl">0.05</span><span class="op">)</span>,
                        keep <span class="op">=</span> <span class="fl">29</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="reference/clear_minimize.html">set_minimize</a></span><span class="op">(</span><span class="fu"><a href="reference/mean_dist_to.html">mean_dist_to</a></span><span class="op">(</span><span class="va">star</span><span class="op">)</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="reference/metamerise.html">metamerise</a></span><span class="op">(</span>stop_if <span class="op">=</span>  <span class="fu"><a href="reference/n_tries.html">minimize_ratio</a></span><span class="op">(</span><span class="fl">0.05</span><span class="op">)</span>,
+  <span class="fu"><a href="reference/set_params.html">set_minimize</a></span><span class="op">(</span><span class="fu"><a href="reference/mean_dist_to.html">mean_dist_to</a></span><span class="op">(</span><span class="va">star</span><span class="op">)</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="reference/metamerise.html">metamerise</a></span><span class="op">(</span>stop_if <span class="op">=</span>  <span class="fu"><a href="reference/stop_conditions.html">minimize_ratio</a></span><span class="op">(</span><span class="fl">0.05</span><span class="op">)</span>,
              keep <span class="op">=</span> <span class="fl">30</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="reference/clear_minimize.html">set_minimize</a></span><span class="op">(</span><span class="fu"><a href="reference/mean_dist_to.html">mean_dist_to</a></span><span class="op">(</span><span class="va">dino</span><span class="op">)</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="reference/metamerise.html">metamerise</a></span><span class="op">(</span>stop_if <span class="op">=</span>  <span class="fu"><a href="reference/n_tries.html">minimize_ratio</a></span><span class="op">(</span><span class="fl">0.05</span><span class="op">)</span>, 
+  <span class="fu"><a href="reference/set_params.html">set_minimize</a></span><span class="op">(</span><span class="fu"><a href="reference/mean_dist_to.html">mean_dist_to</a></span><span class="op">(</span><span class="va">dino</span><span class="op">)</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="reference/metamerise.html">metamerise</a></span><span class="op">(</span>stop_if <span class="op">=</span>  <span class="fu"><a href="reference/stop_conditions.html">minimize_ratio</a></span><span class="op">(</span><span class="fl">0.05</span><span class="op">)</span>, 
              keep <span class="op">=</span> <span class="fl">30</span><span class="op">)</span> </code></pre></div>
 <p>And the full sequence</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -182,48 +177,58 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=metamer">https://​cloud.r-project.org/​package=metamer</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/eliocamp/metamer/">https://​github.com/​eliocamp/​metamer/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/eliocamp/metamer/issues">https://​github.com/​eliocamp/​metamer/​issues</a>
-</li>
-</ul>
-</div>
-<div class="license">
-<h2>License</h2>
-<ul class="list-unstyled">
-<li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></small></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>Elio Campitelli <br><small class="roles"> Maintainer, author </small> <a href="https://orcid.org/0000-0002-7742-9230" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="https://cloud.r-project.org/package=metamer" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/eliocamp/metamer/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/eliocamp/metamer/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="license">
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://zenodo.org/badge/latestdoi/159563811"><img src="https://zenodo.org/badge/159563811.svg" alt="DOI"></a></li>
-<li><a href="https://travis-ci.org/eliocamp/metamer"><img src="https://travis-ci.org/eliocamp/metamer.svg?branch=master" alt="Travis build status"></a></li>
-<li><a href="https://codecov.io/gh/eliocamp/metamer?branch=master"><img src="https://codecov.io/gh/eliocamp/metamer/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a></small></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing metamer</a></li>
+</ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>Elio Campitelli <br><small class="roles"> Maintainer, author </small> <a href="https://orcid.org/0000-0002-7742-9230" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://zenodo.org/badge/latestdoi/159563811" class="external-link"><img src="https://zenodo.org/badge/159563811.svg" alt="DOI"></a></li>
+<li><a href="https://travis-ci.org/eliocamp/metamer" class="external-link"><img src="https://travis-ci.org/eliocamp/metamer.svg?branch=master" alt="Travis build status"></a></li>
+<li><a href="https://codecov.io/gh/eliocamp/metamer?branch=master" class="external-link"><img src="https://codecov.io/gh/eliocamp/metamer/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+</ul>
+</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Elio Campitelli.</p>
+  <p></p>
+<p>Developed by Elio Campitelli.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer>
@@ -231,6 +236,8 @@
 
   
 
+
+  
 
   </body>
 </html>
