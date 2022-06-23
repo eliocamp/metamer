@@ -1,3 +1,5 @@
+# metamer (development version)
+
 # metamer 0.3.0
 
 ## Breaking chances
