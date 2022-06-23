@@ -146,10 +146,8 @@
 
 <span class="fu">ggplot</span><span class="op">(</span><span class="va">metamers</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">transition_manual</span><span class="op">(</span><span class="va">.metamer</span><span class="op">)</span>
-<span class="co">#&gt; Warning: No renderer available. Please install the gifski, av, or magick package</span>
-<span class="co">#&gt; to create animated output</span>
-<span class="co">#&gt; NULL</span></code></pre></div>
+  <span class="fu">transition_manual</span><span class="op">(</span><span class="va">.metamer</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-6-1.gif" width="100%"></p>
 <p>You can freehand your own starting or target data with the <code><a href="reference/draw_data.html">draw_data()</a></code> utility, that will open a shiny interface. You might need to install <code>shiny</code> and <code>miniUI</code> with <code>install.packages(c("shiny", "miniUI"))</code>.</p>
 <p>Metamerizing operations can be chained while changing the minimizing function.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
@@ -172,10 +170,8 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">metamers</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">transition_manual</span><span class="op">(</span><span class="va">.metamer</span><span class="op">)</span>
-<span class="co">#&gt; Warning: No renderer available. Please install the gifski, av, or magick package</span>
-<span class="co">#&gt; to create animated output</span>
-<span class="co">#&gt; NULL</span></code></pre></div>
+  <span class="fu">transition_manual</span><span class="op">(</span><span class="va">.metamer</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-8-1.gif" width="100%"></p>
 </div>
 </div>
   </div>
