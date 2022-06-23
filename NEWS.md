@@ -1,3 +1,21 @@
+# metamer 0.3.0
+
+## Breaking chances
+
+This version overhauls the code and syntax. 
+It makes it pipe friendly and includes new arguments and changes some of the existing ones. 
+
+## New features
+
+- The new `stop_if` argument replaces the old `N` argument. 
+This allows for more flexible and complex stopping criteria than just the number of iterations.
+See `?stop_conditions` for a list of implemented functions. 
+
+- The new `keep` argument replaces the old `trim` argument.
+
+
+(see `?stop_conditions`).
+
 # metamer 0.2.0
 
 ## New features 
