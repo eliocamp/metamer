@@ -146,10 +146,9 @@ library(gganimate)
 ggplot(metamers, aes(x, y)) +
   geom_point() +
   transition_manual(.metamer)
-#> Warning: No renderer available. Please install the gifski, av, or magick package
-#> to create animated output
-#> NULL
 ```
+
+<img src="man/figures/README-unnamed-chunk-6-1.gif" width="100%" />
 
 You can freehand your own starting or target data with the `draw_data()`
 utility, that will open a shiny interface. You might need to install
@@ -182,7 +181,6 @@ And the full sequence
 ggplot(metamers, aes(x, y)) +
   geom_point() +
   transition_manual(.metamer)
-#> Warning: No renderer available. Please install the gifski, av, or magick package
-#> to create animated output
-#> NULL
 ```
+
+<img src="man/figures/README-unnamed-chunk-8-1.gif" width="100%" />
