@@ -54,9 +54,9 @@ the data as argument and return a single numeric.}
 changed.}
 
 \item{round}{A function to apply to the result of \code{preserve} to round
-numbers. See \link{rounding}.}
+numbers. See \link{truncate_to}.}
 
-\item{stop_if}{A stopping criterium. See \link{stop-conditions}.}
+\item{stop_if}{A stopping criterium. See \link{n_tries}.}
 
 \item{keep}{Max number of metamers to return.}
 

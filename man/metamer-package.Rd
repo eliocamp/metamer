@@ -6,8 +6,7 @@
 \alias{metamer-package}
 \title{metamer: Create Data with Identical Statistics}
 \description{
-Creates data with identical statistics (metamers) using an iterative 
-   algorithm proposed by Matejka & Fitzmaurice (2017) <DOI:10.1145/3025453.3025912>.
+Creates data with identical statistics (metamers) using an iterative algorithm proposed by Matejka & Fitzmaurice (2017) \doi{10.1145/3025453.3025912}.
 }
 \section{Overview}{
 
