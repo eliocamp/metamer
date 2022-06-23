@@ -9,7 +9,7 @@ Authors@R:
            comment = c(ORCID = "0000-0002-7742-9230"))
 Description: Creates data with identical statistics (metamers) using an iterative 
    algorithm proposed by Matejka & Fitzmaurice (2017) <DOI:10.1145/3025453.3025912>.
-URL: https://eliocamp.github.io/metamer
+URL: https://eliocamp.github.io/metamer/
 BugReports: https://github.com/eliocamp/metamer/issues
 License: GPL-3
 Encoding: UTF-8

@@ -1,10 +1,11 @@
+
 ## Test environments
 
-* local elementary OS Loki (ubuntu 18.04), R 3.6.1
-* Ubuntu 16.04.6 LTS (on travis-ci), R 3.6.1
-* Windows Server 2008 R2 SP1, R-devel, 32/64 bit (R-hub)
-* Ubuntu Linux 16.04 LTS, R-release, GCC (R-hub)
-* Fedora Linux, R-devel, clang, gfortran (R-hub)
+* local elementary OS 6.1 Jólnir Built on Ubuntu 20.04.3 LTS Linux 5.13.0-51-generic, R 4.2.0
+
+* winbuilder: R Under development (unstable) (2022-06-22 r82512 ucrt)
+
+* R-hub: Windows Server 2022, R-devel, 64 bit
 
 ## R CMD check results
 

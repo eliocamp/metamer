@@ -9,13 +9,14 @@
 [![Travis build
 status](https://travis-ci.org/eliocamp/metamer.svg?branch=master)](https://travis-ci.org/eliocamp/metamer)
 [![Codecov test
-coverage](https://codecov.io/gh/eliocamp/metamer/branch/master/graph/badge.svg)](https://codecov.io/gh/eliocamp/metamer?branch=master)
+coverage](https://codecov.io/gh/eliocamp/metamer/branch/master/graph/badge.svg)](https://app.codecov.io/gh/eliocamp/metamer?branch=master)
 <!-- badges: end -->
 
 Implements the algorithm proposed by [Matejka & Fitzmaurice
-(2017)](https://www.autodeskresearch.com/publications/samestats) to
-create metamers (datasets with identical statistical properties but very
-different graphs) with an annealing scheme derived from [de Vicente et
+(2017)](https://www.autodesk.com/research/publications/same-stats-different-graphs)
+to create metamers (datasets with identical statistical properties but
+very different graphs) with an annealing scheme derived from [de Vicente
+et
 al. (2003)](https://www.sciencedirect.com/science/article/abs/pii/S0375960103013653?via%3Dihub).
 
 In colour theory,
@@ -105,7 +106,7 @@ cbind(dino = signif(mean_cor(dino), 2),
 #>        dino   last
 #> [1,] 54.000 54.000
 #> [2,] 48.000 48.000
-#> [3,] -0.064 -0.064
+#> [3,] -0.064 -0.066
 ```
 
 However, a semi random cloud of points is not that interesting, so we
@@ -145,9 +146,10 @@ library(gganimate)
 ggplot(metamers, aes(x, y)) +
   geom_point() +
   transition_manual(.metamer)
+#> Warning: No renderer available. Please install the gifski, av, or magick package
+#> to create animated output
+#> NULL
 ```
-
-<img src="man/figures/README-unnamed-chunk-6-1.gif" width="100%" />
 
 You can freehand your own starting or target data with the `draw_data()`
 utility, that will open a shiny interface. You might need to install
@@ -157,6 +159,7 @@ Metamerizing operations can be chained while changing the minimizing
 function.
 
 ``` r
+
 star <- subset(datasauRus::datasaurus_dozen, dataset == "star")
 star$dataset <- NULL
 set.seed(42)
@@ -179,6 +182,7 @@ And the full sequence
 ggplot(metamers, aes(x, y)) +
   geom_point() +
   transition_manual(.metamer)
+#> Warning: No renderer available. Please install the gifski, av, or magick package
+#> to create animated output
+#> NULL
 ```
-
-<img src="man/figures/README-unnamed-chunk-8-1.gif" width="100%" />
