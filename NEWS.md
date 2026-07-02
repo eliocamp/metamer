@@ -1,5 +1,7 @@
 # metamer (development version)
 
+- Updates maintainer email. 
+
 # metamer 0.3.0
 
 ## Breaking chances

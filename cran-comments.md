@@ -1,13 +1,13 @@
 
-## Test environments
-
-* local elementary OS 6.1 Jólnir Built on Ubuntu 20.04.3 LTS Linux 5.13.0-51-generic, R 4.2.0
-
-* winbuilder: R Under development (unstable) (2022-06-22 r82512 ucrt)
-
-* R-hub: Windows Server 2022, R-devel, 64 bit
+This submission is to update my email addresss as I not longer have access to the previous one. 
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 notes
 
+There is one note
+
+  Namespace in Imports field not imported from: ‘progress’
+    All declared Imports should be used.
+
+However, this seems to be a false positive, since progress is used in line 203 in R/metamer-class.R
