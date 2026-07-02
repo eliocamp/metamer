@@ -1,5 +1,5 @@
 
-This submission is to update my email addresss as I not longer have access to the previous one. 
+This submission is to update my email address as I not longer have access to the previous one. 
 
 ## R CMD check results
 
