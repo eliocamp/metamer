@@ -31,13 +31,13 @@ moments_3(data)
 
 }
 \seealso{
-Other helper functions: 
-\code{\link{delayed_with}()},
-\code{\link{densify}()},
-\code{\link{draw_data}()},
-\code{\link{mean_dist_to_sf}()},
-\code{\link{mean_dist_to}()},
-\code{\link{mean_self_proximity}()},
-\code{\link{truncate_to}()}
+Other helper functions:
+\code{\link[=delayed_with]{delayed_with()}},
+\code{\link[=densify]{densify()}},
+\code{\link[=draw_data]{draw_data()}},
+\code{\link[=mean_dist_to]{mean_dist_to()}},
+\code{\link[=mean_dist_to_sf]{mean_dist_to_sf()}},
+\code{\link[=mean_self_proximity]{mean_self_proximity()}},
+\code{\link[=truncate_to]{truncate_to()}}
 }
 \concept{helper functions}

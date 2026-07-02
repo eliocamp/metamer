@@ -5,7 +5,7 @@ Authors@R:
     person(given = "Elio",
            family = "Campitelli",
            role = c("cre", "aut"),
-           email = "elio.campitelli@cima.fcen.uba.ar",
+           email = "elio.campitelli@gmail.com",
            comment = c(ORCID = "0000-0002-7742-9230"))
 Description: Creates data with identical statistics (metamers) using an iterative 
    algorithm proposed by Matejka & Fitzmaurice (2017) <DOI:10.1145/3025453.3025912>.
@@ -29,4 +29,4 @@ Suggests:
     covr,
     sf
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.0
+Config/roxygen2/version: 8.0.0

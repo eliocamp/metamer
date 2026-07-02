@@ -39,7 +39,12 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Elio Campitelli \email{elio.campitelli@cima.fcen.uba.ar} (\href{https://orcid.org/0000-0002-7742-9230}{ORCID})
+\strong{Maintainer}: Elio Campitelli \email{elio.campitelli@gmail.com} (\href{https://orcid.org/0000-0002-7742-9230}{ORCID})
+
+Authors:
+\itemize{
+  \item Elio Campitelli \email{elio.campitelli@gmail.com} (\href{https://orcid.org/0000-0002-7742-9230}{ORCID})
+}
 
 }
 \keyword{internal}
