@@ -1,4 +1,4 @@
-# metamer (development version)
+# metamer 0.3.1
 
 - Updates maintainer email. 
 
