@@ -6,18 +6,16 @@
 <!-- badges: start -->
 
 [![DOI](https://zenodo.org/badge/159563811.svg)](https://zenodo.org/badge/latestdoi/159563811)
-[![Travis build
-status](https://travis-ci.org/eliocamp/metamer.svg?branch=master)](https://travis-ci.org/eliocamp/metamer)
 [![Codecov test
 coverage](https://codecov.io/gh/eliocamp/metamer/branch/master/graph/badge.svg)](https://app.codecov.io/gh/eliocamp/metamer?branch=master)
 <!-- badges: end -->
 
 Implements the algorithm proposed by [Matejka & Fitzmaurice
-(2017)](https://www.autodesk.com/research/publications/same-stats-different-graphs)
+(2017)](https://www.research.autodesk.com/publications/same-stats-different-graphs/)
 to create metamers (datasets with identical statistical properties but
 very different graphs) with an annealing scheme derived from [de Vicente
 et
-al. (2003)](https://www.sciencedirect.com/science/article/abs/pii/S0375960103013653?via%3Dihub).
+al. (2003)](https://www.sciencedirect.com/science/article/abs/pii/S0375960103013653).
 
 In colour theory,
 [metamers](https://en.wikipedia.org/wiki/Metamerism_(color)) are colours
@@ -31,7 +29,7 @@ monitors use only 3 lights to show colourful pictures.
 ![](man/figures/lemon.jpg)
 
 (from the excellent [Color: From Hexcodes to
-Eyeballs](http://jamie-wong.com/post/color/) by [Jamie
+Eyeballs](https://jamie-wong.com/post/color/) by [Jamie
 Wong](https://github.com/jlfwong))
 
 Statistical transformations such as mean, standard deviation and
