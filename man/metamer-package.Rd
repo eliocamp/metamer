@@ -34,16 +34,17 @@ Matejka, J., & Fitzmaurice, G. (2017). Same Stats, Different Graphs. Proceedings
 Useful links:
 \itemize{
   \item \url{https://eliocamp.github.io/metamer/}
+  \item \url{https://github.com/eliocamp/metamer}
   \item Report bugs at \url{https://github.com/eliocamp/metamer/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Elio Campitelli \email{elio.campitelli@gmail.com} (\href{https://orcid.org/0000-0002-7742-9230}{ORCID})
+\strong{Maintainer}: Elio Campitelli \email{eliocampitelli@gmail.com} (\href{https://orcid.org/0000-0002-7742-9230}{ORCID})
 
 Authors:
 \itemize{
-  \item Elio Campitelli \email{elio.campitelli@gmail.com} (\href{https://orcid.org/0000-0002-7742-9230}{ORCID})
+  \item Elio Campitelli \email{eliocampitelli@gmail.com} (\href{https://orcid.org/0000-0002-7742-9230}{ORCID})
 }
 
 }
